@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Clima — Nosotros</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+
+  <!-- Icon fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/estilo.css">
+  <link rel="stylesheet" href="css/index.css">
+
+  <style>
+    .feature-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.2) !important;
+    }
+    .mission-card {
+      transition: all 0.3s ease;
+    }
+    .mission-card:hover {
+      transform: scale(1.05);
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    .floating-icon {
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    /* Dark theme styles */
+    body.dark-theme .card {
+      background: rgba(30, 34, 50, 0.9) !important;
+      color: #e8eaed !important;
+    }
+    body.dark-theme .card p {
+      color: #adb5bd !important;
+    }
+    body.dark-theme .card h4 {
+      color: #5b9fff !important;
+    }
+    body.dark-theme .mission-card {
+      background: rgba(40, 44, 60, 0.5);
+    }
+    body.dark-theme .mission-card:hover {
+      background: rgba(50, 54, 70, 0.7);
+    }
+  </style>
+
+</head>
+
+<body>
+  <!-- NAVEGADOR / SIDEBAR -->
+  <div class="container">
+    <div class="navigation">
+      <ul>
+        <li>
+          <a href="index.html">
+            <span class="icon"><img src="img/logo/logo.png" alt="Logo" style="width: 200px; height: 50px; object-fit: contain;"></span>    
+          </a>
+        </li>
+         <li>
+          <a href="index.html">
+            <span class="icon">
+              <ion-icon name="cloudy-night-outline"></ion-icon>
+            </span>
+            <span class="title">Hoy</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="pronóstico-diario.html">
+            <span class="icon">
+              <ion-icon name="today-outline"></ion-icon>
+            </span>
+            <span class="title">Diario</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="radar-tiempo.html">
+            <span class="icon">
+              <ion-icon name="radio-outline"></ion-icon>
+            </span>
+            <span class="title">Radar</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="semana.html">
+            <span class="icon">
+              <ion-icon name="cloud-circle-outline"></ion-icon>
+            </span>
+            <span class="title">Semanal</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="ciclo-lunar.html">
+            <span class="icon">
+              <ion-icon name="moon-outline"></ion-icon>
+            </span>
+            <span class="title">Ciclo Lunar</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="noticias.html">
+            <span class="icon">
+              <ion-icon name="thunderstorm-outline"></ion-icon>
+            </span>
+            <span class="title">Noticias</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="acerca-de.html" class="active">
+            <span class="icon">
+              <ion-icon name="people-circle-outline"></ion-icon>
+            </span>
+            <span class="title">Nosotros</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <div class="toggle">
+        <ion-icon name="menu-outline"></ion-icon>
+      </div>
+
+      
+
+      <!-- Theme Switcher -->
+      <div class="theme-switcher">
+        <button id="theme-btn" class="btn btn-sm btn-theme dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="ri-contrast-2-line me-1"></i>
+          <span id="current-theme">Claro</span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="#" data-theme="light"><i class="ri-sun-line me-2"></i>Claro</a></li>
+          <li><a class="dropdown-item" href="#" data-theme="dark"><i class="ri-moon-line me-2"></i>Oscuro</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="cuadro2 p-4 mx-auto" style="max-width: 1200px;">
+      <div class="container mt-4">
+        
+        <!-- Sección: Quiénes Somos -->
+        <section class="mb-5">
+          <h2 class="forecast-title" style="text-align: center; margin-bottom: 30px;">¿Quiénes Somos?</h2>
+          <div class="card" style="background: rgba(255, 255, 255, 0.95); border-radius: 12px; padding: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+            <p style="font-size: 1.1rem; line-height: 1.8; color: #333;">
+              <strong>ElClima: Honduras</strong> es tu fuente confiable de información meteorológica en tiempo real para todo el territorio hondureño. 
+              Nos dedicamos a proporcionar pronósticos precisos, alertas climáticas y datos actualizados para que puedas planificar tu día con confianza.
+            </p>
+            <p style="font-size: 1.1rem; line-height: 1.8; color: #333; margin-top: 15px;">
+              Nuestro compromiso es hacer accesible la información del clima de manera clara, visual y fácil de entender para todos los hondureños, 
+              desde Tegucigalpa hasta las Islas de la Bahía.
+            </p>
+          </div>
+        </section>
+
+        <!-- Sección: Nuestra Misión -->
+        <section class="mb-5">
+          <h2 class="forecast-title" style="text-align: center; margin-bottom: 30px;">Nuestra Misión</h2>
+          <div class="card" style="background: rgba(255, 255, 255, 0.95); border-radius: 12px; padding: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <div class="mission-card" style="display: flex; gap: 15px; align-items: start; padding: 15px; border-radius: 8px;">
+                  <i class="ri-radar-line" style="font-size: 2.5rem; color: #4da6ff;"></i>
+                  <div>
+                    <h4 style="color: #17217d; margin-bottom: 10px;">Precisión</h4>
+                    <p style="color: #555; line-height: 1.6;">
+                      Utilizar tecnología de punta para ofrecer pronósticos exactos basados en datos meteorológicos internacionales.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="mission-card" style="display: flex; gap: 15px; align-items: start; padding: 15px; border-radius: 8px;">
+                  <i class="ri-map-pin-user-line" style="font-size: 2.5rem; color: #4da6ff;"></i>
+                  <div>
+                    <h4 style="color: #17217d; margin-bottom: 10px;">Accesibilidad</h4>
+                    <p style="color: #555; line-height: 1.6;">
+                      Información climática disponible para todas las regiones de Honduras, desde municipios hasta aldeas.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="mission-card" style="display: flex; gap: 15px; align-items: start; padding: 15px; border-radius: 8px;">
+                  <i class="ri-shield-check-line" style="font-size: 2.5rem; color: #4da6ff;"></i>
+                  <div>
+                    <h4 style="color: #17217d; margin-bottom: 10px;">Confiabilidad</h4>
+                    <p style="color: #555; line-height: 1.6;">
+                      Datos actualizados constantemente para que siempre tengas la información más reciente.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="mission-card" style="display: flex; gap: 15px; align-items: start; padding: 15px; border-radius: 8px;">
+                  <i class="ri-heart-line" style="font-size: 2.5rem; color: #4da6ff;"></i>
+                  <div>
+                    <h4 style="color: #17217d; margin-bottom: 10px;">Servicio</h4>
+                    <p style="color: #555; line-height: 1.6;">
+                      Comprometidos con ayudar a los hondureños a tomar mejores decisiones basadas en el clima.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sección: Características -->
+        <section class="mb-5">
+          <h2 class="forecast-title" style="text-align: center; margin-bottom: 30px;">¿Qué Ofrecemos?</h2>
+          <div class="row">
+            <div class="col-md-4 mb-4">
+              <div class="card h-100 feature-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; padding: 25px; color: white; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                <ion-icon name="partly-sunny-outline" class="floating-icon" style="font-size: 3rem; margin-bottom: 15px;"></ion-icon>
+                <h4 style="margin-bottom: 15px;">Clima en Tiempo Real</h4>
+                <p style="opacity: 0.9;">Condiciones actuales, temperatura, humedad, viento y más.</p>
+              </div>
+            </div>
+            <div class="col-md-4 mb-4">
+              <div class="card h-100 feature-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 12px; padding: 25px; color: white; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.15); animation-delay: 0.5s;">
+                <ion-icon name="calendar-outline" class="floating-icon" style="font-size: 3rem; margin-bottom: 15px; animation-delay: 0.5s;"></ion-icon>
+                <h4 style="margin-bottom: 15px;">Pronósticos Extendidos</h4>
+                <p style="opacity: 0.9;">Planifica tu semana con pronósticos de hasta 7 días.</p>
+              </div>
+            </div>
+            <div class="col-md-4 mb-4">
+              <div class="card h-100 feature-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); border-radius: 12px; padding: 25px; color: white; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.15); animation-delay: 1s;">
+                <ion-icon name="thunderstorm-outline" class="floating-icon" style="font-size: 3rem; margin-bottom: 15px; animation-delay: 1s;"></ion-icon>
+                <h4 style="margin-bottom: 15px;">Alertas Climáticas</h4>
+                <p style="opacity: 0.9;">Mantente informado sobre condiciones meteorológicas extremas.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sección: Contacto -->
+        <section class="mb-5">
+          <h2 class="forecast-title" style="text-align: center; margin-bottom: 30px;">Contáctanos</h2>
+          <div class="card" style="background: rgba(255, 255, 255, 0.95); border-radius: 12px; padding: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center;">
+            <p style="font-size: 1.1rem; color: #555; margin-bottom: 20px;">
+              ¿Tienes preguntas, sugerencias o comentarios? Nos encantaría escucharte.
+            </p>
+            <p style="font-size: 1rem; color: #666; margin-bottom: 25px;">
+              También puedes llenar nuestro <a href="contacto.html" style="color: #4da6ff; font-weight: 600; text-decoration: none;">formulario de sugerencias</a>
+            </p>
+            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+              <a href="https://x.com/ElClimaHN" class="btn btn-dark" style="border-radius: 8px; padding: 10px 25px;">
+                <i class="ri-twitter-x-line me-2"></i>Twitter
+              </a>
+              <a href="https://www.instagram.com/elclima.hn/" class="btn btn-success" style="border-radius: 8px; padding: 10px 25px;">
+                <i class="ri-instagram-line me-2"></i>Instagram
+              </a>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer mt-5 py-4 text-center text-white">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 mb-3 mb-md-0">
+            <p class="mb-0">&copy; 2025 ElClima: Honduras. Todos los derechos reservados.</p>
+          </div>
+          <div class="col-md-6">
+            <p class="mb-2">Síguenos en:</p>
+            <div class="social-links d-flex justify-content-center gap-3">
+              <a href="https://www.instagram.com/elclima.hn/" target="_blank" rel="noopener noreferrer" class="text-white" title="Instagram" aria-label="Instagram">
+                <i class="ri-instagram-line fs-4"></i>
+              </a>
+              <a href="https://x.com/ElClimaHN" target="_blank" rel="noopener noreferrer" class="text-white" title="X" aria-label="X">
+                <i class="ri-twitter-x-line fs-4"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <hr class="my-3 border-white opacity-25">
+        <div class="row">
+          <div class="col-12">
+            <p class="mb-0 small">
+              <a href="acerca-de.html" class="text-white text-decoration-none me-3">Sobre Nosotros</a>
+              <span class="text-white-50">|</span>
+              <a href="contacto.html" class="text-white text-decoration-none mx-3">Contacto</a>
+              <span class="text-white-50">|</span>
+              <a href="https://open-meteo.com" target="_blank" rel="noopener noreferrer" class="text-white text-decoration-none mx-3">Weather Source</a>
+              <span class="text-white-50">|</span>
+              <span class="text-white-50 ms-3">v1.0.0</span>
+            </p>
+          </div>
+        </div>
+        <!-- Removed duplicate block: the links section was repeated twice -->
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Bootstrap Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+  <!-- Ionicons -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+  <!-- Main JS -->
+  <script src="js/principal.js"></script>
+
+  <script>
+    // Theme switcher
+    const themeBtn = document.getElementById('theme-btn');
+    const currentThemeText = document.getElementById('current-theme');
+    const themeItems = document.querySelectorAll('[data-theme]');
+
+    // Cargar tema guardado
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark-theme');
+      currentThemeText.textContent = 'Oscuro';
+    }
+
+    // Cambiar tema
+    themeItems.forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        const theme = item.getAttribute('data-theme');
+        
+        if (theme === 'dark') {
+          document.body.classList.add('dark-theme');
+          currentThemeText.textContent = 'Oscuro';
+          localStorage.setItem('theme', 'dark');
+        } else {
+          document.body.classList.remove('dark-theme');
+          currentThemeText.textContent = 'Claro';
+          localStorage.setItem('theme', 'light');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

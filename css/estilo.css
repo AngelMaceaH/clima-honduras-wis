@@ -1,0 +1,621 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+
+/* =============== GLOBAL ============== */
+* {
+  font-family: "Ubuntu", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --blue: #140a81;
+  --white: #fff;
+  --gray: #f5f5f5;
+  --black1: #222;
+  --black2: #999;
+  
+  /* Honduras Theme Colors - Light Mode */
+  --honduras-dark-blue: #0033a0;
+  --honduras-light-blue: #4da6ff;
+  --honduras-sky-blue: #66b3ff;
+  --nav-gradient-start: #0055cc;
+  --nav-gradient-end: #0088ff;
+  --nav-width: 240px;
+  --nav-collapsed-width: 100px;
+}
+
+/* Dark Theme Variables */
+body.dark-theme {
+  --nav-gradient-start: #001a3d;
+  --nav-gradient-end: #002952;
+  --honduras-dark-blue: #001428;
+  --honduras-light-blue: #0066cc;
+  --honduras-sky-blue: #3d8ae6;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+   
+}
+
+/* ====MENU NAVEGADOR==== */
+
+
+.navigation{
+  position: fixed;
+  left: 0; 
+  top: 0;
+  width: var(--nav-width);
+  height: 100%;
+  background: linear-gradient(180deg, var(--nav-gradient-start) 0%, var(--nav-gradient-end) 100%);
+  box-shadow: 4px 0 25px rgba(0, 136, 255, 0.4), 8px 0 40px rgba(0, 85, 204, 0.2);
+  transition: all 0.5s ease;
+  overflow-x: visible;
+  overflow-y: auto;
+  z-index: 1000;
+}
+.navigation.active {
+  width: var(--nav-collapsed-width);
+  overflow: hidden !important;
+}
+
+/* Efecto de brillo sutil en la navegación */
+.navigation::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, transparent 50%, rgba(77, 166, 255, 0.12) 100%);
+  pointer-events: none;
+}
+
+.navigation ul{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: visible;
+}
+
+.navigation ul li{
+  position: relative;
+  width: 100%;
+  list-style: none;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  margin: 4px 0;
+  overflow: visible;
+  z-index: 1;
+}
+
+.navigation ul li a {
+  display: flex;
+  align-items: flex-start;  /* sube los elementos hacia arriba */
+  padding: 5px 6px;       /* top padding un poco mayor, left padding menor */
+  padding-left: 0px;
+}
+
+/* Si quieres que los íconos queden centrados cuando el menú está colapsado */
+
+.navigation.collapsed ul li a {
+  justify-content: center;   /* centrar íconos horizontalmente */
+  padding: 14px 0;           /* top padding mantiene los íconos más arriba */
+}
+
+.navigation ul li a i,
+.navigation ul li a ion-icon {
+  margin-top: 2px;           /* pequeño ajuste vertical extra si hace falta */
+  min-width: 26px;           /* mantener ancho uniforme */
+}
+
+
+
+
+
+/* Ajustar ancho cuando está colapsado */
+.navigation.active ul li {
+  width: 100px;
+  border-radius: 15px;
+  margin: 4px auto;
+  overflow: hidden !important;
+}
+.navigation ul li:hover,
+.navigation ul li.hovered {
+  background: linear-gradient(90deg, #f8f9fa 0%, #f0f1f3 100%);
+  box-shadow: -3px 0 15px rgba(77, 166, 255, 0.25);
+}
+
+/* Ajustar hover cuando está colapsado - sin salirse */
+.navigation.active ul li:hover,
+.navigation.active ul li.hovered {
+  transform: none;
+  box-shadow: 0 0 15px rgba(77, 166, 255, 0.3);
+  border-radius: 15px;
+}
+
+.navigation ul li:nth-child(1){
+  margin-bottom: 40px;
+  pointer-events: none;
+}
+
+.navigation ul li a .icon {
+ position: relative;
+  display: block;
+  min-width: 60px;
+  height: 60px;
+  line-height: 75px;
+  text-align: center;    
+  margin-left: -20px;
+}
+
+.navigation ul li a .icon ion-icon{
+  font-size: 2rem;
+}
+
+.navigation ul li a .icon i {
+  font-size: 2rem;        
+}
+
+.navigation ul li a .Logo {
+ position: relative;
+  display: block;
+  padding: 0 10px;
+  height: 60px;
+  line-height: 60px;
+  text-align: start;
+  white-space: nowrap;
+  font-size: 1.75rem;
+}
+
+.navigation ul li a .title {
+position: relative;
+  display: block;
+  padding: 0 10px;
+  height: 60px;
+  line-height: 60px;
+  text-align: start;
+  white-space: nowrap;
+}
+.navigation ul li:hover a,
+.navigation ul li.hovered a {
+  color: #0055cc;
+}
+
+.navigation ul li a .icon {
+ position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+  height: 60px;
+  margin-left: 0px;
+  margin-right: 4px;
+  transition: all 0.3s ease;
+  
+}
+
+
+.navigation ul li a .icon ion-icon{
+  font-size: 2rem;
+  transition: all 0.3s ease;
+}
+
+.navigation ul li a .icon i {
+  font-size: 2rem;
+  transition: all 0.3s ease;
+}
+
+
+
+/* --------- MAIN---------- */
+.main {
+  position: absolute;
+  width: calc(100% - 240px);
+  left: 240px;
+  top: 0;
+  min-height: 100vh;
+  background: var(--bg-main);
+  transition: 0.5s;
+  
+  box-sizing: border-box;
+
+}
+
+.main.active {
+  width: calc(100% - 100px);
+  left: 100px;
+}
+
+.topbar {
+  width: 100%;
+  height: 45px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 136, 255, 0.15);
+  padding: 0 20px;
+  box-shadow: 0 2px 10px rgba(0, 85, 204, 0.05);
+}
+
+.toggle {
+  width: 45px;
+  height: 45px;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Dark theme toggle */
+body.dark-theme .toggle {
+  background: rgba(0, 61, 130, 0.3);
+  color: #4da6ff;
+}
+
+
+/* Efecto en los iconos al hacer hover */
+.navigation ul li:hover a .icon ion-icon,
+.navigation ul li:hover a .icon i,
+.navigation ul li.hovered a .icon ion-icon,
+.navigation ul li.hovered a .icon i {
+  margin: 0 auto !important;
+  transform: scale(1.15);
+  filter: drop-shadow(0 2px 8px rgba(0, 51, 160, 0.5));
+}
+
+/* No escalar iconos cuando está colapsado */
+.navigation.active ul li:hover a .icon ion-icon,
+.navigation.active ul li:hover a .icon i,
+.navigation.active ul li.hovered a .icon ion-icon,
+.navigation.active ul li.hovered a .icon i {
+  margin: 0 auto !important;
+  transform: scale(1);
+}
+
+.navigation ul li a .Logo {
+ position: relative;
+  display: block;
+  padding: 0 10px;
+  height: 60px;
+  line-height: 60px;
+  text-align: start;
+  white-space: nowrap;
+  font-size: 1.75rem;
+}
+
+.navigation ul li a .title {
+position: relative;
+  display: block;
+  padding: 0 10px;
+  height: 60px;
+  line-height: 60px;
+  text-align: start;
+  white-space: nowrap;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+  opacity: 1;
+}
+
+/* Ocultar título cuando está colapsado */
+.navigation.active ul li a .title {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Efecto en el texto al hacer hover */
+.navigation ul li:hover a .title,
+.navigation ul li.hovered a .title {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* --------- EFECTO TRANSPARENTE AL HOVER --------- */
+.navigation ul li {
+  position: relative;
+  overflow: visible;
+}
+
+/* Ocultar overflow cuando está colapsado */
+.navigation.active ul li {
+  overflow: hidden !important;
+}
+
+.navigation ul li:hover::before,
+.navigation ul li.hovered::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 5px;
+  width: calc(100% - 10px);
+  height: 100%;
+  background: transparent;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  z-index: 0;
+  transition: 0.3s ease;
+  
+}
+
+/* Ocultar ::before cuando está colapsado */
+.navigation.active ul li:hover::before,
+.navigation.active ul li.hovered::before {
+  display: none;
+}
+
+/* Barra de acento azul al hacer hover */
+.navigation ul li:hover::after,
+.navigation ul li.hovered::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 70%;
+  background: linear-gradient(180deg, var(--honduras-light-blue), var(--honduras-sky-blue));
+  border-radius: 10px 0 0 10px;
+  box-shadow: 0 0 15px var(--honduras-light-blue);
+  animation: slideIn 0.3s ease;
+}
+
+/* Ocultar barra de acento cuando está colapsado */
+.navigation.active ul li:hover::after,
+.navigation.active ul li.hovered::after {
+  display: none;
+}
+
+@keyframes slideIn {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 5px;
+    opacity: 1;
+  }
+}
+
+
+.navigation ul li a {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--white);
+  padding: 8px 16px 8px 8px;
+  margin: 0 8px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+
+
+.navigation ul li:hover a,
+.navigation ul li.hovered a {
+  color: var(--blue);
+}
+
+
+
+/* --------- MAIN---------- */
+.main {
+  position: absolute;
+  width: calc(100% - var(--nav-width));
+  left: var(--nav-width);
+  min-height: 100vh;
+  background: #f8f9fa;
+  transition: all 0.5s ease;
+  margin: 0;
+  padding: 0;
+}
+
+.main.active {
+  width: calc(100% - var(--nav-collapsed-width));
+  left: var(--nav-collapsed-width);
+}
+
+/* Dark theme main background */
+body.dark-theme .main {
+  background: #0f1419 !important;
+}
+
+.topbar {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center; /* CENTRA TODO */
+  align-items: center;
+  position: relative;
+  background: var(--white);
+  border-bottom: 1px solid #ddd;
+}
+
+.toggle {
+  position: absolute;
+  left: 20px;
+  width: 60px;
+  height: 60px;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+/* ====================== Responsive Design ========================== */
+@media (max-width: 991px) {
+  .navigation {
+    left: calc(-1 * var(--nav-width));
+  }
+  .navigation.active {
+    left: 0;
+  }
+  .main {
+    width: 100%;
+    left: 0;
+  }
+  .main.active {
+    left: var(--nav-width);
+  }
+}
+
+@media (max-width: 768px) {
+  .search {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .search {
+    max-width: 250px;
+  }
+  .toggle {
+    left: 10px;
+  }
+}
+
+/* ====================== Ciclo Lunar Styles ========================== */
+#container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  justify-content: center;
+  padding: 28px 16px 60px 16px;
+}
+.day {
+  width: 120px;
+  text-align: center;
+  cursor: pointer;
+}
+.day .moon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #f3f4f6;
+  box-shadow: 0 6px 18px rgba(16,24,40,0.08);
+  position: relative;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.day .moon .shadow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  height: 100%;
+  background: #2b2f4a;
+  right: 0;
+  border-radius: 0 50% 50% 0;
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.08);
+}
+.day .date {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: var(--black2, #6c757d);
+}
+.day .phaseName {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: var(--black2, #6c757d);
+}
+
+/* Modal */
+#modal {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.5);
+  z-index: 2000;
+}
+#modalContent {
+  background: var(--white);
+  padding: 22px;
+  border-radius: 12px;
+  width: 92%;
+  max-width: 520px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.15);
+}
+.modalMoon {
+  width: 240px;
+  height: 240px;
+  margin: 18px auto;
+  position: relative;
+  border-radius: 50%;
+  background: #f3f4f6;
+  overflow: hidden;
+}
+.modalMoon .modalShadow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  background: #2b2f4a;
+  right: 0;
+  border-radius: 0 50% 50% 0;
+}
+#closeBtn {
+  margin-top: 12px;
+  padding: 8px 14px;
+  background: var(--honduras-light-blue);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Refresh button */
+.btn-refresh {
+  background: transparent;
+  border: none;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+}
+.btn-refresh ion-icon {
+  font-size: 1.1rem;
+  color: var(--honduras-dark-blue);
+}
+
+/* Dark theme overrides */
+body.dark-theme .day .moon { background: #11151a; }
+body.dark-theme .day .moon .shadow { background: rgba(255,255,255,0.06); }
+body.dark-theme #modalContent { background: rgba(20,24,30,0.96); color: #e8eaed; }
+body.dark-theme #closeBtn { background: var(--honduras-light-blue); }

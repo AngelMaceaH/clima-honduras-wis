@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Clima — Sugerencias</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+
+  <!-- Icon fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/estilo.css">
+  <link rel="stylesheet" href="css/index.css">
+
+  <style>
+    .form-container {
+      max-width: 700px;
+      margin: 0 auto;
+      animation: fadeIn 0.5s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .form-control:focus {
+      border-color: #4da6ff;
+      box-shadow: 0 0 0 0.25rem rgba(77, 166, 255, 0.25);
+    }
+    .submit-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border: none;
+      transition: all 0.3s ease;
+    }
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(102, 126, 234, 0.4);
+    }
+    .success-message {
+      display: none;
+      animation: slideDown 0.5s ease;
+    }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Dark theme styles */
+    body.dark-theme .card {
+      background: rgba(30, 34, 50, 0.95) !important;
+    }
+    body.dark-theme .form-label {
+      color: #5b9fff !important;
+    }
+    body.dark-theme .form-control {
+      background: rgba(40, 44, 60, 0.8) !important;
+      border-color: rgba(77, 166, 255, 0.3) !important;
+      color: #e8eaed !important;
+    }
+    body.dark-theme .form-control::placeholder {
+      color: #6c757d !important;
+    }
+    body.dark-theme .form-control:focus {
+      background: rgba(45, 49, 65, 0.9) !important;
+      border-color: #4da6ff !important;
+      color: #e8eaed !important;
+    }
+    body.dark-theme .form-text {
+      color: #8ba3c7 !important;
+    }
+    body.dark-theme p {
+      color: #adb5bd !important;
+    }
+    body.dark-theme .ri-mail-send-line {
+      color: #5b9fff !important;
+    }
+  </style>
+
+</head>
+
+<body>
+  <!-- NAVEGADOR / SIDEBAR -->
+  <div class="container">
+    <div class="navigation">
+      <ul>
+        <li>
+          <a href="index.html">
+            <span class="icon"><img src="img/logo/logo.png" alt="Logo" style="width: 200px; height: 50px; object-fit: contain;"></span>    
+          </a>
+        </li>
+         <li>
+          <a href="index.html">
+            <span class="icon">
+              <ion-icon name="cloudy-night-outline"></ion-icon>
+            </span>
+            <span class="title">Hoy</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="pronóstico-diario.html">
+            <span class="icon">
+              <ion-icon name="today-outline"></ion-icon>
+            </span>
+            <span class="title">Diario</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="radar-tiempo.html">
+            <span class="icon">
+              <ion-icon name="radio-outline"></ion-icon>
+            </span>
+            <span class="title">Radar</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="semana.html">
+            <span class="icon">
+              <ion-icon name="cloud-circle-outline"></ion-icon>
+            </span>
+            <span class="title">Semanal</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="ciclo-lunar.html">
+            <span class="icon">
+              <ion-icon name="moon-outline"></ion-icon>
+            </span>
+            <span class="title">Ciclo Lunar</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="noticias.html">
+            <span class="icon">
+              <ion-icon name="thunderstorm-outline"></ion-icon>
+            </span>
+            <span class="title">Noticias</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="acerca-de.html">
+            <span class="icon">
+              <ion-icon name="people-circle-outline"></ion-icon>
+            </span>
+            <span class="title">Nosotros</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <div class="toggle">
+        <ion-icon name="menu-outline"></ion-icon>
+      </div>
+
+      
+
+      <!-- Theme Switcher -->
+      <div class="theme-switcher">
+        <button id="theme-btn" class="btn btn-sm btn-theme dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="ri-contrast-2-line me-1"></i>
+          <span id="current-theme">Claro</span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="#" data-theme="light"><i class="ri-sun-line me-2"></i>Claro</a></li>
+          <li><a class="dropdown-item" href="#" data-theme="dark"><i class="ri-moon-line me-2"></i>Oscuro</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="cuadro2 p-4 mx-auto" style="min-height: calc(100vh - 100px);">
+      <div class="container mt-4">
+        
+        <div class="form-container">
+          <!-- Header -->
+          <div class="text-center mb-4">
+            <i class="ri-mail-send-line" style="font-size: 4rem; color: #4da6ff;"></i>
+            <h2 class="forecast-title mt-3">Cuéntanos tu Opinión</h2>
+            <p style="font-size: 1.1rem; color: #666;">
+              Tus sugerencias nos ayudan a mejorar. ¡Queremos escucharte!
+            </p>
+          </div>
+
+          <!-- Success Message -->
+          <div id="success-message" class="alert alert-success success-message" role="alert">
+            <i class="ri-checkbox-circle-line me-2"></i>
+            <strong>¡Mensaje enviado!</strong> Gracias por tu sugerencia. Te responderemos pronto.
+          </div>
+
+          <!-- Error Message -->
+          <div id="error-message" class="alert alert-danger" role="alert" style="display: none;">
+            <i class="ri-error-warning-line me-2"></i>
+            <strong>Error:</strong> <span id="error-text"></span>
+          </div>
+
+          <!-- Formulario -->
+          <div class="card" style="background: rgba(255, 255, 255, 0.95); border-radius: 12px; padding: 40px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+            <form id="suggestion-form">
+              
+              <!-- Nombre -->
+              <div class="mb-4">
+                <label for="nombre" class="form-label" style="font-weight: 600; color: #17217d;">
+                  <i class="ri-user-line me-2"></i>Nombre <span style="color: #d32f2f;">*</span>
+                </label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="nombre" 
+                  name="nombre"
+                  placeholder="Tu nombre" 
+                  required
+                  style="border-radius: 8px; padding: 12px; border: 2px solid #e0e0e0;"
+                />
+              </div>
+
+              <!-- Apellido (Opcional) -->
+              <div class="mb-4">
+                <label for="apellido" class="form-label" style="font-weight: 600; color: #17217d;">
+                  <i class="ri-user-2-line me-2"></i>Apellido <span style="color: #999; font-size: 0.9rem;">(Opcional)</span>
+                </label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="apellido" 
+                  name="apellido"
+                  placeholder="Tu apellido" 
+                  style="border-radius: 8px; padding: 12px; border: 2px solid #e0e0e0;"
+                />
+              </div>
+
+              <!-- Correo Electrónico -->
+              <div class="mb-4">
+                <label for="email" class="form-label" style="font-weight: 600; color: #17217d;">
+                  <i class="ri-mail-line me-2"></i>Correo Electrónico <span style="color: #d32f2f;">*</span>
+                </label>
+                <input 
+                  type="email" 
+                  class="form-control" 
+                  id="email" 
+                  name="email"
+                  placeholder="tucorreo@ejemplo.com" 
+                  required
+                  style="border-radius: 8px; padding: 12px; border: 2px solid #e0e0e0;"
+                />
+              </div>
+
+              <!-- Mensaje/Sugerencia -->
+              <div class="mb-4">
+                <label for="mensaje" class="form-label" style="font-weight: 600; color: #17217d;">
+                  <i class="ri-message-3-line me-2"></i>Tu Sugerencia <span style="color: #d32f2f;">*</span>
+                </label>
+                <textarea 
+                  class="form-control" 
+                  id="mensaje" 
+                  name="mensaje"
+                  rows="6" 
+                  placeholder="Escribe aquí tu sugerencia, comentario o pregunta..." 
+                  required
+                  style="border-radius: 8px; padding: 12px; border: 2px solid #e0e0e0; resize: vertical;"
+                ></textarea>
+                <div class="form-text" style="color: #666;">
+                  Mínimo 10 caracteres
+                </div>
+              </div>
+
+              <!-- Botón Enviar -->
+              <div class="text-center">
+                <button 
+                  type="submit" 
+                  class="btn btn-primary submit-btn" 
+                  style="padding: 12px 40px; font-size: 1.1rem; border-radius: 8px; font-weight: 600;"
+                  id="submit-btn"
+                >
+                  <i class="ri-send-plane-fill me-2"></i>Enviar Sugerencia
+                </button>
+              </div>
+
+            </form>
+          </div>
+
+          <!-- Info adicional -->
+          <div class="text-center mt-4">
+            <p style="color: #666; font-size: 0.95rem;">
+              <i class="ri-shield-check-line me-1"></i>
+              Tu información está segura y solo será usada para responderte.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  <!-- FOOTER -->
+  <footer class="footer mt-5 py-4 text-center text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mb-3 mb-md-0">
+          <p class="mb-0">&copy; 2025 ElClima: Honduras. Todos los derechos reservados.</p>
+        </div>
+        <div class="col-md-6">
+          <p class="mb-2">Síguenos en:</p>
+          <div class="social-links d-flex justify-content-center gap-3">
+              <a href="https://www.instagram.com/elclima.hn/" target="_blank" rel="noopener noreferrer" class="text-white" title="Instagram" aria-label="Instagram">
+                <i class="ri-instagram-line fs-4"></i>
+              </a>
+              <a href="https://x.com/ElClimaHN" target="_blank" rel="noopener noreferrer" class="text-white" title="X" aria-label="X">
+                <i class="ri-twitter-x-line fs-4"></i>
+              </a>
+          </div>
+        </div>
+      </div>
+      <hr class="my-3 border-white opacity-25">
+      <div class="row">
+        <div class="col-12">
+          <p class="mb-0 small">
+              <a href="acerca-de.html" class="text-white text-decoration-none me-3">Sobre Nosotros</a>
+              <span class="text-white-50">|</span>
+              <a href="contacto.html" class="text-white text-decoration-none mx-3">Contacto</a>
+            <span class="text-white-50">|</span>
+            <a href="https://open-meteo.com" target="_blank" rel="noopener noreferrer" class="text-white text-decoration-none mx-3">Weather Source</a>
+            <span class="text-white-50">|</span>
+            <span class="text-white-50 ms-3">v1.0.0</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  </div>
+
+  <!-- Bootstrap Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+  <!-- Ionicons -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+  <!-- Main JS -->
+  <script src="js/principal.js"></script>
+
+  <!-- EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <script>
+    // Inicializar EmailJS con tu Public Key
+    (function(){
+      emailjs.init("YOUR_PUBLIC_KEY"); // Necesitas registrarte en emailjs.com y obtener tu clave
+    })();
+
+    // Theme switcher
+    const themeBtn = document.getElementById('theme-btn');
+    const currentThemeText = document.getElementById('current-theme');
+    const themeItems = document.querySelectorAll('[data-theme]');
+
+    // Cargar tema guardado
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark-theme');
+      currentThemeText.textContent = 'Oscuro';
+    }
+
+    // Cambiar tema
+    themeItems.forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        const theme = item.getAttribute('data-theme');
+        
+        if (theme === 'dark') {
+          document.body.classList.add('dark-theme');
+          currentThemeText.textContent = 'Oscuro';
+          localStorage.setItem('theme', 'dark');
+        } else {
+          document.body.classList.remove('dark-theme');
+          currentThemeText.textContent = 'Claro';
+          localStorage.setItem('theme', 'light');
+        }
+      });
+    });
+
+    // Manejar envío del formulario
+    const form = document.getElementById('suggestion-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const successMessage = document.getElementById('success-message');
+    const errorMessage = document.getElementById('error-message');
+    const errorText = document.getElementById('error-text');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Validar longitud del mensaje
+      const mensaje = document.getElementById('mensaje').value;
+      if (mensaje.length < 10) {
+        errorText.textContent = 'El mensaje debe tener al menos 10 caracteres.';
+        errorMessage.style.display = 'block';
+        return;
+      }
+
+      // Obtener datos del formulario
+      const formData = {
+        nombre: document.getElementById('nombre').value,
+        apellido: document.getElementById('apellido').value || 'No proporcionado',
+        email: document.getElementById('email').value,
+        mensaje: document.getElementById('mensaje').value,
+        to_email: 'riotandroz@gmail.com'
+      };
+
+      // Deshabilitar botón mientras se envía
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="ri-loader-4-line me-2" style="animation: spin 1s linear infinite;"></i>Enviando...';
+
+      // Enviar email usando EmailJS
+      // OPCIÓN 1: Usando EmailJS (requiere registro en emailjs.com)
+      /*
+      emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', formData)
+        .then(function(response) {
+          console.log('SUCCESS!', response.status, response.text);
+          showSuccess();
+        }, function(error) {
+          console.log('FAILED...', error);
+          showError('No se pudo enviar el mensaje. Intenta de nuevo.');
+        });
+      */
+
+      // OPCIÓN 2: Usando FormSubmit (más fácil, no requiere registro)
+      fetch('https://formsubmit.co/ajax/elclima.hn@yahoo.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.nombre + ' ' + formData.apellido,
+          email: formData.email,
+          message: formData.mensaje,
+          _subject: 'Nueva sugerencia desde ElClima Honduras',
+          _template: 'table'
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+        showSuccess();
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        showError('No se pudo enviar el mensaje. Intenta de nuevo.');
+      });
+    });
+
+    function showSuccess() {
+      // Ocultar errores
+      errorMessage.style.display = 'none';
+      
+      // Mostrar mensaje de éxito
+      successMessage.style.display = 'block';
+      
+      // Limpiar formulario
+      form.reset();
+      
+      // Restaurar botón
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i class="ri-send-plane-fill me-2"></i>Enviar Sugerencia';
+      
+      // Scroll al mensaje de éxito
+      successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      
+      // Ocultar mensaje después de 5 segundos
+      setTimeout(() => {
+        successMessage.style.display = 'none';
+      }, 5000);
+    }
+
+    function showError(message) {
+      errorText.textContent = message;
+      errorMessage.style.display = 'block';
+      successMessage.style.display = 'none';
+      
+      // Restaurar botón
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i class="ri-send-plane-fill me-2"></i>Enviar Sugerencia';
+    }
+
+    // Agregar animación de spin para el loader
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+
+</body>
+</html>

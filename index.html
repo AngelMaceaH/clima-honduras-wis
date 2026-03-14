@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Clima — Hoy</title>
+
+  <!-- Bootstrap CSS (solo uno) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+
+  <!-- Icon fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/estilo.css">
+  <link rel="stylesheet" href="css/index.css">
+
+</head>
+
+
+<body>
+  <!-- NAVEGADOR / SIDEBAR -->
+  <div class="container">
+    <div class="navigation">
+      <ul>
+        <li>
+          <a href="index.html">
+            <span class="icon"><img src="img/logo/logo.png" alt="Logo" style="width: 200px; height: 50px; object-fit: contain;"></span>    
+          </a>
+        </li>
+         <li>
+                    <a href="index.html">
+                        <span class="icon">
+                            <ion-icon name="cloudy-night-outline"></ion-icon>
+                        </span>
+                        <span class="title">Hoy</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="pronóstico-diario.html">
+                        <span class="icon">
+                            <ion-icon name="today-outline"></ion-icon>
+                        </span>
+                        <span class="title">Diario</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="radar-tiempo.html">
+                        <span class="icon">
+                            <ion-icon name="radio-outline"></ion-icon>
+                        </span>
+                        <span class="title">Radar</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="semana.html">
+                        <span class="icon">
+                           <ion-icon name="cloud-circle-outline"></ion-icon>
+                        </span>
+                        <span class="title">Semanal</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="ciclo-lunar.html">
+                        <span class="icon">
+                            <ion-icon name="moon-outline"></ion-icon>
+                        </span>
+                        <span class="title">Ciclo Lunar</span>
+                    </a>
+                </li>
+
+                 <li>
+                    <a href="noticias.html">
+                        <span class="icon">
+                           <ion-icon name="thunderstorm-outline"></ion-icon>
+                        </span>
+                        <span class="title">Noticias </span>
+                    </a>
+                </li>
+
+                
+                 <li>
+                    <a href="acerca-de.html">
+                        <span class="icon">
+                           <ion-icon name="people-circle-outline"></ion-icon>
+                        </span>
+                        <span class="title">Nosotros </span>
+                    </a>
+                </li>
+            </ul>
+    </div>
+      </div>
+
+    
+  <!-- MAIN -->
+<div class="main">
+    <div class="topbar">
+      <div class="toggle"><ion-icon name="menu-outline"></ion-icon>
+      </div>
+
+      <!-- CABECERA EN TOPBAR -->
+      <div class="forecast-header" style="margin: 0; margin-left: 60px; flex: 1; display: flex; justify-content: space-between; align-items: center; padding: 0 10px 0 0;">
+        <div style="display: flex; align-items: center; gap: 15px;">
+          
+          <!-- Barra de búsqueda -->
+          <div style="position: relative;">
+            <input 
+              type="text" 
+              id="city-search" 
+              class="city-search-input"
+              placeholder="Buscar ciudad..."
+              style="padding: 6px 35px 6px 12px; border-radius: 8px; border: 1px solid rgba(0, 136, 255, 0.3); background: rgba(255, 255, 255, 0.95); font-size: 0.9rem; width: 200px; outline: none;"
+            />
+            <i class="ri-search-line city-search-icon" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #0055cc; pointer-events: none;"></i>
+            
+            <!-- Resultados de búsqueda -->
+            <div id="search-results" class="search-results-dropdown" style="position: absolute; top: 100%; left: 0; width: 100%; max-height: 300px; overflow-y: auto; background: white; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); margin-top: 5px; display: none; z-index: 10002;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Theme Switcher -->
+      <div class="theme-switcher">
+        <button id="theme-btn" class="btn btn-sm btn-theme dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="ri-contrast-2-line me-1"></i>
+          <span id="current-theme">Claro</span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="#" data-theme="light"><i class="ri-sun-line me-2"></i>Claro</a></li>
+          <li><a class="dropdown-item" href="#" data-theme="dark"><i class="ri-moon-line me-2"></i>Oscuro</a></li>
+        </ul>
+      </div>
+    </div>
+
+  <!-- PANEL PRINCIPAL (.cuadro2) -->
+  <div class="cuadro2 p-4 mx-auto">
+    <div class="container mt-4">
+      <!-- Título -->
+      <h2 class="forecast-title" style="text-align: center; margin-bottom: 10px;">El Clima de Hoy</h2>
+      <div class="forecast-subtitle" style="text-align: center; margin-bottom: 20px;">HONDURAS</div>
+      
+      <!-- Selectores de ubicación -->
+      <div class="location-select d-flex justify-content-center gap-2 mb-3">
+        <select id="departamentos" class="form-select select-styled w-auto">
+          <option value="">Seleccionar departamento</option>
+        </select>
+
+        <select id="municipios" class="form-select select-styled w-auto">
+          <option value="">Seleccionar municipio</option>
+        </select>
+      </div>
+
+      <!-- Cuadro principal de clima -->
+      <div class="weather-card position-relative text-white p-4 mx-auto"
+           style="max-width: 500px; background: rgba(182, 21, 21, 0.15);">
+        
+        <!-- Header superior -->
+        <div class="card-header d-flex justify-content-between mb-4 align-items-start" style="text-align: left;">
+          <div>
+            <div id="location-text" class="location-default fw-bold">Ubicación</div>
+            <div id="local-time" style="font-size: 0.85rem; font-weight: normal; color: rgba(255,255,255,0.85); margin-top: 4px;"></div>
+          </div>
+
+          <div style="text-align: right;">
+            <div style="display: flex; align-items: center; gap: 6px; justify-content: flex-end;">
+              <span id="update-time" class="small" style="font-size: 0.85rem;">Última actualización</span>
+              <button id="refresh-btn" type="button" class="btn btn-sm" title="Refrescar">
+                <i class="ri-refresh-line"></i>
+              </button>
+            </div>
+            <!-- Botones de unidad -->
+            <div class="btn-group btn-group-sm mt-1" role="group" aria-label="unidad temperatura">
+              <button id="celsius-btn" type="button" class="btn btn-light btn-sm" style="border-top-left-radius: 4px; border-bottom-left-radius: 4px; border-top-right-radius: 0; border-bottom-right-radius: 0;" title="Celsius">°C</button>
+              <button id="fahrenheit-btn" type="button" class="btn btn-light btn-sm" style="border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-top-left-radius: 0; border-bottom-left-radius: 0;" title="Fahrenheit">°F</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Body: temperatura grande -->
+        <div class="card-body">
+          <!-- Temperatura a la izquierda -->
+          <div class="d-flex align-items-center gap-3 mb-3" style="padding-left: 1rem;">
+            <span id="temp" style="font-size: 5.5rem; font-weight: 700; line-height: 1;">--°</span>
+            <img id="weather-icon" src="" alt="Icono clima" width="120">
+          </div>
+
+          <!-- Info del clima alineada a la izquierda -->
+          <div style="text-align: left; padding-left: 1rem;">
+            <div class="weather-desc mb-3" id="weather-desc" style="font-size: 1.8rem; color: rgba(255,255,255,1); font-weight: 500;">Estado</div>
+            <div class="mb-1" style="font-size: 0.85rem; color: rgba(255,255,255,0.65);">Sensación térmica <span id="feels-like">--°</span></div>
+            <div class="temp-high-low mb-2" id="high-low" style="font-size: 0.85rem; color: rgba(255,255,255,0.65);">Alta -- / Baja --</div>
+          </div>
+          
+          <!-- Resumen de clima con más espacio -->
+          <div style="text-align: left; padding-left: 1rem; padding-top: 1rem; min-height: 60px; border-top: 1px solid rgba(255,255,255,0.2);">
+            <p id="summary-sentence" class="summary-text" style="font-size: 0.95rem; opacity: 0.9; margin: 0;">Cargando resumen...</p>
+          </div>
+        </div>
+
+        <!-- Fondo dinámico (controlado por JS) -->
+        <div class="weather-bg position-absolute top-0 start-0 w-100 h-100"
+             style="z-index:-1; background-size:cover; background-position:center;"></div>
+      </div>
+      <!-- Cuadro secundario: detalles (dentro de .cuadro2) -->
+      <div class="today-summary mt-3 text-white">
+
+        <div class="detail-row d-flex justify-content-between align-items-center gap-2">
+          <div class="detail-item text-center flex-fill">
+            <div class="detail-icon"><ion-icon name="weather-windy-outline"></ion-icon></div>
+            <div class="detail-value" id="detail-wind">--</div>
+            <div class="detail-label">Viento</div>
+          </div>
+          <div class="detail-item text-center flex-fill">
+            <div class="detail-icon"><ion-icon name="water-outline"></ion-icon></div>
+            <div class="detail-value" id="detail-humidity">--</div>
+            <div class="detail-label">Humedad</div>
+          </div>
+          <div class="detail-item text-center flex-fill">
+            <div class="detail-icon"><ion-icon name="eye-outline"></ion-icon></div>
+            <div class="detail-value" id="detail-visibility">--</div>
+            <div class="detail-label">Visibilidad</div>
+          </div>
+          <div class="detail-item text-center flex-fill">
+            <div class="detail-icon"><ion-icon name="speedometer-outline"></ion-icon></div>
+            <div class="detail-value" id="detail-pressure">--</div>
+            <div class="detail-label">Presión</div>
+          </div>
+          <div class="detail-item text-center flex-fill">
+            <div class="detail-icon"><ion-icon name="thermometer-outline"></ion-icon></div>
+            <div class="detail-value" id="detail-dewpoint">--</div>
+            <div class="detail-label">Punto de rocío</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRONÓSTICO POR HORAS -->
+  <div class="hourly-forecast mx-auto mt-4">
+    <h3 class="section-title">Pronóstico por Horas <span class="forecast-subtitle-small">(12 horas)</span></h3>
+    <div class="hourly-container" id="hourly-container">
+      <!-- Se llenará dinámicamente con JS -->
+    </div>
+  </div>
+
+  <!-- INFORMACIÓN ADICIONAL DEL CLIMA -->
+  <div class="weather-info-grid mx-auto mt-4">
+    <div class="info-card">
+      <div class="info-icon"><ion-icon name="water-outline"></ion-icon></div>
+      <div class="info-content">
+        <div class="info-label">Probabilidad de lluvia</div>
+        <div class="card-value" id="rain-prob">--%</div>
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-icon"><ion-icon name="sunny-outline"></ion-icon></div>
+      <div class="info-content">
+        <div class="info-label">Índice UV</div>
+        <div class="card-value" id="uv-value">--</div>
+        <div class="uv-severity" style="font-size: 0.85rem; opacity: 0.7; margin-top: 0.2rem; color: inherit;">--</div>
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-icon"><ion-icon name="leaf-outline"></ion-icon></div>
+      <div class="info-content">
+        <div class="info-label">Calidad del aire</div>
+        <div class="card-value" id="air-quality-text">--</div>
+        <div class="air-quality-pm" style="font-size: 0.85rem; opacity: 0.7; margin-top: 0.2rem; color: inherit;">PM 2.5: --</div>
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-icon"><ion-icon name="time-outline"></ion-icon></div>
+      <div class="info-content">
+        <div class="info-label">Amanecer / Atardecer</div>
+        <div class="card-value" id="sun-times-data">-- / --</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer mt-5 py-4 text-center text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mb-3 mb-md-0">
+          <p class="mb-0">&copy; 2025 ElClima: Honduras. Todos los derechos reservados.</p>
+        </div>
+        <div class="col-md-6">
+          <p class="mb-2">Síguenos en:</p>
+          <div class="social-links d-flex justify-content-center gap-3">
+              <a href="https://www.instagram.com/elclima.hn/" target="_blank" rel="noopener noreferrer" class="text-white" title="Instagram" aria-label="Instagram">
+                <i class="ri-instagram-line fs-4"></i>
+              </a>
+              <a href="https://x.com/ElClimaHN" target="_blank" rel="noopener noreferrer" class="text-white" title="X" aria-label="X">
+                <i class="ri-twitter-x-line fs-4"></i>
+              </a>
+          </div>
+        </div>
+      </div>
+      <hr class="my-3 border-white opacity-25">
+      <div class="row">
+        <div class="col-12">
+          <p class="mb-0 small">
+              <a href="acerca-de.html" class="text-white text-decoration-none me-3">Sobre Nosotros</a>
+              <span class="text-white-50">|</span>
+              <a href="contacto.html" class="text-white text-decoration-none mx-3">Contacto</a>
+            <span class="text-white-50">|</span>
+            <a href="https://open-meteo.com" target="_blank" rel="noopener noreferrer" class="text-white text-decoration-none mx-3">Weather Source</a>
+            <span class="text-white-50">|</span>
+            <span class="text-white-50 ms-3">v1.0.0</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+  
+  <!-- SCRIPTS: solo un bootstrap bundle, luego tus JS. -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Ionicons -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+  <!--  scripts -->
+  <script src="js/principal.js"></script>
+  <script src="js/municipios.js"></script>
+  <script src="js/index.js"></script>
+  
+  <!-- Theme Switcher Script -->
+  <script>
+    (function() {
+      const themeBtn = document.getElementById('theme-btn');
+      const currentThemeSpan = document.getElementById('current-theme');
+      const themeOptions = document.querySelectorAll('[data-theme]');
+      
+      // Load saved theme or default to light
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      applyTheme(savedTheme);
+      
+      // Theme option click handlers
+      themeOptions.forEach(option => {
+        option.addEventListener('click', (e) => {
+          e.preventDefault();
+          const theme = option.getAttribute('data-theme');
+          applyTheme(theme);
+          localStorage.setItem('theme', theme);
+        });
+      });
+      
+      function applyTheme(theme) {
+        if (theme === 'dark') {
+          document.body.classList.add('dark-theme');
+          currentThemeSpan.textContent = 'Oscuro';
+        } else {
+          document.body.classList.remove('dark-theme');
+          currentThemeSpan.textContent = 'Claro';
+        }
+      }
+    })();
+
+    // City Search Functionality
+    (function() {
+      const searchInput = document.getElementById('city-search');
+      const searchResults = document.getElementById('search-results');
+      let searchTimeout;
+
+      if (!searchInput || !searchResults) return;
+
+      searchInput.addEventListener('input', function(e) {
+        const query = e.target.value.trim();
+        
+        clearTimeout(searchTimeout);
+        
+        if (query.length < 2) {
+          searchResults.style.display = 'none';
+          searchResults.innerHTML = '';
+          return;
+        }
+
+        searchTimeout = setTimeout(() => {
+          searchCity(query);
+        }, 500);
+      });
+
+      // Cerrar resultados al hacer click fuera
+      document.addEventListener('click', function(e) {
+        if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+          searchResults.style.display = 'none';
+        }
+      });
+
+      async function searchCity(query) {
+        try {
+          searchResults.innerHTML = '<div style="padding: 10px; text-align: center; color: #666;">Buscando...</div>';
+          searchResults.style.display = 'block';
+
+          const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=10&language=es&format=json`;
+          const response = await fetch(url);
+          const data = await response.json();
+
+          if (!data.results || data.results.length === 0) {
+            searchResults.innerHTML = '<div style="padding: 10px; text-align: center; color: #666;">No se encontraron resultados</div>';
+            return;
+          }
+
+          let html = '';
+          data.results.forEach(city => {
+            const cityName = city.name || '';
+            const country = city.country || '';
+            const admin1 = city.admin1 ? `, ${city.admin1}` : '';
+            const displayName = `${cityName}${admin1}, ${country}`;
+            
+            html += `
+              <div class="search-result-item" 
+                   data-lat="${city.latitude}" 
+                   data-lon="${city.longitude}"
+                   data-name="${displayName}"
+                   style="padding: 10px 15px; cursor: pointer; transition: background 0.2s;">
+                <div class="search-item-name" style="font-weight: 600;">${cityName}</div>
+                <div class="search-item-details" style="font-size: 0.85rem;">${country}${admin1}</div>
+              </div>
+            `;
+          });
+
+          searchResults.innerHTML = html;
+
+          // Agregar eventos de click a cada resultado
+          document.querySelectorAll('.search-result-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+              this.classList.add('hovered');
+            });
+            item.addEventListener('mouseleave', function() {
+              this.classList.remove('hovered');
+            });
+            item.addEventListener('click', function() {
+              const lat = this.getAttribute('data-lat');
+              const lon = this.getAttribute('data-lon');
+              const name = this.getAttribute('data-name');
+              
+              selectCity(lat, lon, name);
+              searchResults.style.display = 'none';
+              searchInput.value = name;
+            });
+          });
+
+        } catch (error) {
+          console.error('Error buscando ciudad:', error);
+          searchResults.innerHTML = '<div style="padding: 10px; text-align: center; color: #d32f2f;">Error al buscar</div>';
+        }
+      }
+
+      function selectCity(lat, lon, name) {
+        // Actualizar el texto de ubicación
+        const locationText = document.getElementById('location-text');
+        if (locationText) {
+          locationText.textContent = name;
+        }
+
+        // Guardar coordenadas y nombre para usar en hoy.js
+        if (window.__hoy_debug) {
+          window.__hoy_debug.ultimaUbicacion = { lat: parseFloat(lat), lon: parseFloat(lon), name: name };
+        }
+
+        // Llamar a la función de hoy.js para obtener clima
+        if (window.__hoy_debug && window.__hoy_debug.obtenerClimaPorCoords) {
+          window.__hoy_debug.obtenerClimaPorCoords(parseFloat(lat), parseFloat(lon));
+        }
+      }
+    })();
+  </script>
+</body>
+</html>

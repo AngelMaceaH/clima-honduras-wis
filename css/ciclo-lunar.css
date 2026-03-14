@@ -1,0 +1,358 @@
+body {
+        font-family: "Segoe UI", sans-serif;
+        background: #0d0d18;
+        color: #000000;
+        padding: 20px;
+        text-align: center;
+      }      
+
+    h1 {
+        margin-bottom: 10px;
+        font-weight: 300;
+    }
+
+    #status {
+        margin-bottom: 20px;
+        opacity: .85;
+        font-size: 15px;
+    }
+
+    #container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 18px;
+        margin-top: 10px;
+    }
+
+    .day {
+        width: 130px;
+        padding: 14px;
+        border-radius: 14px;
+        background: #ffffff;
+        box-shadow: 0 0 12px rgba(255,255,255,0.05);
+        transition: 0.3s;
+        cursor: pointer;
+    }
+    .day:hover {
+        transform: scale(1.06);
+        background: #4f4f7d;
+    }
+
+    .moon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 30% 30%, #ffffff, #dcdcdc);
+        margin: 0 auto 10px auto;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .shadow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 60px;
+        border-radius: 50%;
+        background: #343468;
+        transition: 0.4s ease;
+    }
+
+    .date {
+        font-size: 13px;
+        opacity: .9;
+        margin-bottom: 4px;
+    }
+
+    .phaseName {
+        font-size: 12px;
+        opacity: .8;
+        margin-top: 4px;
+    }
+
+    /* ---------------- MODAL ---------------- */
+    #modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.7);
+        backdrop-filter: blur(4px);
+        align-items: center;
+        justify-content: center;
+    }
+
+    #modalContent {
+        background: #a9a9c2;
+        padding: 25px;
+        border-radius: 18px;
+        width: 320px;
+        text-align: center;
+        box-shadow: 0 0 18px rgba(0,0,0,0.6);
+        animation: aparecer .3s ease;
+    }
+
+    @keyframes aparecer {
+        from { transform: scale(.7); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+
+    .modalMoon {
+        width: 120px;
+        height: 120px;
+        background: radial-gradient(circle at 30% 30%, #ffffff, #cfcfcf);
+        border-radius: 50%;
+        position: relative;
+        overflow: hidden;
+        margin: 10px auto;
+    }
+
+    .modalShadow {
+        position: absolute;
+        top: 0;
+        height: 120px;
+        background: #0d0d18;
+        border-radius: 50%;
+    }
+
+    #closeBtn {
+        margin-top: 12px;
+        padding: 8px 18px;
+        border-radius: 8px;
+        background: #343a55;
+        border: none;
+        cursor: pointer;
+        color: #fff;
+        transition: .3s;
+    }
+
+    #closeBtn:hover {
+        background: #4c5371;
+    }
+
+    .body-dark-theme .radar-title{
+         color: #66b3ff;
+    }
+
+        #container{display:grid;grid-template-columns:repeat(5,1fr);gap:30px 34px;justify-items:center;padding:12px 8px}
+    .day{width:140px;display:flex;flex-direction:column;align-items:center;gap:10px}
+    .moon{width:96px;height:96px;border-radius:50%;background:#f6f6fb;position:relative;box-shadow:6px 6px 0 rgba(0,0,0,0.06)}
+    .shadow{position:absolute;top:0;bottom:0;background:#2b2b6b;border-radius:50%;filter:drop-shadow(2px 2px 0 rgba(0,0,0,0.06))}
+    .date{font-size:0.85rem;color:var(--text-secondary);text-transform:lowercase}
+    .phaseName{font-size:0.9rem;color:var(--text-primary);font-weight:500}
+    @media(max-width:1100px){#container{grid-template-columns:repeat(4,1fr)}}
+    @media(max-width:900px){#container{grid-template-columns:repeat(3,1fr);gap:22px}}
+    @media(max-width:520px){#container{grid-template-columns:repeat(2,1fr)}}
+
+    .theme-switcher .btn-theme { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; padding: 6px 10px; height: 36px; }
+    
+    .phase-separator { width: 100%; height: 1px; border: 0; background: rgba(0,0,0,0.06); margin: 72px 0; }
+    .phases-list { display: flex; flex-direction: column; gap: 24px; margin-top: 36px; }
+    .phase-card { background: rgba(255,255,255,0.98); border-radius: 12px; padding: 18px 18px; box-shadow: 0 8px 24px rgba(0,0,0,0.07); width: 100%; }
+    .phase-card h4 { margin: 0 0 6px 0; font-size: 1rem; color: var(--text-primary); }
+    .phase-card p { margin: 0; color: #444; font-size: 0.95rem; line-height: 1.45; text-align: justify; text-justify: inter-word; }
+    @media(max-width:800px){ .phase-card { padding: 12px; } }
+
+    /* Dark theme  */
+    body.dark-theme .phase-card {
+      background: rgba(18,22,34,0.78) !important;
+      color: #e8eaed !important;
+      box-shadow: none !important;
+      border: 1px solid rgba(77,166,255,0.08);
+    }
+    body.dark-theme .phase-card h4 { color: #bfe1ff !important; }
+    body.dark-theme .phase-card p { color: rgba(235,240,255,0.92) !important; }
+    body.dark-theme .phase-separator { background: rgba(255,255,255,0.06); }
+
+   /* MODAL LUNAR */
+.modal-lunar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-lunar.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content-lunar {
+  background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 20px;
+  padding: 25px;
+  width: 90%;
+  max-width: 450px;
+  border: 1px solid rgba(100, 150, 255, 0.2);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  position: relative;
+  animation: modalSlideIn 0.4s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    transform: translateY(-30px) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-header h3 {
+  color: #fff;
+  font-size: 1.4rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 28px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 8px;
+  transition: color 0.3s;
+}
+
+.close-btn:hover {
+  color: #66b3ff;
+}
+
+.modal-body {
+  padding: 10px 0;
+}
+
+.moon-icon-large {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.moon-phase-icon {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #f0f0f0, #ccc);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(102, 179, 255, 0.4);
+}
+
+.lunar-info {
+  text-align: center;
+  margin: 25px 0;
+}
+
+.lunar-date {
+  color: #aaa;
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.lunar-phase {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.lunar-illumination {
+  color: #66b3ff;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.btn-modal-close {
+  background: linear-gradient(135deg, #4a6fa5, #3a5a8a);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 15px;
+  transition: all 0.3s;
+}
+
+.btn-modal-close:hover {
+  background: linear-gradient(135deg, #5a80b5, #4a6a9a);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Para modo oscuro/claro */
+body.dark-theme .modal-content-lunar {
+  background: linear-gradient(145deg, #0a0a15 0%, #121a2e 100%);
+}
+
+body:not(.dark-theme) .modal-content-lunar {
+  background: linear-gradient(145deg, #ffffff 0%, #f0f4f8 100%);
+  color: #333;
+}
+
+body:not(.dark-theme) .modal-header h3,
+body:not(.dark-theme) .lunar-phase,
+body:not(.dark-theme) .close-btn {
+  color: #333;
+}
+
+body:not(.dark-theme) .lunar-date {
+  color: #666;
+}
+
+body:not(.dark-theme) .btn-modal-close {
+  background: linear-gradient(135deg, #3a5a8a, #2a4a7a);
+}
+.day {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.day:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+
+.day::after {
+  content: "🔍";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.day:hover::after {
+  opacity: 0.7;
+}
+
+/* Para el modo oscuro */
+body.dark-theme .day:hover {
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1) !important;
+}

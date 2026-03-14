@@ -1,0 +1,1322 @@
+@import url("css/estilo.css");
+@import url("css/hoy-css.css");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+
+
+/* ====================== Responsive Navegador ========================== */
+@media (max-width: 991px) {
+  .navigation {
+    left: -300px;
+  }
+  .navigation.active {
+    width: 300px;
+    left: 0;
+  }
+  .main {
+    width: 100%;
+    left: 0;
+  }
+  .main.active {
+    left: 300px;
+  }
+  .cardBox {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .details {
+    grid-template-columns: 1fr;
+  }
+  .recentOrders {
+    overflow-x: auto;
+  }
+  .status.inProgress {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .cardBox {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .cardHeader h2 {
+    font-size: 20px;
+  }
+  .user {
+    min-width: 40px;
+  }
+  .navigation {
+    width: 100%;
+    left: -100%;
+    z-index: 1000;
+  }
+  .navigation.active {
+    width: 100%;
+    left: 0;
+  }
+  .toggle {
+    z-index: 10001;
+  }
+  .main.active .toggle {
+    color: #fff;
+    position: fixed;
+    right: 0;
+    left: initial;
+  }
+}
+
+
+.btn-primary {
+    background: #170dd5;
+    padding: 12px 22px;
+    border-radius: 22px;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-secondary {
+    background: #3a3f52;
+    padding: 12px 22px;
+    border-radius: 22px;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* SECCIÓN DE ALERTAS */
+.alertas-section {
+    margin-left: var(--menu-width); /* adapta esto al ancho de tu menú */
+    padding: 60px;
+    color: #222;
+}
+
+.alertas-title {
+    font-size: 30px;
+    font-weight: 900;
+}
+
+.alertas-subtitle {
+    font-size: 18px;
+    color: #555;
+    margin-top: 5px;
+    margin-bottom: 35px;
+}
+
+/* CONTENEDOR DE CARDS */
+.alertas-cards {
+    display: flex;
+    gap: 25px;
+    justify-content: space-between;
+}
+
+/* ESTILO GENERAL DE LAS CARDS */
+.alert-card {
+    width: 42%;
+    padding: 30px;
+    border-radius: 18px;
+    color: white;
+    position: relative;
+    min-height: 260px;
+}
+
+.alert-card h3 {
+    padding-top: 60px;
+    margin-bottom: 8px;
+    font-size: 20px;
+}
+
+.alert-card p {
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.subinfo {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.ubicacion {
+    margin: 10px 0;
+    font-weight: 600;
+}
+
+/* BOTÓN ACTIVO */
+.estado-btn {
+    position: absolute;
+    top: 15px;
+    left: 230px;
+    padding: 5px 14px;
+    border-radius: 12px;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.estado-btn.verde,
+.estado-btn.rojo,
+.estado-btn.rojo{
+  margin-left: var(--menu-width);
+}
+
+/* Icono dentro de la card, redondo y arriba del título */
+.alert-icon {
+    width: 55px;
+    height: 55px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff; /* color inicial del icono */
+    font-size: 28px;
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.alert-card:hover .alert-icon {
+    transform: scale(1.1) rotate(15deg);
+    background-color: #fff; 
+}
+
+.card-lluvias:hover .alert-icon ion-icon { color: #4aa3ff; }
+.card-tormentas:hover .alert-icon ion-icon { color: #ff9f1c; }
+.card-inundaciones:hover .alert-icon ion-icon { color: #00b894; }
+
+/* Animación de la card al hover */
+.alert-card {
+    position: relative;
+    padding: 20px;
+    border-radius: 18px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 260px;
+}
+
+.alert-card:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 15px 25px rgba(0,0,0,0.25);
+}
+
+/* Colores por tipo */
+.card-lluvias { background: #4aa3ff; }
+.card-tormentas { background: #ff9f1c; }
+.card-inundaciones { background: #00b894; }
+
+/* Botones de estado */
+
+.estado-btn.rojo { background: #007bff; }
+.estado-btn.naranja { background: #8d5404; }
+.estado-btn.verde { background: #014d3e; }
+
+
+
+/* RESPONSIVE */
+@media (max-width: 991px) {
+    .alertas-section {
+        margin-left: 0;
+        padding: 30px;
+    }
+    .alertas-cards {
+        flex-direction: column;
+    }
+    .alert-card {
+        width: 100%;
+    }
+}
+
+
+/* CARDS DE NOTICIAS DESTACDAS */
+.noticias-section {
+    padding: 60px 30px;
+    background: #f9f9f9;
+}
+
+.noticias-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.noticias-title {
+    font-size: 32px;
+    font-weight: 1000;
+    margin-bottom: 0px;
+    padding-left: 0; 
+    text-align: center; 
+}
+
+.subinfo2 {
+    font-weight: 600;
+    margin-bottom: 60px; 
+    padding-left: 0; 
+    text-align: center; 
+}
+
+
+.noticias-filtros {
+    display: flex;
+    justify-content: center; 
+    gap: 10px;
+    margin-top: 20px; 
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.filtro-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    background: #ddd;
+    cursor: pointer;
+    position: center;
+    transition: background 0.3s;
+    
+}
+
+.filtro-btn.active,
+.filtro-btn:hover {
+    background: #170dd5;
+    color: white;
+}
+
+.noticias-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.noticia-card {
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+/* Hover idéntico al de alert-card */
+.noticia-card:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 15px 25px rgba(0,0,0,0.25);
+}
+
+
+
+.noticia-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.noticia-card h3 {
+    font-size: 20px;
+    margin: 10px 15px 5px 15px;
+}
+
+.noticia-card .descripcion {
+    font-size: 14px;
+    margin: 0 15px 10px 15px;
+    color: #555;
+}
+
+.noticia-card .fecha {
+    font-size: 12px;
+    color: #999;
+    margin: 0 15px 15px 15px;
+}
+
+.card {
+    position: relative;
+}
+
+.btn-ver-mas {
+    position: absolute;
+    bottom: 2px;
+    right: 20px;
+    padding: 5px 12px;
+    border: none;
+    border-radius: 12px;
+    background: #170dd5;
+      text-decoration: none; 
+
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-ver-mas:hover {
+    background: #007bff;
+}
+
+
+/* BOTONES CON ANIMACIÓN */
+.filtro-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    background: #ddd;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.filtro-btn:hover {
+    background: #170dd5;
+    color: white;
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+
+.filtro-btn.active {
+    background: #170dd5;
+    color: white;
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+
+/* Animación de aparición/desaparición */
+.noticia-card {
+  transition: transform 0.5s ease, box-shadow 0.3s ease, opacity 0.5s ease;
+}
+
+.noticia-card.oculto {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  display: none; 
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+
+/* =============== GLOBAL ============== */
+* {
+  font-family: "Ubuntu", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --blue: #140a81;
+  --white: #fff;
+  --gray: #f5f5f5;
+  --black1: #222;
+  --black2: #999;
+  
+  /* Honduras Theme Colors - Light Mode */
+  --honduras-dark-blue: #0033a0;
+  --honduras-light-blue: #4da6ff;
+  --honduras-sky-blue: #66b3ff;
+  --nav-gradient-start: #0055cc;
+  --nav-gradient-end: #0088ff;
+  --nav-width: 240px;
+  --nav-collapsed-width: 100px;
+}
+
+/* Dark Theme Variables */
+body.dark-theme {
+  --nav-gradient-start: #001a3d;
+  --nav-gradient-end: #002952;
+  --honduras-dark-blue: #001428;
+  --honduras-light-blue: #0066cc;
+  --honduras-sky-blue: #3d8ae6;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+   
+}
+
+/* ====MENU NAVEGADOR==== */
+
+.navigation{
+  position: fixed;
+  left: 0; 
+  top: 0;
+  width: var(--nav-width);
+  height: 100%;
+  background: linear-gradient(180deg, var(--nav-gradient-start) 0%, var(--nav-gradient-end) 100%);
+  box-shadow: 4px 0 25px rgba(0, 136, 255, 0.4), 8px 0 40px rgba(0, 85, 204, 0.2);
+  transition: all 0.5s ease;
+  overflow-x: visible;
+  overflow-y: auto;
+  z-index: 1000;
+}
+.navigation.active {
+  width: var(--nav-collapsed-width);
+  overflow: hidden !important;
+}
+
+/* Efecto de brillo sutil en la navegación */
+.navigation::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, transparent 50%, rgba(77, 166, 255, 0.12) 100%);
+  pointer-events: none;
+}
+
+.navigation ul{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: visible;
+}
+
+.navigation ul li{
+  position: relative;
+  width: 100%;
+  list-style: none;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  margin: 4px 0;
+  overflow: visible;
+  z-index: 1;
+}
+
+.navigation ul li a {
+  display: flex;
+  align-items: flex-start;  
+  padding: 5px 6px;       
+  padding-left: 0px;
+}
+
+.navigation.collapsed ul li a {
+  justify-content: center;   
+  padding: 14px 0;          
+}
+
+.navigation ul li a i,
+.navigation ul li a ion-icon {
+  margin-top: 2px;           
+  min-width: 26px;           
+}
+
+/* Ajustar ancho cuando está colapsado */
+.navigation.active ul li {
+  width: 100px;
+  border-radius: 15px;
+  margin: 4px auto;
+  overflow: hidden !important;
+}
+.navigation ul li:hover,
+.navigation ul li.hovered {
+  background: linear-gradient(90deg, #f8f9fa 0%, #f0f1f3 100%);
+  box-shadow: -3px 0 15px rgba(77, 166, 255, 0.25);
+}
+
+/* Ajustar hover cuando está colapsado - sin salirse */
+.navigation.active ul li:hover,
+.navigation.active ul li.hovered {
+  transform: none;
+  box-shadow: 0 0 15px rgba(77, 166, 255, 0.3);
+  border-radius: 15px;
+}
+
+.navigation ul li:nth-child(1){
+  margin-bottom: 40px;
+  pointer-events: none;
+}
+
+.navigation ul li a .icon {
+ position: relative;
+  display: block;
+  min-width: 60px;
+  height: 60px;
+  line-height: 75px;
+  text-align: center;    
+  margin-left: -20px;
+}
+
+.navigation ul li a .icon ion-icon{
+  font-size: 2rem;
+}
+
+.navigation ul li a .icon i {
+  font-size: 2rem;        
+}
+
+.navigation ul li a .Logo {
+ position: relative;
+  display: block;
+  padding: 0 10px;
+  height: 60px;
+  line-height: 60px;
+  text-align: start;
+  white-space: nowrap;
+  font-size: 1.75rem;
+}
+
+.navigation ul li a .title {
+position: relative;
+  display: block;
+  padding: 0 10px;
+  height: 60px;
+  line-height: 60px;
+  text-align: start;
+  white-space: nowrap;
+}
+.navigation ul li:hover a,
+.navigation ul li.hovered a {
+  color: #0055cc;
+}
+
+.navigation ul li a .icon {
+ position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+  height: 60px;
+  margin-left: 0px;
+  margin-right: 4px;
+  transition: all 0.3s ease;
+  
+}
+
+
+.navigation ul li a .icon ion-icon{
+  font-size: 2rem;
+  transition: all 0.3s ease;
+}
+
+.navigation ul li a .icon i {
+  font-size: 2rem;
+  transition: all 0.3s ease;
+}
+
+
+
+/* --------- MAIN---------- */
+.main {
+  position: absolute;
+  width: calc(100% - 240px);
+  left: 240px;
+  min-height: 100vh;
+  background: var(--bg-main);
+  transition: 0.5s;
+  
+  box-sizing: border-box;
+
+}
+
+.main.active {
+  width: calc(100% - 100px);
+  left: 100px;
+}
+
+.topbar {
+  width: 100%;
+  height: 45px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 136, 255, 0.15);
+  padding: 0 20px;
+  box-shadow: 0 2px 10px rgba(0, 85, 204, 0.05);
+}
+
+.toggle {
+  width: 45px;
+  height: 45px;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Dark theme toggle */
+body.dark-theme .toggle {
+  background: rgba(68, 85, 105, 0.3);
+  color: #4da6ff;
+}
+
+
+/* Efecto en los iconos al hacer hover */
+.navigation ul li:hover a .icon ion-icon,
+.navigation ul li:hover a .icon i,
+.navigation ul li.hovered a .icon ion-icon,
+.navigation ul li.hovered a .icon i {
+  margin: 0 auto !important;
+  transform: scale(1.15);
+  filter: drop-shadow(0 2px 8px rgba(0, 51, 160, 0.5));
+}
+
+/* No escalar iconos cuando está colapsado */
+.navigation.active ul li:hover a .icon ion-icon,
+.navigation.active ul li:hover a .icon i,
+.navigation.active ul li.hovered a .icon ion-icon,
+.navigation.active ul li.hovered a .icon i {
+  margin: 0 auto !important;
+  transform: scale(1);
+}
+
+.navigation ul li a .Logo {
+ position: relative;
+  display: block;
+  padding: 0 10px;
+  height: 60px;
+  line-height: 60px;
+  text-align: start;
+  white-space: nowrap;
+  font-size: 1.75rem;
+}
+
+.navigation ul li a .title {
+position: relative;
+  display: block;
+  padding: 0 10px;
+  height: 60px;
+  line-height: 60px;
+  text-align: start;
+  white-space: nowrap;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+  opacity: 1;
+}
+
+/* Ocultar título cuando está colapsado */
+.navigation.active ul li a .title {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Efecto en el texto al hacer hover */
+.navigation ul li:hover a .title,
+.navigation ul li.hovered a .title {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* --------- EFECTO TRANSPARENTE AL HOVER --------- */
+.navigation ul li {
+  position: relative;
+  overflow: visible;
+}
+
+/* Ocultar overflow cuando está colapsado */
+.navigation.active ul li {
+  overflow: hidden !important;
+}
+
+.navigation ul li:hover::before,
+.navigation ul li.hovered::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 5px;
+  width: calc(100% - 10px);
+  height: 100%;
+  background: transparent;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  z-index: 0;
+  transition: 0.3s ease;
+  
+}
+
+/* Ocultar ::before cuando está colapsado */
+.navigation.active ul li:hover::before,
+.navigation.active ul li.hovered::before {
+  display: none;
+}
+
+/* Barra de acento azul al hacer hover */
+.navigation ul li:hover::after,
+.navigation ul li.hovered::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 70%;
+  background: linear-gradient(180deg, var(--honduras-light-blue), var(--honduras-sky-blue));
+  border-radius: 10px 0 0 10px;
+  box-shadow: 0 0 15px var(--honduras-light-blue);
+  animation: slideIn 0.3s ease;
+}
+
+/* Ocultar barra de acento cuando está colapsado */
+.navigation.active ul li:hover::after,
+.navigation.active ul li.hovered::after {
+  display: none;
+}
+
+@keyframes slideIn {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 5px;
+    opacity: 1;
+  }
+}
+
+
+.navigation ul li a {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--white);
+  padding: 8px 16px 8px 8px;
+  margin: 0 8px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+
+
+.navigation ul li:hover a,
+.navigation ul li.hovered a {
+  color: var(--blue);
+}
+
+
+
+/* --------- MAIN---------- */
+.main {
+  position: absolute;
+  width: calc(100% - var(--nav-width));
+  left: var(--nav-width);
+  min-height: 100vh;
+  background: #f8f9fa;
+  transition: all 0.5s ease;
+  margin: 0;
+  padding: 0;
+}
+
+.main.active {
+  width: calc(100% - var(--nav-collapsed-width));
+  left: var(--nav-collapsed-width);
+}
+
+/* Dark theme main background */
+body.dark-theme .main {
+  background: #0f1419 !important;
+}
+
+.topbar {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center; /* CENTRA TODO */
+  align-items: center;
+  position: relative;
+  background: var(--white);
+  border-bottom: 1px solid #ddd;
+}
+
+.toggle {
+  position: absolute;
+  left: 20px;
+  width: 60px;
+  height: 60px;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+/* ====================== Responsive Design ========================== */
+@media (max-width: 991px) {
+  .navigation {
+    left: calc(-1 * var(--nav-width));
+  }
+  .navigation.active {
+    left: 0;
+  }
+  .main {
+    width: 100%;
+    left: 0;
+  }
+  .main.active {
+    left: var(--nav-width);
+  }
+}
+
+@media (max-width: 768px) {
+  .search {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .search {
+    max-width: 250px;
+  }
+  .toggle {
+    left: 10px;
+  }
+}
+
+/* ================= Hero Buttons Animados ================= */
+.hero-buttons .btn-primary,
+.hero-buttons .btn-secondary {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Efecto hover: ligero rebote y cambio de sombra */
+.hero-buttons .btn-primary:hover,
+.hero-buttons .btn-secondary:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+/* Brillo animado */
+.hero-buttons .btn-primary::before,
+.hero-buttons .btn-secondary::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(120deg, rgba(255,255,255,0.2), rgba(255,255,255,0));
+    transform: rotate(45deg) translateX(-100%);
+    transition: transform 0.5s ease;
+    pointer-events: none;
+}
+
+.hero-buttons .btn-primary:hover::before,
+.hero-buttons .btn-secondary:hover::before {
+    transform: rotate(45deg) translateX(100%);
+}
+
+/* Efecto de transición suave para el texto del botón */
+.hero-buttons .btn-primary span,
+.hero-buttons .btn-secondary span {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.hero-buttons .btn-primary:hover span,
+.hero-buttons .btn-secondary:hover span {
+    transform: translateY(-2px);
+}
+
+/* Opcional: animación continua de pulsación */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+    100% { transform: scale(1); }
+}
+
+.hero-buttons .btn-primary:hover {
+    animation: pulse 0.6s ease-in-out;
+}
+
+.hero-buttons .btn-secondary:hover {
+    animation: pulse 0.6s ease-in-out;
+}
+
+
+/* Theme Switcher */
+.theme-switcher {
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+.btn-theme {
+  background: linear-gradient(135deg, #0055cc 0%, #0088ff 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 85, 204, 0.3);
+  transition: all 0.3s ease;
+}
+
+.btn-theme:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 85, 204, 0.4);
+  background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
+}
+
+/* Dark theme button */
+body.dark-theme .btn-theme {
+  background: linear-gradient(135deg, #003d82 0%, #0055cc 100%);
+  box-shadow: 0 4px 12px rgba(0, 61, 130, 0.4);
+}
+
+body.dark-theme .btn-theme:hover {
+  box-shadow: 0 6px 16px rgba(0, 61, 130, 0.5);
+  background: linear-gradient(135deg, #004d99 0%, #0066cc 100%);
+}
+
+.btn-theme i {
+  font-size: 16px;
+}
+
+.dropdown-menu {
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.1);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  margin-top: 8px;
+}
+
+.dropdown-item {
+  padding: 8px 16px;
+  transition: background 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background: rgba(102, 126, 234, 0.1);
+}
+
+.dropdown-item i {
+  color: #667eea;
+}
+
+
+
+/* Icono del clima */
+.weather-card #weather-icon,
+.weather-card ion-icon,
+.weather-card i {
+    width: 60px;
+    height: 60px;
+    color: rgba(219, 204, 204, 0.068) !important;
+    margin-left: 10px;
+}
+
+
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .weather-card {
+        max-width: 95%;
+    }
+}
+
+
+
+/* ========= FOOTER ========= */
+.footer {
+  width: 100%;
+  background: linear-gradient(135deg, #0055cc 0%, #003d82 100%);
+  color: rgba(255, 255, 255, 0.95);
+  padding: 30px 0;
+  margin-top: 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 -4px 20px rgba(0, 85, 204, 0.2);
+}
+
+.footer p {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.footer .social-links a {
+  color: rgba(255, 255, 255, 0.9);
+  transition: color 0.3s ease, transform 0.2s ease;
+  text-decoration: none;
+}
+
+.footer .social-links a:hover {
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.footer .social-links i {
+  font-size: 24px;
+}
+
+/* Dark theme footer */
+body.dark-theme .footer {
+  background: linear-gradient(135deg, #001428 0%, #000810 100%);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+  border-top: 1px solid rgba(77, 166, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+  .footer .row > div {
+    text-align: center;
+  }
+  .footer .social-links {
+    margin-top: 12px;
+  }
+}
+
+
+#weekly-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 20px 10px;
+}
+
+.week-card {
+  background: rgba(255,255,255,0.9);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.week-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.week-day {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #0055cc;
+}
+
+.week-main-icon ion-icon {
+  font-size: 2.5rem;
+  color: #f1c40f; /* amarillo para sol */
+}
+
+.week-temp {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #0055cc;
+}
+
+.week-details {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.week-details .detail-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.week-details ion-icon {
+  font-size: 1.5rem;
+  color: #0055cc;
+}
+
+/* Dark theme */
+body.dark-theme .week-card {
+  background: rgba(10,20,35,0.7);
+  color: #fff;
+}
+
+body.dark-theme .week-main-icon ion-icon,
+body.dark-theme .week-details ion-icon {
+  color: #4da6ff;
+}
+
+/* ==== TOPBAR MÁS VISTOSA ==== */
+.topbar {
+    width: 100%;
+    height: 60px;
+    padding: 0 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: linear-gradient(90deg,
+        rgba(0, 85, 204, 0.85),
+        rgba(0, 136, 255, 0.85)
+    );
+    color: rgb(14, 14, 14);
+
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.18);
+    box-shadow: 0px 2px 15px rgba(0, 136, 255, 0.25);
+    z-index: 1500;
+}
+
+body.dark-theme .topbar {
+    background: linear-gradient(90deg,
+        rgba(0, 25, 60, 0.75),
+        rgba(0, 60, 110, 0.75)
+    );
+    border-bottom: 1px solid rgba(0, 145, 255, 0.3);
+    box-shadow: 0px 2px 20px rgba(0, 140, 255, 0.3);
+}
+
+
+
+
+body.dark-theme .toggle {
+    background: rgba(0, 100, 200, 0.25);
+}
+
+
+.hero {
+      margin-left: var(--menu-width); 
+    height: 80vh; 
+    background: linear-gradient(180deg, #1c1f26, #2c2f38); 
+    display: flex;
+    align-items: flex-start;
+    padding-left: 190px;
+    padding-top: 40px;
+    box-sizing: border-box;
+
+    background: linear-gradient(135deg, 
+        #010914 0%, 
+        #0b456e 50%, 
+        #52708e 100%
+    );
+    color: white;
+
+    box-shadow: inset 0px -30px 60px rgba(0,0,0,0.15);
+}
+
+/* HERO DARK */
+body.dark-theme .hero {
+    background: linear-gradient(135deg, 
+        #00172c 0%, 
+        #003058 50%, 
+        #005a9c 100%
+    );
+    box-shadow: inset 0px -30px 60px rgba(0,0,0,0.45);
+}
+
+
+/* TÍTULOS DEL HERO */
+.hero h1 {
+    font-size: 50px;
+    font-weight: 900;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
+.hero p {
+    max-width: 550px;
+    font-size: 20px;
+    opacity: 0.9;
+}
+
+
+/* BOTONES DEL HERO */
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.hero-buttons button {
+    padding: 12px 28px;
+    font-size: 17px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-primary {
+    background: white;
+    color: #0033a0;
+}
+.btn-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 18px rgba(255,255,255,0.45);
+}
+
+.btn-secondary {
+    background: rgba(255,255,255,0.25);
+    border: 2px solid rgba(255,255,255,0.5);
+    color: white;
+}
+.btn-secondary:hover {
+    transform: translateY(-4px);
+    background: rgba(255,255,255,0.35);
+}
+
+
+/*  DARK THEME - SOLO COLORES*/
+
+/* Cards de alertas y noticias */
+body.dark-theme .alert-card,
+body.dark-theme .noticia-card {
+    background-color: #1F1F2F; 
+    color: #E0E0E0;
+}
+
+/* Iconos de alerta */
+body.dark-theme .alert-card .alert-icon {
+    color: #FFCC00;
+}
+
+/* Estados de alerta */
+body.dark-theme .estado-btn.rojo { background-color: #B00020; color: #FFF; }
+body.dark-theme .estado-btn.naranja { background-color: #FF6F00; color: #FFF; }
+body.dark-theme .estado-btn.verde { background-color: #00C853; color: #FFF; }
+
+/* Títulos dentro de cards */
+body.dark-theme .alert-card h3,
+body.dark-theme .noticia-card h3 {
+    color: #FFCC00;
+}
+
+/* Texto dentro de cards */
+body.dark-theme .alert-card p,
+body.dark-theme .noticia-card p {
+    color: #E0E0E0;
+}
+
+/* Sección de noticias destacadas */
+body.dark-theme .noticias-section {
+    background: linear-gradient(to left, #030609 0%, #060d15 50%, #0a1520 100%);
+    color: #e8eaed;
+}
+
+/* Títulos, descripción y meta info de noticias */
+body.dark-theme .noticia-card .noticia-title { color: #4da6ff; }
+body.dark-theme .noticia-card .noticia-desc { color: #adb5bd; }
+body.dark-theme .noticia-card .noticia-meta { color: #a0b0c0; }
+
+
+body.dark-theme .alertas-subtitle,
+body.dark-theme .alertas-title {
+    color: #ffffff; /* blanco */
+    
+}
