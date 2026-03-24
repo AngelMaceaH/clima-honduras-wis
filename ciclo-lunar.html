@@ -13,9 +13,9 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="css/estilo.css">
-  <link rel="stylesheet" href="css/index.css">
-  <link rel="stylesheet" href="css/ciclo-lunar.css">
-  <link rel="stylesheet" href="css/radar-tiempo.css">
+  <link rel="stylesheet" href="css/hoy-css.css">
+  <link rel="stylesheet" href="css/ciclo.css">
+  <link rel="stylesheet" href="css/radar.css">
   <!-- CSS del Modal Lunar -->
   <link rel="stylesheet" href="css/modal-lunar.css">
 </head>
@@ -26,12 +26,12 @@
     <div class="navigation">
       <ul>
         <li>
-          <a href="index.html">
-            <span class="icon"><img src="img/logo/logo.png" alt="Logo" style="width: 200px; height: 50px; object-fit: contain;"></span>    
+          <a href="hoy.html">
+            <span class="icon"><img src="img/Captura_de_pantalla_2025-11-26_214249-removebg-preview.png" alt="Logo" style="width: 200px; height: 50px; object-fit: contain;"></span>    
           </a>
         </li>
          <li>
-          <a href="index.html">
+          <a href="hoy.html">
             <span class="icon">
               <ion-icon name="cloudy-night-outline"></ion-icon>
             </span>
@@ -40,7 +40,7 @@
         </li>
 
         <li>
-          <a href="pronóstico-diario.html">
+          <a href="diario.html">
             <span class="icon">
               <ion-icon name="today-outline"></ion-icon>
             </span>
@@ -49,7 +49,7 @@
         </li>
 
         <li>
-          <a href="radar-tiempo.html">
+          <a href="radar.html">
             <span class="icon">
               <ion-icon name="radio-outline"></ion-icon>
             </span>
@@ -67,7 +67,7 @@
         </li>
 
         <li>
-          <a href="ciclo-lunar.html" class="active">
+          <a href="ciclo.html" class="active">
             <span class="icon">
               <ion-icon name="moon-outline"></ion-icon>
             </span>
@@ -85,7 +85,7 @@
         </li>
 
         <li>
-          <a href="acerca-de.html">
+          <a href="nosotros.html">
             <span class="icon">
               <ion-icon name="people-circle-outline"></ion-icon>
             </span>
@@ -119,10 +119,10 @@
     <h1>🌙 Ciclo Lunar</h1>
     
     <!-- Luna clicable para abrir modal -->
-    <div class="current-moon-display" style="text-align: center; margin: 25px 0;">
-      <div class="moon-clickable" id="moon-clickable" style="cursor: pointer; display: inline-block;">
-        <div class="moon-icon-clickable" style="width: 80px; height: 80px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #f0f0f0, #ccc); margin: 0 auto 10px; position: relative; overflow: hidden; box-shadow: 0 0 20px rgba(102, 179, 255, 0.5);"></div>
-        <p style="color: var(--text-secondary); font-size: 0.9rem;">Haz clic en la luna para ver los detalles de hoy</p>
+    <div class="current-moon-display">
+      <div class="moon-clickable" id="moon-clickable">
+        <div class="moon-icon-clickable"></div>
+        <p>Haz clic en la luna para ver los detalles de hoy</p>
       </div>
     </div>
 
@@ -196,9 +196,9 @@
         <div class="row">
           <div class="col-12">
             <p class="mb-0 small">
-              <a href="acerca-de.html" class="text-white text-decoration-none me-3">Sobre Nosotros</a>
+              <a href="nosotros.html" class="text-white text-decoration-none me-3">Sobre Nosotros</a>
               <span class="text-white-50">|</span>
-              <a href="contacto.html" class="text-white text-decoration-none mx-3">Contacto</a>
+              <a href="sugerencias.html" class="text-white text-decoration-none mx-3">Contacto</a>
               <span class="text-white-50">|</span>
               <a href="https://open-meteo.com" target="_blank" rel="noopener noreferrer" class="text-white text-decoration-none mx-3">Weather Source</a>
               <span class="text-white-50">|</span>
@@ -225,10 +225,16 @@
           <p id="modal-lunar-date" class="lunar-date">lunes, 01 de diciembre de 2025</p>
           <p id="modal-lunar-phase" class="lunar-phase">Gibosa menguante</p>
           <p id="modal-lunar-illumination" class="lunar-illumination">Iluminación: 61%</p>
+          <div class="illumination-ring" id="modal-illumination-ring"></div>
         </div>
+        <button id="download-phase-btn" class="btn-download-phase">
+          <i class="ri-download-2-line"></i> Descargar imagen de la fase
+        </button>
         <button id="close-modal-btn" class="btn-modal-close">Cerrar</button>
       </div>
     </div>
+    <!-- Hidden canvas for generating downloadable moon image -->
+    <canvas id="moon-download-canvas" width="400" height="400" style="display:none;"></canvas>
   </div>
 
   <!-- Bootstrap Bundle -->
@@ -239,8 +245,8 @@
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
   <!-- Main JS -->
-  <script src="js/ciclo-lunar.js"></script>
-  <script src="js/prueba.js"></script>
+  <script src="js/ciclo-weather.js"></script>
+  <script src="js/Prueba.js"></script>
 
  
   <script>

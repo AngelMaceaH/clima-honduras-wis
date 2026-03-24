@@ -1,185 +1,488 @@
+/* ============================================================
+   CICLO LUNAR — REDESIGNED
+   Palette: Deep Space Violet + Warm Amber/Gold accents
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+/* ---- Page-level overrides for this page only ---- */
 body {
-        font-family: "Segoe UI", sans-serif;
-        background: #0d0d18;
-        color: #000000;
-        padding: 20px;
-        text-align: center;
-      }      
+  font-family: 'Inter', 'Outfit', sans-serif;
+  color: #2d2a3e;
+  background: #faf8f5;
+}
 
-    h1 {
-        margin-bottom: 10px;
-        font-weight: 300;
-    }
+body.dark-theme {
+  background: #0e0b1a;
+  color: #e8e4f0;
+}
 
-    #status {
-        margin-bottom: 20px;
-        opacity: .85;
-        font-size: 15px;
-    }
+/* ---- Title ---- */
+.main > h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #8b5cf6 0%, #d97706 50%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+  margin: 32px 0 6px;
+  animation: titleGlow 4s ease-in-out infinite alternate;
+}
 
-    #container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 18px;
-        margin-top: 10px;
-    }
+@keyframes titleGlow {
+  0%   { filter: brightness(1); }
+  100% { filter: brightness(1.15); }
+}
 
-    .day {
-        width: 130px;
-        padding: 14px;
-        border-radius: 14px;
-        background: #ffffff;
-        box-shadow: 0 0 12px rgba(255,255,255,0.05);
-        transition: 0.3s;
-        cursor: pointer;
-    }
-    .day:hover {
-        transform: scale(1.06);
-        background: #4f4f7d;
-    }
+/* ---- Status text ---- */
+#status {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #8b7fa8;
+  margin-bottom: 12px;
+  letter-spacing: 0.3px;
+}
 
-    .moon {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        background: radial-gradient(circle at 30% 30%, #ffffff, #dcdcdc);
-        margin: 0 auto 10px auto;
-        position: relative;
-        overflow: hidden;
-    }
+body.dark-theme #status {
+  color: #a893c7;
+}
 
-    .shadow {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 60px;
-        border-radius: 50%;
-        background: #343468;
-        transition: 0.4s ease;
-    }
+/* ---- Current Moon Display (hero) ---- */
+.current-moon-display {
+  text-align: center;
+  margin: 18px 0 10px !important;
+}
 
-    .date {
-        font-size: 13px;
-        opacity: .9;
-        margin-bottom: 4px;
-    }
+.moon-clickable {
+  display: inline-flex !important;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform 0.35s ease;
+}
 
-    .phaseName {
-        font-size: 12px;
-        opacity: .8;
-        margin-top: 4px;
-    }
+.moon-clickable:hover {
+  transform: scale(1.08);
+}
 
-    /* ---------------- MODAL ---------------- */
-    #modal {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.7);
-        backdrop-filter: blur(4px);
-        align-items: center;
-        justify-content: center;
-    }
+.moon-icon-clickable {
+  width: 90px !important;
+  height: 90px !important;
+  border-radius: 50% !important;
+  background: radial-gradient(circle at 35% 30%, #fff8e7, #f5d280, #d4a043) !important;
+  box-shadow:
+    0 0 30px rgba(245, 158, 11, 0.35),
+    0 0 60px rgba(139, 92, 246, 0.15),
+    inset 0 -4px 8px rgba(0,0,0,0.08) !important;
+  margin: 0 auto 8px !important;
+  position: relative !important;
+  overflow: hidden !important;
+  animation: moonPulse 3s ease-in-out infinite;
+}
 
-    #modalContent {
-        background: #a9a9c2;
-        padding: 25px;
-        border-radius: 18px;
-        width: 320px;
-        text-align: center;
-        box-shadow: 0 0 18px rgba(0,0,0,0.6);
-        animation: aparecer .3s ease;
-    }
+body.dark-theme .moon-icon-clickable {
+  background: radial-gradient(circle at 35% 30%, #fff8e7, #e8c063, #b8862e) !important;
+  box-shadow:
+    0 0 40px rgba(245, 158, 11, 0.45),
+    0 0 80px rgba(139, 92, 246, 0.25) !important;
+}
 
-    @keyframes aparecer {
-        from { transform: scale(.7); opacity: 0; }
-        to { transform: scale(1); opacity: 1; }
-    }
+@keyframes moonPulse {
+  0%, 100% { box-shadow: 0 0 30px rgba(245, 158, 11, 0.35), 0 0 60px rgba(139, 92, 246, 0.15); }
+  50%      { box-shadow: 0 0 45px rgba(245, 158, 11, 0.5),  0 0 90px rgba(139, 92, 246, 0.25); }
+}
 
-    .modalMoon {
-        width: 120px;
-        height: 120px;
-        background: radial-gradient(circle at 30% 30%, #ffffff, #cfcfcf);
-        border-radius: 50%;
-        position: relative;
-        overflow: hidden;
-        margin: 10px auto;
-    }
+.moon-clickable p {
+  color: #9b8fb5 !important;
+  font-size: 0.82rem !important;
+  font-style: italic;
+  transition: color 0.3s;
+}
 
-    .modalShadow {
-        position: absolute;
-        top: 0;
-        height: 120px;
-        background: #0d0d18;
-        border-radius: 50%;
-    }
+body.dark-theme .moon-clickable p {
+  color: #c4b5db !important;
+}
 
-    #closeBtn {
-        margin-top: 12px;
-        padding: 8px 18px;
-        border-radius: 8px;
-        background: #343a55;
-        border: none;
-        cursor: pointer;
-        color: #fff;
-        transition: .3s;
-    }
+/* ---- Main Card Container (.cuadro2) ---- */
+.cuadro2 {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(139, 92, 246, 0.1);
+  border-radius: 24px;
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 20px 60px rgba(139, 92, 246, 0.06),
+    0 4px 16px rgba(0, 0, 0, 0.04);
+  padding: 32px !important;
+  max-width: 1120px !important;
+  margin: 0 auto 40px !important;
+  transition: background 0.4s, box-shadow 0.4s;
+}
 
-    #closeBtn:hover {
-        background: #4c5371;
-    }
+body.dark-theme .cuadro2 {
+  background: rgba(20, 16, 36, 0.75);
+  border-color: rgba(139, 92, 246, 0.15);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(139, 92, 246, 0.05);
+}
 
-    .body-dark-theme .radar-title{
-         color: #66b3ff;
-    }
+/* ============================================================
+   CALENDAR GRID — 7 columns like a real calendar
+   ============================================================ */
+#container {
+  display: grid !important;
+  grid-template-columns: repeat(7, 1fr) !important;
+  gap: 16px !important;
+  padding: 8px 0 !important;
+  justify-items: center;
+}
 
-        #container{display:grid;grid-template-columns:repeat(5,1fr);gap:30px 34px;justify-items:center;padding:12px 8px}
-    .day{width:140px;display:flex;flex-direction:column;align-items:center;gap:10px}
-    .moon{width:96px;height:96px;border-radius:50%;background:#f6f6fb;position:relative;box-shadow:6px 6px 0 rgba(0,0,0,0.06)}
-    .shadow{position:absolute;top:0;bottom:0;background:#2b2b6b;border-radius:50%;filter:drop-shadow(2px 2px 0 rgba(0,0,0,0.06))}
-    .date{font-size:0.85rem;color:var(--text-secondary);text-transform:lowercase}
-    .phaseName{font-size:0.9rem;color:var(--text-primary);font-weight:500}
-    @media(max-width:1100px){#container{grid-template-columns:repeat(4,1fr)}}
-    @media(max-width:900px){#container{grid-template-columns:repeat(3,1fr);gap:22px}}
-    @media(max-width:520px){#container{grid-template-columns:repeat(2,1fr)}}
+@media (max-width: 960px)  { #container { grid-template-columns: repeat(5, 1fr) !important; } }
+@media (max-width: 680px)  { #container { grid-template-columns: repeat(4, 1fr) !important; gap: 12px !important; } }
+@media (max-width: 480px)  { #container { grid-template-columns: repeat(3, 1fr) !important; gap: 10px !important; } }
+@media (max-width: 360px)  { #container { grid-template-columns: repeat(2, 1fr) !important; } }
 
-    .theme-switcher .btn-theme { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; padding: 6px 10px; height: 36px; }
-    
-    .phase-separator { width: 100%; height: 1px; border: 0; background: rgba(0,0,0,0.06); margin: 72px 0; }
-    .phases-list { display: flex; flex-direction: column; gap: 24px; margin-top: 36px; }
-    .phase-card { background: rgba(255,255,255,0.98); border-radius: 12px; padding: 18px 18px; box-shadow: 0 8px 24px rgba(0,0,0,0.07); width: 100%; }
-    .phase-card h4 { margin: 0 0 6px 0; font-size: 1rem; color: var(--text-primary); }
-    .phase-card p { margin: 0; color: #444; font-size: 0.95rem; line-height: 1.45; text-align: justify; text-justify: inter-word; }
-    @media(max-width:800px){ .phase-card { padding: 12px; } }
+/* ---- Day Cards ---- */
+.day {
+  position: relative;
+  width: 100% !important;
+  max-width: 130px;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 16px 10px 14px !important;
+  border-radius: 18px !important;
+  background: linear-gradient(160deg, #ffffff 0%, #f8f4ff 100%) !important;
+  border: 1px solid rgba(139, 92, 246, 0.08);
+  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.06) !important;
+  cursor: pointer !important;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  overflow: visible;
+}
 
-    /* Dark theme  */
-    body.dark-theme .phase-card {
-      background: rgba(18,22,34,0.78) !important;
-      color: #e8eaed !important;
-      box-shadow: none !important;
-      border: 1px solid rgba(77,166,255,0.08);
-    }
-    body.dark-theme .phase-card h4 { color: #bfe1ff !important; }
-    body.dark-theme .phase-card p { color: rgba(235,240,255,0.92) !important; }
-    body.dark-theme .phase-separator { background: rgba(255,255,255,0.06); }
+.day:hover {
+  transform: translateY(-6px) scale(1.03) !important;
+  box-shadow:
+    0 12px 32px rgba(139, 92, 246, 0.18),
+    0 0 20px rgba(245, 158, 11, 0.1) !important;
+  border-color: rgba(139, 92, 246, 0.25);
+  background: linear-gradient(160deg, #fefcff 0%, #f3ecff 100%) !important;
+}
 
-   /* MODAL LUNAR */
+body.dark-theme .day {
+  background: linear-gradient(160deg, rgba(30, 22, 54, 0.9) 0%, rgba(22, 18, 40, 0.95) 100%) !important;
+  border-color: rgba(139, 92, 246, 0.12);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2) !important;
+}
+
+body.dark-theme .day:hover {
+  background: linear-gradient(160deg, rgba(40, 30, 70, 0.95) 0%, rgba(30, 24, 55, 1) 100%) !important;
+  box-shadow:
+    0 12px 32px rgba(139, 92, 246, 0.25),
+    0 0 20px rgba(245, 158, 11, 0.12) !important;
+  border-color: rgba(139, 92, 246, 0.35);
+}
+
+/* Remove the old 🔍 pseudo-element */
+.day::after {
+  display: none !important;
+}
+
+/* ---- Moon Orbs ---- */
+.day .moon,
+.moon {
+  width: 64px !important;
+  height: 64px !important;
+  border-radius: 50% !important;
+  background: radial-gradient(circle at 35% 30%, #fff8e7, #f5d280, #d4a043) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  box-shadow:
+    0 2px 10px rgba(245, 158, 11, 0.25),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.06) !important;
+  transition: box-shadow 0.35s ease;
+  margin: 0 auto !important;
+  flex-shrink: 0;
+}
+
+.day:hover .moon {
+  box-shadow:
+    0 0 18px rgba(245, 158, 11, 0.4),
+    0 0 30px rgba(139, 92, 246, 0.15),
+    inset 0 -3px 6px rgba(0,0,0,0.06) !important;
+}
+
+body.dark-theme .day .moon,
+body.dark-theme .moon {
+  background: radial-gradient(circle at 35% 30%, #fff6dd, #e8c063, #b8862e) !important;
+  box-shadow:
+    0 2px 10px rgba(245, 158, 11, 0.3),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* ---- Shadow overlay (dark portion of moon) ---- */
+.shadow {
+  position: absolute !important;
+  top: 0 !important;
+  height: 100% !important;
+  background: rgba(30, 20, 55, 0.88) !important;
+  border-radius: 50% !important;
+  transition: width 0.5s ease !important;
+  filter: none !important;
+}
+
+body.dark-theme .shadow {
+  background: rgba(10, 6, 22, 0.92) !important;
+}
+
+/* ---- Date & Phase Text ---- */
+.date {
+  font-size: 0.78rem !important;
+  font-weight: 500 !important;
+  color: #6b5b8a !important;
+  text-transform: capitalize !important;
+  letter-spacing: 0.2px;
+}
+
+body.dark-theme .date {
+  color: #b8a5d4 !important;
+}
+
+.phaseName {
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  color: #8b5cf6 !important;
+  text-align: center;
+}
+
+body.dark-theme .phaseName {
+  color: #a78bfa !important;
+}
+
+/* ============================================================
+   TOOLTIP — shows on hover with illumination %
+   ============================================================ */
+.day .tooltip-illumination {
+  position: absolute;
+  top: -42px;
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  background: linear-gradient(135deg, #7c3aed, #8b5cf6);
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.35);
+}
+
+.day .tooltip-illumination::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px 5px 0;
+  border-style: solid;
+  border-color: #8b5cf6 transparent transparent;
+}
+
+.day:hover .tooltip-illumination {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ============================================================
+   DOWNLOAD BUTTON (inside modal)
+   ============================================================ */
+.btn-download-phase {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #d97706, #f59e0b);
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  justify-content: center;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.3);
+}
+
+.btn-download-phase:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(217, 119, 6, 0.45);
+  background: linear-gradient(135deg, #b45309, #d97706);
+}
+
+.btn-download-phase i {
+  font-size: 1.1rem;
+}
+
+/* ============================================================
+   ILLUMINATION CHART BAR (mini bar chart in calendar)
+   ============================================================ */
+.illumination-bar-container {
+  width: 100%;
+  height: 4px;
+  background: rgba(139, 92, 246, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 2px;
+}
+
+body.dark-theme .illumination-bar-container {
+  background: rgba(139, 92, 246, 0.2);
+}
+
+.illumination-bar {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #8b5cf6, #f59e0b);
+  transition: width 0.6s ease;
+}
+
+/* ============================================================
+   PHASE SEPARATOR
+   ============================================================ */
+.phase-separator {
+  width: 80%;
+  height: 1px;
+  border: 0;
+  margin: 48px auto;
+  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.25), rgba(245, 158, 11, 0.25), transparent);
+}
+
+body.dark-theme .phase-separator {
+  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.3), rgba(245, 158, 11, 0.2), transparent);
+}
+
+/* ============================================================
+   PHASES EXPLANATION SECTION
+   ============================================================ */
+.phases-explain h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.3rem !important;
+  font-weight: 600;
+  text-align: center;
+  background: linear-gradient(135deg, #7c3aed, #d97706);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 20px !important;
+}
+
+.phases-list {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 16px !important;
+  margin-top: 24px !important;
+}
+
+@media (max-width: 700px) {
+  .phases-list {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.phase-card {
+  background: linear-gradient(150deg, #fdfbff 0%, #f6f0ff 100%) !important;
+  border: 1px solid rgba(139, 92, 246, 0.08) !important;
+  border-radius: 16px !important;
+  padding: 20px 18px !important;
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.05) !important;
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.phase-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, #8b5cf6, #f59e0b);
+  border-radius: 4px 0 0 4px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.phase-card:hover::before {
+  opacity: 1;
+}
+
+.phase-card:hover {
+  transform: translateX(4px);
+  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.12) !important;
+  border-color: rgba(139, 92, 246, 0.15) !important;
+}
+
+.phase-card h4 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  color: #6d28d9 !important;
+  margin: 0 0 6px 0 !important;
+}
+
+.phase-card p {
+  color: #5b5279 !important;
+  font-size: 0.88rem !important;
+  line-height: 1.55 !important;
+  margin: 0 !important;
+}
+
+/* Dark theme phase cards */
+body.dark-theme .phase-card {
+  background: linear-gradient(150deg, rgba(28, 20, 50, 0.9) 0%, rgba(20, 16, 38, 0.95) 100%) !important;
+  border-color: rgba(139, 92, 246, 0.12) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
+}
+
+body.dark-theme .phase-card h4 {
+  color: #c4b5fa !important;
+}
+
+body.dark-theme .phase-card p {
+  color: #beb3d6 !important;
+}
+
+/* ============================================================
+   MODAL — Completely restyled
+   ============================================================ */
 .modal-lunar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(6px);
+  background: rgba(14, 11, 26, 0.88);
+  backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 9999;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
 }
 
 .modal-lunar.show {
@@ -188,20 +491,35 @@ body {
 }
 
 .modal-content-lunar {
-  background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
-  border-radius: 20px;
-  padding: 25px;
-  width: 90%;
-  max-width: 450px;
-  border: 1px solid rgba(100, 150, 255, 0.2);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(155deg, #1c1433 0%, #150f28 50%, #1a1230 100%);
+  border-radius: 24px;
+  padding: 30px;
+  width: 92%;
+  max-width: 420px;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.5),
+    0 0 60px rgba(139, 92, 246, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
   position: relative;
-  animation: modalSlideIn 0.4s ease-out;
+  animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
+}
+
+.modal-content-lunar::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 20%, rgba(139, 92, 246, 0.06), transparent 40%);
+  pointer-events: none;
 }
 
 @keyframes modalSlideIn {
   from {
-    transform: translateY(-30px) scale(0.95);
+    transform: translateY(-20px) scale(0.92);
     opacity: 0;
   }
   to {
@@ -214,31 +532,34 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 22px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(139, 92, 246, 0.15);
 }
 
 .modal-header h3 {
-  color: #fff;
-  font-size: 1.4rem;
+  color: #ede9fe;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.3rem;
   margin: 0;
   font-weight: 600;
 }
 
 .close-btn {
-  background: transparent;
+  background: rgba(139, 92, 246, 0.15);
   border: none;
-  color: #fff;
-  font-size: 28px;
+  color: #c4b5fa;
+  font-size: 22px;
   cursor: pointer;
   line-height: 1;
-  padding: 0 8px;
-  transition: color 0.3s;
+  padding: 4px 10px;
+  border-radius: 10px;
+  transition: all 0.3s;
 }
 
 .close-btn:hover {
-  color: #66b3ff;
+  background: rgba(139, 92, 246, 0.3);
+  color: #fff;
 }
 
 .modal-body {
@@ -252,107 +573,322 @@ body {
 }
 
 .moon-phase-icon {
-  width: 120px;
-  height: 120px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #f0f0f0, #ccc);
+  background: radial-gradient(circle at 35% 30%, #fff8e7, #f5d280, #d4a043);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 0 30px rgba(102, 179, 255, 0.4);
+  box-shadow:
+    0 0 40px rgba(245, 158, 11, 0.4),
+    0 0 80px rgba(139, 92, 246, 0.15);
+  animation: modalMoonGlow 3s ease-in-out infinite;
+}
+
+@keyframes modalMoonGlow {
+  0%, 100% { box-shadow: 0 0 40px rgba(245, 158, 11, 0.4), 0 0 80px rgba(139, 92, 246, 0.15); }
+  50%      { box-shadow: 0 0 55px rgba(245, 158, 11, 0.55), 0 0 100px rgba(139, 92, 246, 0.25); }
 }
 
 .lunar-info {
   text-align: center;
-  margin: 25px 0;
+  margin: 22px 0;
 }
 
 .lunar-date {
-  color: #aaa;
-  font-size: 1rem;
+  color: #a8a0be;
+  font-size: 0.95rem;
   margin-bottom: 8px;
 }
 
 .lunar-phase {
-  color: #fff;
+  color: #ede9fe;
+  font-family: 'Outfit', sans-serif;
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 10px;
+  letter-spacing: -0.3px;
 }
 
 .lunar-illumination {
-  color: #66b3ff;
-  font-size: 1.2rem;
-  font-weight: 500;
+  color: #f59e0b;
+  font-size: 1.15rem;
+  font-weight: 600;
 }
 
+/* Illumination progress ring in modal */
+.illumination-ring {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 12px 0 0;
+}
+
+.illumination-ring svg {
+  width: 60px;
+  height: 60px;
+}
+
+.illumination-ring circle {
+  fill: none;
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+
+.illumination-ring .ring-bg {
+  stroke: rgba(139, 92, 246, 0.15);
+}
+
+.illumination-ring .ring-fill {
+  stroke: url(#gradientRing);
+  transition: stroke-dashoffset 1s ease;
+}
+
+.illumination-ring .ring-text {
+  font-size: 0.7rem;
+  font-weight: 700;
+  fill: #f59e0b;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+/* Modal close button */
 .btn-modal-close {
-  background: linear-gradient(135deg, #4a6fa5, #3a5a8a);
+  background: linear-gradient(135deg, #7c3aed, #8b5cf6);
   color: white;
   border: none;
   padding: 12px 30px;
   border-radius: 50px;
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 0.95rem;
+  font-weight: 600;
   cursor: pointer;
   width: 100%;
-  margin-top: 15px;
+  margin-top: 8px;
   transition: all 0.3s;
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.3);
 }
 
 .btn-modal-close:hover {
-  background: linear-gradient(135deg, #5a80b5, #4a6a9a);
+  background: linear-gradient(135deg, #6d28d9, #7c3aed);
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.45);
 }
 
-/* Para modo oscuro/claro */
-body.dark-theme .modal-content-lunar {
-  background: linear-gradient(145deg, #0a0a15 0%, #121a2e 100%);
-}
-
+/* Light theme modal overrides */
 body:not(.dark-theme) .modal-content-lunar {
-  background: linear-gradient(145deg, #ffffff 0%, #f0f4f8 100%);
-  color: #333;
+  background: linear-gradient(155deg, #fefcff 0%, #f5f0ff 50%, #fef9f0 100%);
+  border-color: rgba(139, 92, 246, 0.15);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
 }
 
 body:not(.dark-theme) .modal-header h3,
-body:not(.dark-theme) .lunar-phase,
+body:not(.dark-theme) .lunar-phase {
+  color: #3b2070;
+}
+
 body:not(.dark-theme) .close-btn {
-  color: #333;
+  color: #6b5b8a;
+  background: rgba(139, 92, 246, 0.08);
+}
+
+body:not(.dark-theme) .close-btn:hover {
+  background: rgba(139, 92, 246, 0.15);
+  color: #4c1d95;
 }
 
 body:not(.dark-theme) .lunar-date {
-  color: #666;
+  color: #7c6f95;
+}
+
+body:not(.dark-theme) .lunar-illumination {
+  color: #d97706;
 }
 
 body:not(.dark-theme) .btn-modal-close {
-  background: linear-gradient(135deg, #3a5a8a, #2a4a7a);
-}
-.day {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: linear-gradient(135deg, #7c3aed, #8b5cf6);
 }
 
-.day:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important;
+/* ============================================================
+   OLD MODAL (#modal, #modalContent) — restyle to match
+   ============================================================ */
+#modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(14, 11, 26, 0.88);
+  backdrop-filter: blur(10px);
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
 }
 
+#modalContent {
+  background: linear-gradient(155deg, #1c1433, #150f28);
+  padding: 28px;
+  border-radius: 24px;
+  width: 92%;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
 
-.day::after {
-  content: "🔍";
+body:not(.dark-theme) #modalContent {
+  background: linear-gradient(155deg, #fefcff, #f5f0ff);
+  color: #2d2a3e;
+}
+
+.modalMoon {
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle at 35% 30%, #fff8e7, #f5d280, #d4a043);
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  margin: 14px auto;
+  box-shadow: 0 0 30px rgba(245, 158, 11, 0.35);
+}
+
+.modalShadow {
   position: absolute;
-  top: 5px;
-  right: 5px;
-  font-size: 12px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  top: 0;
+  height: 100%;
+  background: rgba(30, 20, 55, 0.88);
+  border-radius: 50%;
 }
 
-.day:hover::after {
-  opacity: 0.7;
+#closeBtn {
+  margin-top: 14px;
+  padding: 10px 22px;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #7c3aed, #8b5cf6);
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 600;
+  transition: all 0.3s;
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.3);
 }
 
-/* Para el modo oscuro */
-body.dark-theme .day:hover {
-  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1) !important;
+#closeBtn:hover {
+  background: linear-gradient(135deg, #6d28d9, #7c3aed);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   THEME SWITCHER
+   ============================================================ */
+.theme-switcher .btn-theme {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  padding: 6px 14px;
+  height: 36px;
+  border-radius: 20px;
+  background: rgba(139, 92, 246, 0.08);
+  border: 1px solid rgba(139, 92, 246, 0.15);
+  color: #6d28d9;
+  font-weight: 500;
+  font-size: 0.85rem;
+  transition: all 0.3s;
+}
+
+.theme-switcher .btn-theme:hover {
+  background: rgba(139, 92, 246, 0.15);
+}
+
+body.dark-theme .theme-switcher .btn-theme {
+  background: rgba(139, 92, 246, 0.12);
+  border-color: rgba(139, 92, 246, 0.25);
+  color: #c4b5fa;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  background: linear-gradient(135deg, #1c1433, #150f28) !important;
+  border-top: 1px solid rgba(139, 92, 246, 0.15);
+}
+
+body:not(.dark-theme) .footer {
+  background: linear-gradient(135deg, #2d1f5e, #1e1245) !important;
+}
+
+/* ============================================================
+   DARK THEME — day cards from estilo
+   ============================================================ */
+body.dark-theme .day .moon {
+  background: radial-gradient(circle at 35% 30%, #fff6dd, #e8c063, #b8862e) !important;
+}
+
+body.dark-theme .day .moon .shadow {
+  background: rgba(10, 6, 22, 0.92) !important;
+}
+
+body.dark-theme #modalContent {
+  background: linear-gradient(155deg, rgba(28, 20, 50, 0.98), rgba(21, 15, 40, 0.98));
+  color: #e8e4f0;
+}
+
+body.dark-theme #closeBtn {
+  background: linear-gradient(135deg, #7c3aed, #8b5cf6);
+}
+
+/* ============================================================
+   SCROLLBAR — styled for elegance
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.25);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.4);
+}
+
+/* ============================================================
+   TODAY CARD INDICATOR (special gold ring)
+   ============================================================ */
+.day.is-today {
+  border: 2px solid rgba(245, 158, 11, 0.5) !important;
+  box-shadow:
+    0 4px 14px rgba(245, 158, 11, 0.15),
+    inset 0 0 0 1px rgba(245, 158, 11, 0.08) !important;
+}
+
+.day.is-today .date {
+  color: #d97706 !important;
+  font-weight: 700 !important;
+}
+
+body.dark-theme .day.is-today {
+  border-color: rgba(245, 158, 11, 0.45) !important;
+  box-shadow:
+    0 4px 18px rgba(245, 158, 11, 0.2),
+    0 0 30px rgba(245, 158, 11, 0.06) !important;
+}
+
+/* ============================================================
+   LOADING SKELETON ANIMATION
+   ============================================================ */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.day.loading .moon {
+  background: linear-gradient(90deg, rgba(139,92,246,0.05) 25%, rgba(139,92,246,0.12) 50%, rgba(139,92,246,0.05) 75%) !important;
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
 }
