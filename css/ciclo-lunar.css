@@ -625,13 +625,13 @@ body.dark-theme .phase-card p {
 }
 
 .illumination-ring svg {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
 }
 
 .illumination-ring circle {
   fill: none;
-  stroke-width: 5;
+  stroke-width: 4;
   stroke-linecap: round;
 }
 
@@ -641,11 +641,11 @@ body.dark-theme .phase-card p {
 
 .illumination-ring .ring-fill {
   stroke: url(#gradientRing);
-  transition: stroke-dashoffset 1s ease;
+  transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .illumination-ring .ring-text {
-  font-size: 0.7rem;
+  font-size: 0.55rem;
   font-weight: 700;
   fill: #f59e0b;
   text-anchor: middle;
