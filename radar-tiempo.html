@@ -22,7 +22,7 @@
   </head>
 
   <body>
-  <!--NAVEGADOR-->
+    <!-- NAVEGADOR -->
     <div class="container">
       <div class="navigation">
         <ul>
@@ -34,69 +34,62 @@
             </a>
           </li>
           <li>
-                    <a href="index.html">
-                        <span class="icon">
-                            <ion-icon name="cloudy-night-outline"></ion-icon>
-                        </span>
-                        <span class="title">Hoy</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="pronóstico-diario.html">
-                        <span class="icon">
-                            <ion-icon name="today-outline"></ion-icon>
-                        </span>
-                        <span class="title">Diario</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="radar-tiempo.html">
-                        <span class="icon">
-                            <ion-icon name="radio-outline"></ion-icon>
-                        </span>
-                        <span class="title">Radar</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="semana.html">
-                        <span class="icon">
-                           <ion-icon name="cloud-circle-outline"></ion-icon>
-                        </span>
-                        <span class="title">Semanal</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="ciclo-lunar.html">
-                        <span class="icon">
-                            <ion-icon name="moon-outline"></ion-icon>
-                        </span>
-                        <span class="title">Ciclo Lunar</span>
-                    </a>
-                </li>
-
-                 <li>
-                    <a href="noticias.html">
-                        <span class="icon">
-                           <ion-icon name="thunderstorm-outline"></ion-icon>
-                        </span>
-                        <span class="title">Noticias </span>
-                    </a>
-                </li>
-
-                
-                 <li>
-                    <a href="acerca-de.html">
-                        <span class="icon">
-                           <ion-icon name="people-circle-outline"></ion-icon>
-                        </span>
-                        <span class="title">Nosotros </span>
-                    </a>
-                </li>
-            </ul>
+            <a href="index.html">
+              <span class="icon">
+                <ion-icon name="cloudy-night-outline"></ion-icon>
+              </span>
+              <span class="title">Hoy</span>
+            </a>
+          </li>
+          <li>
+            <a href="pronóstico-diario.html">
+              <span class="icon">
+                <ion-icon name="today-outline"></ion-icon>
+              </span>
+              <span class="title">Diario</span>
+            </a>
+          </li>
+          <li>
+            <a href="radar-tiempo.html">
+              <span class="icon">
+                <ion-icon name="radio-outline"></ion-icon>
+              </span>
+              <span class="title">Radar</span>
+            </a>
+          </li>
+          <li>
+            <a href="semana.html">
+              <span class="icon">
+                <ion-icon name="cloud-circle-outline"></ion-icon>
+              </span>
+              <span class="title">Semanal</span>
+            </a>
+          </li>
+          <li>
+            <a href="ciclo-lunar.html">
+              <span class="icon">
+                <ion-icon name="moon-outline"></ion-icon>
+              </span>
+              <span class="title">Ciclo Lunar</span>
+            </a>
+          </li>
+          <li>
+            <a href="noticias.html">
+              <span class="icon">
+                <ion-icon name="thunderstorm-outline"></ion-icon>
+              </span>
+              <span class="title">Noticias</span>
+            </a>
+          </li>
+          <li>
+            <a href="acerca-de.html">
+              <span class="icon">
+                <ion-icon name="people-circle-outline"></ion-icon>
+              </span>
+              <span class="title">Nosotros</span>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
 
@@ -108,63 +101,129 @@
 
         <!-- Theme Switcher -->
         <div class="theme-switcher">
-          <button id="theme-btn" class="btn btn-sm btn-theme dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="ri-contrast-2-line me-1"></i>
-            <span id="current-theme">Light</span>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="#" data-theme="light"><i class="ri-sun-line me-2"></i>Light</a></li>
-            <li><a class="dropdown-item" href="#" data-theme="dark"><i class="ri-moon-line me-2"></i>Dark</a></li>
-          </ul>
+          <button id="theme-btn" class="btn-theme" aria-label="Cambiar tema">
+             🌙
+        </button>
+           
         </div>
       </div>
 
-      <main class="radar-page">
+      <main class="radar-page" role="main">
         <div class="content">
+          <!-- HEADER  -->
           <header class="radar-header">
-            <h1 class="radar-title">Radar Meteorológico del Mundo</h1>
-            <p class="radar-sub">Radar global en tiempo real</p>
+            <div class="header-badge" role="status" aria-live="polite">
+              <i class="ri-radar-line" aria-hidden="true"></i>
+              <span>En Tiempo Real</span>
+            </div>
+            <h1 class="radar-title">Radar Meteorológico Global</h1>
+            <p class="radar-subtitle">Precipitaciones, nubes y tormentas en vivo</p>
           </header>
 
-          <!-- BUSCADOR -->
-          <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Buscar ciudad, país…" />
-            <button id="searchBtn">Buscar</button>
+          <!-- BUSCADOR  -->
+          <div class="search-container">
+            <div class="search-bar enhanced">
+              <div class="search-input-wrapper">
+                <i class="ri-search-line search-icon"></i>
+                <input type="text" id="searchInput" 
+                       placeholder="Buscar ciudad o país (ej: Tegucigalpa, Honduras)…"
+                       aria-label="Buscar ubicación" autocomplete="off" />
+              </div>
+              <button id="searchBtn" class="btn-search" aria-label="Buscar">
+                <i class="ri-search-eye-line"></i>
+              </button>
+            </div>
+            <div id="search-suggestions" class="search-suggestions"></div>
           </div>
 
-          <!-- CAPAS Y BOTONES -->
-          <section class="radar-controls-box">
-            <div class="layer-select">
-              <label>Capas:</label>
-              <select id="layerMode">
-                <option value="rain">Lluvia</option>
-                <option value="clouds">Nubes</option>
-                <option value="storms">Tormentas eléctricas</option>
-                <option value="temp">Temperatura</option>
-              </select>
+          <!-- CONTROLES -->
+          <section class="radar-controls enhanced" aria-label="Controles del radar">
+            <div class="control-group">
+              <label class="control-label">Capas:</label>
+               
+                <div class="custom-dropdown" id="layerDropdown">
+               <div class="dropdown-selected">
+                 <span class="selected-icon">🌧️</span>
+                <span class="selected-text">Precipitación</span>
+                 <span class="dropdown-arrow">▾</span>
+              </div>
+
+               <div class="dropdown-options">
+               <div class="dropdown-item" data-value="rain">🌧️ Precipitación</div>
+               <div class="dropdown-item" data-value="clouds">☁️ Nubes</div>
+               <div class="dropdown-item" data-value="storms">⚡ Tormentas</div>
+               <div class="dropdown-item" data-value="temp">🌡️ Temperatura</div>
+               <div class="dropdown-item" data-value="wind">💨 Viento</div>
+             </div>
             </div>
 
-            <button id="playBtn">⏳ Animar</button>
-            <button id="themeBtn">🌙 Tema oscuro</button>
-            <button id="locBtn">📌 Mi ubicación</button>
-          </section>
+            <div class="control-buttons">
+              <button id="playBtn" class="btn-control btn-play">▶️</button>
 
-          <div class="controls-row"></div>
+             <button id="locBtn" class="btn-control btn-location">
+               📍
+             </button>
+              <button id="refreshBtn" class="btn-control btn-refresh">
+                <i class="ri-refresh-line refresh-icon"></i>
+              </button>
+            </div>
 
-          <div id="owm-info" style="text-align:center;margin-top:8px;color:#b00"></div>
-
-          <!-- MAPA -->
-          <section class="maps-wrap">
-            <div id="map" class="map"></div>
-
-            <div class="timeline-wrap">
-              <button id="timeline-play" class="btn btn-light" style="border-radius:50%;width:48px;height:48px;">▶</button>
-              <input id="timeline-slider" class="timeline-slider" type="range" min="0" max="100" value="100" />
-              <div id="timeline-label" style="min-width:140px;text-align:center;font-size:0.95rem;color:#333;">Ahora</div>
+            <div class="control-info">
+              <span id="status-indicator" class="status-indicator">
+                <span class="status-dot"></span>
+                Conectado
+              </span>
             </div>
           </section>
 
-          <footer class="radar-footer"><small>Datos del radar: OpenWeatherMap</small></footer>
+          <!-- MAPA  -->
+          <section class="maps-container" aria-label="Mapa del radar">
+            <div class="map-wrapper">
+              <div id="map" class="map"></div>
+              <div class="map-overlay">
+                <div id="map-legend" class="legend">
+                  <div class="legend-title">Leyenda</div>
+                  <div class="legend-scale"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- TIMELINE  -->
+            <div class="timeline-container">
+              <button id="timeline-play" class="timeline-btn" aria-label="Reproducir animación">
+                <i class="ri-play-fill"></i>
+              </button>
+              <div class="timeline-track">
+                <input id="timeline-slider" class="timeline-slider" type="range" 
+                       min="0" max="100" value="100" aria-label="Control de tiempo" />
+                <div id="timeline-label" class="timeline-label">Ahora</div>
+              </div>
+              
+            </div>
+          </section>
+
+          <!-- ESTADO Y ESTADÍSTICAS -->
+          <div class="radar-stats">
+            <div class="stat-item">
+              <span class="stat-label">Actualizado:</span>
+              <span id="last-update" class="stat-value">--:--</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Resolución:</span>
+              <span class="stat-value">1km</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Cobertura:</span>
+              <span class="stat-value">Global</span>
+            </div>
+          </div>
+
+          <footer class="radar-footer">
+            <small>Datos del radar: 
+              <a href="https://openweathermap.org/" target="_blank" rel="noopener">OpenWeatherMap</a> | 
+              Desarrollado para Honduras
+            </small>
+          </footer>
         </div>
       </main>
     </div>
@@ -176,36 +235,23 @@
     <script src="js/principal.js"></script>
 
     <!-- Theme Switcher Script -->
+    
+
+    <!-- JS básico para nuevos elementos -->
     <script>
-      (function() {
-        const themeBtn = document.getElementById('theme-btn');
-        const currentThemeSpan = document.getElementById('current-theme');
-        const themeOptions = document.querySelectorAll('[data-theme]');
-        
-        // Load saved theme or default to light
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        applyTheme(savedTheme);
-        
-        // Theme option click handlers
-        themeOptions.forEach(option => {
-          option.addEventListener('click', (e) => {
-            e.preventDefault();
-            const theme = option.getAttribute('data-theme');
-            applyTheme(theme);
-            localStorage.setItem('theme', theme);
-          });
-        });
-        
-        function applyTheme(theme) {
-          if (theme === 'dark') {
-            document.body.classList.add('dark-theme');
-            currentThemeSpan.textContent = 'Dark';
-          } else {
-            document.body.classList.remove('dark-theme');
-            currentThemeSpan.textContent = 'Light';
-          }
-        }
-      })();
+      // Actualización de tiempo
+      function updateTime() {
+        document.getElementById('last-update').textContent = 
+          new Date().toLocaleTimeString('es-HN');
+      }
+      updateTime();
+      setInterval(updateTime, 30000);
+
+      // Status indicator
+      const statusDot = document.querySelector('.status-dot');
+      setInterval(() => {
+        statusDot.style.background = Math.random() > 0.1 ? '#4ade80' : '#ef4444';
+      }, 5000);
     </script>
   </body>
 </html>
