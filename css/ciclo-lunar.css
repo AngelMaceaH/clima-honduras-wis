@@ -17,8 +17,34 @@ body.dark-theme {
   color: #e8e4f0;
 }
 
+/* ---- Topbar overrides for ciclo-lunar ---- */
+.topbar {
+  position: relative;
+  z-index: 100;
+}
+
+body.dark-theme .topbar {
+  background: #0e0b1a !important;
+  border-bottom-color: rgba(139, 92, 246, 0.15) !important;
+}
+
+body.dark-theme .toggle {
+  background: transparent !important;
+  color: #c4b5fa;
+}
+
+/* Ensure dropdown appears above all content */
+.theme-switcher {
+  position: relative;
+  z-index: 1001;
+}
+
+.theme-switcher .dropdown-menu {
+  z-index: 1002;
+}
+
 /* ---- Title ---- */
-.main > h1 {
+.main>h1 {
   font-family: 'Outfit', sans-serif;
   font-size: 2.2rem;
   font-weight: 700;
@@ -29,12 +55,19 @@ body.dark-theme {
   background-clip: text;
   text-align: center;
   margin: 32px 0 6px;
+  position: relative;
+  z-index: 1;
   animation: titleGlow 4s ease-in-out infinite alternate;
 }
 
 @keyframes titleGlow {
-  0%   { filter: brightness(1); }
-  100% { filter: brightness(1.15); }
+  0% {
+    filter: brightness(1);
+  }
+
+  100% {
+    filter: brightness(1.15);
+  }
 }
 
 /* ---- Status text ---- */
@@ -77,7 +110,7 @@ body.dark-theme #status {
   box-shadow:
     0 0 30px rgba(245, 158, 11, 0.35),
     0 0 60px rgba(139, 92, 246, 0.15),
-    inset 0 -4px 8px rgba(0,0,0,0.08) !important;
+    inset 0 -4px 8px rgba(0, 0, 0, 0.08) !important;
   margin: 0 auto 8px !important;
   position: relative !important;
   overflow: hidden !important;
@@ -92,8 +125,15 @@ body.dark-theme .moon-icon-clickable {
 }
 
 @keyframes moonPulse {
-  0%, 100% { box-shadow: 0 0 30px rgba(245, 158, 11, 0.35), 0 0 60px rgba(139, 92, 246, 0.15); }
-  50%      { box-shadow: 0 0 45px rgba(245, 158, 11, 0.5),  0 0 90px rgba(139, 92, 246, 0.25); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 30px rgba(245, 158, 11, 0.35), 0 0 60px rgba(139, 92, 246, 0.15);
+  }
+
+  50% {
+    box-shadow: 0 0 45px rgba(245, 158, 11, 0.5), 0 0 90px rgba(139, 92, 246, 0.25);
+  }
 }
 
 .moon-clickable p {
@@ -141,10 +181,31 @@ body.dark-theme .cuadro2 {
   justify-items: center;
 }
 
-@media (max-width: 960px)  { #container { grid-template-columns: repeat(5, 1fr) !important; } }
-@media (max-width: 680px)  { #container { grid-template-columns: repeat(4, 1fr) !important; gap: 12px !important; } }
-@media (max-width: 480px)  { #container { grid-template-columns: repeat(3, 1fr) !important; gap: 10px !important; } }
-@media (max-width: 360px)  { #container { grid-template-columns: repeat(2, 1fr) !important; } }
+@media (max-width: 960px) {
+  #container {
+    grid-template-columns: repeat(5, 1fr) !important;
+  }
+}
+
+@media (max-width: 680px) {
+  #container {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 12px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  #container {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 10px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  #container {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
 
 /* ---- Day Cards ---- */
 .day {
@@ -214,7 +275,7 @@ body.dark-theme .day:hover {
   box-shadow:
     0 0 18px rgba(245, 158, 11, 0.4),
     0 0 30px rgba(139, 92, 246, 0.15),
-    inset 0 -3px 6px rgba(0,0,0,0.06) !important;
+    inset 0 -3px 6px rgba(0, 0, 0, 0.06) !important;
 }
 
 body.dark-theme .day .moon,
@@ -522,6 +583,7 @@ body.dark-theme .phase-card p {
     transform: translateY(-20px) scale(0.92);
     opacity: 0;
   }
+
   to {
     transform: translateY(0) scale(1);
     opacity: 1;
@@ -586,8 +648,15 @@ body.dark-theme .phase-card p {
 }
 
 @keyframes modalMoonGlow {
-  0%, 100% { box-shadow: 0 0 40px rgba(245, 158, 11, 0.4), 0 0 80px rgba(139, 92, 246, 0.15); }
-  50%      { box-shadow: 0 0 55px rgba(245, 158, 11, 0.55), 0 0 100px rgba(139, 92, 246, 0.25); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 40px rgba(245, 158, 11, 0.4), 0 0 80px rgba(139, 92, 246, 0.15);
+  }
+
+  50% {
+    box-shadow: 0 0 55px rgba(245, 158, 11, 0.55), 0 0 100px rgba(139, 92, 246, 0.25);
+  }
 }
 
 .lunar-info {
@@ -883,12 +952,17 @@ body.dark-theme .day.is-today {
    LOADING SKELETON ANIMATION
    ============================================================ */
 @keyframes shimmer {
-  0%   { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 .day.loading .moon {
-  background: linear-gradient(90deg, rgba(139,92,246,0.05) 25%, rgba(139,92,246,0.12) 50%, rgba(139,92,246,0.05) 75%) !important;
+  background: linear-gradient(90deg, rgba(139, 92, 246, 0.05) 25%, rgba(139, 92, 246, 0.12) 50%, rgba(139, 92, 246, 0.05) 75%) !important;
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }

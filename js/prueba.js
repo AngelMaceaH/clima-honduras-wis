@@ -20,16 +20,6 @@
     });
   }
 
-  // ─── Theme: respect existing localStorage setting ───
-  const currentThemeText = document.getElementById('current-theme');
-  const savedTheme = localStorage.getItem('theme') || 'light';
-  if (savedTheme === 'dark') {
-    document.body.classList.add('dark-theme');
-    if (currentThemeText) currentThemeText.textContent = 'Oscuro';
-  } else {
-    if (currentThemeText) currentThemeText.textContent = 'Claro';
-  }
-
   // ═══════════════════════════════════════════════════════════
   // LUNAR CALCULATIONS
   // ═══════════════════════════════════════════════════════════
@@ -232,7 +222,7 @@
 
     // Trigger download
     const link = document.createElement('a');
-    link.download = `fase-lunar-${data.fecha.toISOString().slice(0,10)}.png`;
+    link.download = `fase-lunar-${data.fecha.toISOString().slice(0, 10)}.png`;
     link.href = canvas.toDataURL('image/png');
     link.click();
   }
@@ -365,6 +355,6 @@
   // expose minimal debug API
   try {
     window.__ciclo_debug = { dibujarCicloLunar, abrirModalLunar };
-  } catch (e) {}
+  } catch (e) { }
 
 })();
