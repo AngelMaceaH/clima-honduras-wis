@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Clima — Hoy</title>
+  <meta name="description" content="Clima actual en Honduras: temperatura, pronóstico por horas y pronósticos locales por municipio." />
+  <title>Clima — Hoy | El Clima Honduras</title>
 
   <!-- Bootstrap CSS (solo uno) -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
@@ -13,24 +14,29 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="css/estilo.css">
+  <link rel="stylesheet" href="css/site-shell.css">
   <link rel="stylesheet" href="css/index.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
 </head>
 
 
-<body>
+<body class="index-page site-page">
+  <a class="skip-link" href="#contenido-principal">Saltar al contenido principal</a>
   <!-- NAVEGADOR / SIDEBAR -->
   <div class="container">
-    <div class="navigation">
+    <nav class="navigation" aria-label="Secciones del sitio">
       <ul>
         <li>
-          <a href="index.html">
-            <span class="icon"><img src="img/logo/logo.png" alt="Logo" style="width: 200px; height: 50px; object-fit: contain;"></span>    
+          <a href="index.html" aria-label="El Clima Honduras — inicio">
+            <span class="icon"><img src="img/logo/logo.png" alt="" width="200" height="50" style="width: 200px; height: 50px; object-fit: contain;"></span>    
           </a>
         </li>
-         <li>
-                    <a href="index.html">
-                        <span class="icon">
+         <li class="active" aria-current="page">
+                    <a href="index.html" aria-current="page">
+                        <span class="icon" aria-hidden="true">
                             <ion-icon name="cloudy-night-outline"></ion-icon>
                         </span>
                         <span class="title">Hoy</span>
@@ -39,7 +45,7 @@
 
                 <li>
                     <a href="pronóstico-diario.html">
-                        <span class="icon">
+                        <span class="icon" aria-hidden="true">
                             <ion-icon name="today-outline"></ion-icon>
                         </span>
                         <span class="title">Diario</span>
@@ -48,7 +54,7 @@
 
                 <li>
                     <a href="radar-tiempo.html">
-                        <span class="icon">
+                        <span class="icon" aria-hidden="true">
                             <ion-icon name="radio-outline"></ion-icon>
                         </span>
                         <span class="title">Radar</span>
@@ -57,7 +63,7 @@
 
                 <li>
                     <a href="semana.html">
-                        <span class="icon">
+                        <span class="icon" aria-hidden="true">
                            <ion-icon name="cloud-circle-outline"></ion-icon>
                         </span>
                         <span class="title">Semanal</span>
@@ -66,7 +72,7 @@
 
                 <li>
                     <a href="ciclo-lunar.html">
-                        <span class="icon">
+                        <span class="icon" aria-hidden="true">
                             <ion-icon name="moon-outline"></ion-icon>
                         </span>
                         <span class="title">Ciclo Lunar</span>
@@ -75,7 +81,7 @@
 
                  <li>
                     <a href="noticias.html">
-                        <span class="icon">
+                        <span class="icon" aria-hidden="true">
                            <ion-icon name="thunderstorm-outline"></ion-icon>
                         </span>
                         <span class="title">Noticias </span>
@@ -85,49 +91,29 @@
                 
                  <li>
                     <a href="acerca-de.html">
-                        <span class="icon">
+                        <span class="icon" aria-hidden="true">
                            <ion-icon name="people-circle-outline"></ion-icon>
                         </span>
                         <span class="title">Nosotros </span>
                     </a>
                 </li>
             </ul>
-    </div>
+    </nav>
       </div>
 
     
   <!-- MAIN -->
 <div class="main">
-    <div class="topbar">
-      <div class="toggle"><ion-icon name="menu-outline"></ion-icon>
+    <header class="topbar" role="banner">
+      <div class="toggle" role="button" tabindex="0" aria-label="Abrir o cerrar el menú de navegación"><ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
       </div>
 
-      <!-- CABECERA EN TOPBAR -->
-      <div class="forecast-header" style="margin: 0; margin-left: 60px; flex: 1; display: flex; justify-content: space-between; align-items: center; padding: 0 10px 0 0;">
-        <div style="display: flex; align-items: center; gap: 15px;">
-          
-          <!-- Barra de búsqueda -->
-          <div style="position: relative;">
-            <input 
-              type="text" 
-              id="city-search" 
-              class="city-search-input"
-              placeholder="Buscar ciudad..."
-              style="padding: 6px 35px 6px 12px; border-radius: 8px; border: 1px solid rgba(0, 136, 255, 0.3); background: rgba(255, 255, 255, 0.95); font-size: 0.9rem; width: 200px; outline: none;"
-            />
-            <i class="ri-search-line city-search-icon" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #0055cc; pointer-events: none;"></i>
-            
-            <!-- Resultados de búsqueda -->
-            <div id="search-results" class="search-results-dropdown" style="position: absolute; top: 100%; left: 0; width: 100%; max-height: 300px; overflow-y: auto; background: white; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); margin-top: 5px; display: none; z-index: 10002;">
-            </div>
-          </div>
-        </div>
-      </div>
+      <div class="topbar-spacer flex-grow-1" aria-hidden="true"></div>
 
       <!-- Theme Switcher -->
       <div class="theme-switcher">
-        <button id="theme-btn" class="btn btn-sm btn-theme dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="ri-contrast-2-line me-1"></i>
+        <button id="theme-btn" class="btn btn-sm btn-theme btn-theme-modern dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Elegir tema de la página: claro u oscuro">
+          <i id="theme-icon" class="ri-sun-line me-1" aria-hidden="true"></i>
           <span id="current-theme">Claro</span>
         </button>
         <ul class="dropdown-menu dropdown-menu-end">
@@ -135,105 +121,192 @@
           <li><a class="dropdown-item" href="#" data-theme="dark"><i class="ri-moon-line me-2"></i>Oscuro</a></li>
         </ul>
       </div>
+    </header>
+
+  <main id="contenido-principal" tabindex="-1">
+  <!-- Primera sección: imagen de fondo dinámica (clima / hora del día) — solo este bloque -->
+  <section class="index-hero-weather-bg index-hero-backdrop" id="index-weather-hero" aria-label="Cabecera del clima">
+    <div class="index-hero-overlay" aria-hidden="true"></div>
+    <div class="container index-container position-relative index-hero-inner index-hero-inner--padded">
+      <div class="row justify-content-center py-4 pt-lg-5">
+        <div class="col-12 col-xl-10 text-center text-md-start">
+          <header class="dashboard-intro index-hero-text mx-auto mx-md-0">
+            <p class="index-hero-kicker mb-1">Pronóstico en tiempo real</p>
+            <h1 class="index-hero-title mb-1">El clima de hoy</h1>
+            <p class="index-hero-region mb-0" id="hero-region">Honduras</p>
+          </header>
+        </div>
+      </div>
+      <div class="row g-0 pb-4 pb-lg-5 mt-3 mt-lg-4">
+        <div class="col-12">
+          <div class="dashboard-toolbar dashboard-toolbar--glass">
+            <section class="location-section location-section--toolbar mb-0" aria-labelledby="ubicacion-heading">
+              <h2 id="ubicacion-heading" class="visually-hidden">Ubicación en Honduras</h2>
+              <div class="location-select location-select--toolbar row g-2 g-3 align-items-end">
+                <div class="location-field col-6">
+                  <label class="location-label" for="departamentos">Departamento</label>
+                  <select id="departamentos" class="form-select select-styled w-100" aria-describedby="ubicacion-hint">
+                    <option value="">Seleccionar departamento</option>
+                  </select>
+                </div>
+                <div class="location-field col-6">
+                  <label class="location-label" for="municipios">Municipio</label>
+                  <select id="municipios" class="form-select select-styled w-100">
+                    <option value="">Seleccionar municipio</option>
+                  </select>
+                </div>
+              </div>
+              <p id="ubicacion-hint" class="location-hint small mt-2 mb-0 text-center">Los datos se actualizan al elegir departamento y municipio.</p>
+            </section>
+
+            <div id="toolbar-weather-panel" class="toolbar-weather-embed toolbar-weather-hero-style pt-3 mt-3 is-loading" aria-labelledby="panel-clima-heading" aria-busy="true">
+              <h2 id="panel-clima-heading" class="visually-hidden">Condiciones actuales</h2>
+              <div class="weather-panel-skeleton" aria-hidden="false">
+                <div class="wc-header-toolbar wc-header-toolbar--split mb-3">
+                  <div class="weather-skel-col">
+                    <div class="weather-skel skel-line skel-line--title"></div>
+                    <div class="weather-skel skel-line skel-line--subtitle mt-2"></div>
+                  </div>
+                  <div class="weather-skel-actions d-flex align-items-center justify-content-end gap-2 flex-wrap">
+                    <div class="weather-skel skel-line skel-line--meta"></div>
+                    <div class="weather-skel skel-pill"></div>
+                    <div class="weather-skel skel-pill"></div>
+                  </div>
+                </div>
+                <div class="wc-toolbar-hero-main weather-skel-hero">
+                  <div class="weather-skel skel-circle" aria-hidden="true"></div>
+                  <div class="weather-skel-data">
+                    <div class="weather-skel skel-line skel-line--temp mb-2"></div>
+                    <div class="weather-skel skel-line skel-line--md mb-2"></div>
+                    <div class="weather-skel skel-line skel-line--sm mb-1"></div>
+                    <div class="weather-skel skel-line skel-line--sm"></div>
+                  </div>
+                </div>
+                <div class="wc-summary-wrap border-top pt-3 mt-3">
+                  <div class="weather-skel skel-line skel-line--full"></div>
+                  <div class="weather-skel skel-line skel-line--md mt-2 mx-auto skel-line--narrow"></div>
+                </div>
+              </div>
+              <div class="weather-panel-live" aria-hidden="true">
+              <div class="wc-header-toolbar wc-header-toolbar--split mb-3">
+                <div class="wc-header-toolbar-left">
+                  <div id="location-text" class="location-default fw-semibold wc-location toolbar-wc-location">Ubicación</div>
+                  <div id="local-time" class="wc-local-time toolbar-wc-meta mt-1"></div>
+                </div>
+                <div class="wc-header-toolbar-right d-flex align-items-center justify-content-end gap-2 flex-wrap">
+                  <span id="update-time" class="wc-update-label small toolbar-wc-meta mb-0">Última actualización</span>
+                  <button id="refresh-btn" type="button" class="btn btn-wc-refresh btn-sm" aria-label="Actualizar datos del clima">
+                    <i class="ri-refresh-line" aria-hidden="true"></i>
+                  </button>
+                  <div class="btn-group btn-group-sm wc-unit-group" role="group" aria-label="unidad temperatura">
+                    <button id="celsius-btn" type="button" class="btn btn-sm wc-unit-btn" title="Celsius">°C</button>
+                    <button id="fahrenheit-btn" type="button" class="btn btn-sm wc-unit-btn" title="Fahrenheit">°F</button>
+                  </div>
+                </div>
+              </div>
+              <div class="wc-body toolbar-wc-body wc-toolbar-hero-body">
+                <div class="wc-toolbar-hero">
+                  <div class="wc-toolbar-hero-main">
+                    <div class="wc-toolbar-hero-icon-wrap">
+                      <img id="weather-icon" class="wc-weather-icon wc-toolbar-hero-icon-img" src="" alt="" width="160" height="160">
+                    </div>
+                    <div class="wc-toolbar-hero-data">
+                      <div class="wc-toolbar-hero-temp">
+                        <span id="temp" class="wc-temp-display toolbar-wc-temp wc-toolbar-hero-temp-value" aria-live="polite">--°</span>
+                      </div>
+                      <div class="weather-desc wc-weather-desc mb-2 toolbar-wc-desc" id="weather-desc">Estado</div>
+                      <div class="wc-meta mb-1 toolbar-wc-meta">Sensación térmica <span id="feels-like">--°</span></div>
+                      <div class="temp-high-low wc-meta mb-0 toolbar-wc-meta" id="high-low">Alta -- / Baja --</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="wc-summary-wrap toolbar-wc-summary border-top pt-3 mt-3 mx-auto toolbar-wc-summary-inner text-center">
+                  <p id="summary-sentence" class="summary-text wc-summary mb-0">Cargando resumen...</p>
+                </div>
+              </div>
+              </div>
+            </div>
+
+            <aside class="dashboard-cta border-top pt-3 mt-3 text-center" aria-labelledby="cta-local-heading">
+              <h2 id="cta-local-heading" class="dashboard-cta-title">Pronósticos locales</h2>
+              <div class="dashboard-cta-actions dashboard-cta-actions--split">
+                <a class="btn btn-cta btn-cta-primary" href="pronóstico-diario.html">
+                  <i class="ri-calendar-todo-line" aria-hidden="true"></i>
+                  Diario por ciudad
+                </a>
+                <a class="btn btn-cta btn-cta-secondary" href="semana.html">
+                  <i class="ri-calendar-2-line" aria-hidden="true"></i>
+                  Semana completa
+                </a>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
 
-  <!-- PANEL PRINCIPAL (.cuadro2) -->
-  <div class="cuadro2 p-4 mx-auto">
-    <div class="container mt-4">
-      <!-- Título -->
-      <h2 class="forecast-title" style="text-align: center; margin-bottom: 10px;">El CLIMA de hoy</h2>
-      <div class="forecast-subtitle" style="text-align: center; margin-bottom: 20px;">HONDURAS</div>
-      
-      <!-- Selectores de ubicación -->
-      <div class="location-select d-flex justify-content-center gap-2 mb-3">
-        <select id="departamentos" class="form-select select-styled w-auto">
-          <option value="">Seleccionar departamento</option>
-        </select>
-
-        <select id="municipios" class="form-select select-styled w-auto">
-          <option value="">Seleccionar municipio</option>
-        </select>
-      </div>
-
-      <!-- Cuadro principal de clima -->
-      <div class="weather-card position-relative text-white p-4 mx-auto"
-           style="max-width: 500px; background: rgba(182, 21, 21, 0.15);">
-        
-        <!-- Header superior -->
-        <div class="card-header d-flex justify-content-between mb-4 align-items-start" style="text-align: left;">
-          <div>
-            <div id="location-text" class="location-default fw-bold">Ubicación</div>
-            <div id="local-time" style="font-size: 0.85rem; font-weight: normal; color: rgba(255,255,255,0.85); margin-top: 4px;"></div>
-          </div>
-
-          <div style="text-align: right;">
-            <div style="display: flex; align-items: center; gap: 6px; justify-content: flex-end;">
-              <span id="update-time" class="small" style="font-size: 0.85rem;">Última actualización</span>
-              <button id="refresh-btn" type="button" class="btn btn-sm" title="Refrescar">
-                <i class="ri-refresh-line"></i>
-              </button>
+  <!-- Gráficas a ancho completo + detalle métricas -->
+  <div class="index-content-block cuadro2 index-cuadro p-4 mx-auto">
+    <div class="container dashboard-index">
+      <div class="row g-4 dashboard-charts-row">
+        <div class="col-12">
+          <section class="charts-panel charts-panel-full w-100" aria-label="Gráficas de pronóstico por horas">
+            <div class="chart-card mb-3 mb-lg-4">
+              <div class="chart-card-header">
+                <h3 id="chart-temp-title" class="chart-card-title">
+                  <i class="ri-temp-hot-line" aria-hidden="true"></i>
+                  Temperatura próximas 24 h
+                </h3>
+                <span class="chart-card-hint">Según tu zona seleccionada</span>
+              </div>
+              <div class="chart-canvas-wrap">
+                <canvas id="chart-temp-hourly" role="img" aria-label="Gráfico de temperatura por hora"></canvas>
+              </div>
             </div>
-            <!-- Botones de unidad -->
-            <div class="btn-group btn-group-sm mt-1" role="group" aria-label="unidad temperatura">
-              <button id="celsius-btn" type="button" class="btn btn-light btn-sm" style="border-top-left-radius: 4px; border-bottom-left-radius: 4px; border-top-right-radius: 0; border-bottom-right-radius: 0;" title="Celsius">°C</button>
-              <button id="fahrenheit-btn" type="button" class="btn btn-light btn-sm" style="border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-top-left-radius: 0; border-bottom-left-radius: 0;" title="Fahrenheit">°F</button>
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <h3 id="chart-precip-title" class="chart-card-title">
+                  <i class="ri-drop-line" aria-hidden="true"></i>
+                  Probabilidad de lluvia
+                </h3>
+                <span class="chart-card-hint">Porcentaje por hora</span>
+              </div>
+              <div class="chart-canvas-wrap chart-canvas-wrap--short">
+                <canvas id="chart-precip-hourly" role="img" aria-label="Gráfico de probabilidad de precipitación"></canvas>
+              </div>
             </div>
-          </div>
+          </section>
         </div>
-
-        <!-- Body: temperatura grande -->
-        <div class="card-body">
-          <!-- Temperatura a la izquierda -->
-          <div class="d-flex align-items-center gap-3 mb-3" style="padding-left: 1rem;">
-            <span id="temp" style="font-size: 5.5rem; font-weight: 700; line-height: 1;">--°</span>
-            <img id="weather-icon" src="" alt="Icono clima" width="120">
-          </div>
-
-          <!-- Info del clima alineada a la izquierda -->
-          <div style="text-align: left; padding-left: 1rem;">
-            <div class="weather-desc mb-3" id="weather-desc" style="font-size: 1.8rem; color: rgba(255,255,255,1); font-weight: 500;">Estado</div>
-            <div class="mb-1" style="font-size: 0.85rem; color: rgba(255,255,255,0.65);">Sensación térmica <span id="feels-like">--°</span></div>
-            <div class="temp-high-low mb-2" id="high-low" style="font-size: 0.85rem; color: rgba(255,255,255,0.65);">Alta -- / Baja --</div>
-          </div>
-          
-          <!-- Resumen de clima con más espacio -->
-          <div style="text-align: left; padding-left: 1rem; padding-top: 1rem; min-height: 60px; border-top: 1px solid rgba(255,255,255,0.2);">
-            <p id="summary-sentence" class="summary-text" style="font-size: 0.95rem; opacity: 0.9; margin: 0;">Cargando resumen...</p>
-          </div>
-        </div>
-
-        <!-- Fondo dinámico (controlado por JS) -->
-        <div class="weather-bg position-absolute top-0 start-0 w-100 h-100"
-             style="z-index:-1; background-size:cover; background-position:center;"></div>
-      </div>
-      <!-- Cuadro secundario: detalles (dentro de .cuadro2) -->
-      <div class="today-summary mt-3 text-white">
-
-        <div class="detail-row d-flex justify-content-between align-items-center gap-2">
-          <div class="detail-item text-center flex-fill">
-            <div class="detail-icon"><ion-icon name="weather-windy-outline"></ion-icon></div>
-            <div class="detail-value" id="detail-wind">--</div>
-            <div class="detail-label">Viento</div>
-          </div>
-          <div class="detail-item text-center flex-fill">
-            <div class="detail-icon"><ion-icon name="water-outline"></ion-icon></div>
-            <div class="detail-value" id="detail-humidity">--</div>
-            <div class="detail-label">Humedad</div>
-          </div>
-          <div class="detail-item text-center flex-fill">
-            <div class="detail-icon"><ion-icon name="eye-outline"></ion-icon></div>
-            <div class="detail-value" id="detail-visibility">--</div>
-            <div class="detail-label">Visibilidad</div>
-          </div>
-          <div class="detail-item text-center flex-fill">
-            <div class="detail-icon"><ion-icon name="speedometer-outline"></ion-icon></div>
-            <div class="detail-value" id="detail-pressure">--</div>
-            <div class="detail-label">Presión</div>
-          </div>
-          <div class="detail-item text-center flex-fill">
-            <div class="detail-icon"><ion-icon name="thermometer-outline"></ion-icon></div>
-            <div class="detail-value" id="detail-dewpoint">--</div>
-            <div class="detail-label">Punto de rocío</div>
+        <div class="col-12">
+          <div class="today-summary today-summary-modern mt-0 w-100">
+            <div class="detail-row d-flex justify-content-between align-items-center gap-2">
+              <div class="detail-item text-center flex-fill">
+                <div class="detail-icon"><ion-icon name="navigate-outline" aria-hidden="true"></ion-icon></div>
+                <div class="detail-value" id="detail-wind">--</div>
+                <div class="detail-label">Viento</div>
+              </div>
+              <div class="detail-item text-center flex-fill">
+                <div class="detail-icon"><ion-icon name="water-outline"></ion-icon></div>
+                <div class="detail-value" id="detail-humidity">--</div>
+                <div class="detail-label">Humedad</div>
+              </div>
+              <div class="detail-item text-center flex-fill">
+                <div class="detail-icon"><ion-icon name="eye-outline"></ion-icon></div>
+                <div class="detail-value" id="detail-visibility">--</div>
+                <div class="detail-label">Visibilidad</div>
+              </div>
+              <div class="detail-item text-center flex-fill">
+                <div class="detail-icon"><ion-icon name="speedometer-outline"></ion-icon></div>
+                <div class="detail-value" id="detail-pressure">--</div>
+                <div class="detail-label">Presión</div>
+              </div>
+              <div class="detail-item text-center flex-fill">
+                <div class="detail-icon"><ion-icon name="thermometer-outline"></ion-icon></div>
+                <div class="detail-value" id="detail-dewpoint">--</div>
+                <div class="detail-label">Punto de rocío</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -241,15 +314,15 @@
   </div>
 
   <!-- PRONÓSTICO POR HORAS -->
-  <div class="hourly-forecast mx-auto mt-4">
-    <h3 class="section-title">Pronóstico por Horas <span class="forecast-subtitle-small">(12 horas)</span></h3>
+  <section class="hourly-forecast mx-auto mt-4" aria-labelledby="hourly-heading">
+    <h3 id="hourly-heading" class="section-title">Pronóstico por horas <span class="forecast-subtitle-small">(12 horas)</span></h3>
     <div class="hourly-container" id="hourly-container">
       <!-- Se llenará dinámicamente con JS -->
     </div>
-  </div>
+  </section>
 
   <!-- INFORMACIÓN ADICIONAL DEL CLIMA -->
-  <div class="weather-info-grid mx-auto mt-4">
+  <section class="weather-info-grid mx-auto mt-4" aria-label="Detalles adicionales del clima">
     <div class="info-card">
       <div class="info-icon"><ion-icon name="water-outline"></ion-icon></div>
       <div class="info-content">
@@ -280,14 +353,16 @@
         <div class="card-value" id="sun-times-data">-- / --</div>
       </div>
     </div>
-  </div>
+  </section>
+
+  </main>
 
   <!-- FOOTER -->
   <footer class="footer mt-5 py-4 text-center text-white">
     <div class="container">
       <div class="row">
         <div class="col-md-6 mb-3 mb-md-0">
-          <p class="mb-0">&copy; 2025 ElClima: Honduras. Todos los derechos reservados.</p>
+          <p class="mb-0">&copy; 2026 ElClima: Honduras. Todos los derechos reservados.</p>
         </div>
         <div class="col-md-6">
           <p class="mb-2">Síguenos en:</p>
@@ -321,49 +396,24 @@
 </div>
   
   <!-- SCRIPTS: solo un bootstrap bundle, luego tus JS. -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
   <!-- Ionicons -->
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" crossorigin="anonymous"></script>
 
   <!--  scripts -->
   <script src="js/principal.js"></script>
   <script src="js/municipios.js"></script>
   <script src="js/index.js"></script>
   
-  <!-- Theme Switcher Script -->
-  <script>
-    (function() {
-      const themeBtn = document.getElementById('theme-btn');
-      const currentThemeSpan = document.getElementById('current-theme');
-      const themeOptions = document.querySelectorAll('[data-theme]');
-      
-      // Load saved theme or default to light
-      const savedTheme = localStorage.getItem('theme') || 'light';
-      applyTheme(savedTheme);
-      
-      // Theme option click handlers
-      themeOptions.forEach(option => {
-        option.addEventListener('click', (e) => {
-          e.preventDefault();
-          const theme = option.getAttribute('data-theme');
-          applyTheme(theme);
-          localStorage.setItem('theme', theme);
-        });
-      });
-      
-      function applyTheme(theme) {
-        if (theme === 'dark') {
-          document.body.classList.add('dark-theme');
-          currentThemeSpan.textContent = 'Oscuro';
-        } else {
-          document.body.classList.remove('dark-theme');
-          currentThemeSpan.textContent = 'Claro';
-        }
-      }
-    })();
+  <script src="js/site-theme.js"></script>
+  <script src="js/ai-chat-keys.js" defer></script>
+  <script src="js/ai-chat-widget.js" defer></script>
 
+  <script>
     // City Search Functionality
     (function() {
       const searchInput = document.getElementById('city-search');
@@ -378,8 +428,9 @@
         clearTimeout(searchTimeout);
         
         if (query.length < 2) {
-          searchResults.style.display = 'none';
+          searchResults.setAttribute('hidden', '');
           searchResults.innerHTML = '';
+          searchInput.setAttribute('aria-expanded', 'false');
           return;
         }
 
@@ -391,21 +442,25 @@
       // Cerrar resultados al hacer click fuera
       document.addEventListener('click', function(e) {
         if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
-          searchResults.style.display = 'none';
+          searchResults.setAttribute('hidden', '');
+          searchInput.setAttribute('aria-expanded', 'false');
         }
       });
 
       async function searchCity(query) {
         try {
-          searchResults.innerHTML = '<div style="padding: 10px; text-align: center; color: #666;">Buscando...</div>';
-          searchResults.style.display = 'block';
+          searchResults.innerHTML = '<div class="search-results-status">Buscando...</div>';
+          searchResults.removeAttribute('hidden');
+          searchInput.setAttribute('aria-expanded', 'true');
 
           const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=10&language=es&format=json`;
           const response = await fetch(url);
           const data = await response.json();
 
           if (!data.results || data.results.length === 0) {
-            searchResults.innerHTML = '<div style="padding: 10px; text-align: center; color: #666;">No se encontraron resultados</div>';
+            searchResults.innerHTML = '<div class="search-results-status">No se encontraron resultados</div>';
+            searchResults.removeAttribute('hidden');
+            searchInput.setAttribute('aria-expanded', 'true');
             return;
           }
 
@@ -444,14 +499,17 @@
               const name = this.getAttribute('data-name');
               
               selectCity(lat, lon, name);
-              searchResults.style.display = 'none';
+              searchResults.setAttribute('hidden', '');
+              searchInput.setAttribute('aria-expanded', 'false');
               searchInput.value = name;
             });
           });
 
         } catch (error) {
           console.error('Error buscando ciudad:', error);
-          searchResults.innerHTML = '<div style="padding: 10px; text-align: center; color: #d32f2f;">Error al buscar</div>';
+          searchResults.innerHTML = '<div class="search-results-status search-results-error">Error al buscar</div>';
+          searchResults.removeAttribute('hidden');
+          searchInput.setAttribute('aria-expanded', 'true');
         }
       }
 

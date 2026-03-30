@@ -14,6 +14,8 @@
   const weatherIcon = () => document.getElementById("weather-icon");
   const weatherBg = () => document.querySelector(".weather-bg");
   const cuadro2 = () => document.querySelector(".cuadro2");
+  /** Fondo dinámico según clima: solo la primera sección (hero) en index */
+  const indexHeroBackdrop = () => document.querySelector(".index-hero-weather-bg");
 
 
   console.log('hoy.js inicializando...');
@@ -102,6 +104,23 @@
       return elGetter();
     } catch (e) {
       return null;
+    }
+  }
+
+  /** Muestra u oculta el skeleton del panel de clima (index #toolbar-weather-panel). */
+  function setWeatherPanelLoading(loading) {
+    try {
+      const panel = document.getElementById('toolbar-weather-panel');
+      if (!panel) return;
+      const on = !!loading;
+      panel.classList.toggle('is-loading', on);
+      panel.setAttribute('aria-busy', on ? 'true' : 'false');
+      const live = panel.querySelector('.weather-panel-live');
+      if (live) live.setAttribute('aria-hidden', on ? 'true' : 'false');
+      const sk = panel.querySelector('.weather-panel-skeleton');
+      if (sk) sk.setAttribute('aria-hidden', on ? 'false' : 'true');
+    } catch (e) {
+      /* noop */
     }
   }
 
@@ -293,6 +312,193 @@
       }
     } catch (e) {
       console.warn('Error actualizando pronóstico horario:', e);
+    }
+  }
+
+  // Índice de hora "actual" en series horarias (misma lógica que pronóstico por horas)
+  function findCurrentHourIndex(data) {
+    if (!data || !data.hourly || !Array.isArray(data.hourly.time)) return 0;
+    const cityTimezone = (window.__hoy_debug && window.__hoy_debug.cityTimezone) || data.timezone || 'America/Tegucigalpa';
+    const now = new Date();
+    const cityTimeStr = now.toLocaleString('en-US', { timeZone: cityTimezone, hour: 'numeric', hour12: false, minute: 'numeric' });
+    const [cityHour] = cityTimeStr.split(':').map(Number);
+    let currentHourIndex = 0;
+    for (let i = 0; i < data.hourly.time.length; i++) {
+      const hourMatch = String(data.hourly.time[i]).match(/T(\d{2}):/);
+      if (hourMatch) {
+        const dataHour = parseInt(hourMatch[1], 10);
+        if (dataHour >= cityHour) {
+          currentHourIndex = i;
+          break;
+        }
+      }
+    }
+    return currentHourIndex;
+  }
+
+  let chartTempInstance = null;
+  let chartPrecipInstance = null;
+
+  function destroyForecastCharts() {
+    try {
+      if (chartTempInstance) { chartTempInstance.destroy(); chartTempInstance = null; }
+    } catch (e) { /* noop */ }
+    try {
+      if (chartPrecipInstance) { chartPrecipInstance.destroy(); chartPrecipInstance = null; }
+    } catch (e) { /* noop */ }
+  }
+
+  function chartThemeColors() {
+    const dark = document.body.classList.contains('dark-theme');
+    return {
+      text: dark ? '#94a3b8' : '#64748b',
+      grid: dark ? 'rgba(148,163,184,0.12)' : 'rgba(100,116,139,0.12)',
+      line: dark ? '#38bdf8' : '#0284c7',
+      fillTop: dark ? 'rgba(56,189,248,0.28)' : 'rgba(2,132,199,0.22)',
+      fillBot: dark ? 'rgba(56,189,248,0.02)' : 'rgba(2,132,199,0.02)',
+      bar: dark ? 'rgba(56,189,248,0.55)' : 'rgba(2,132,199,0.45)',
+      barBorder: dark ? '#38bdf8' : '#0284c7'
+    };
+  }
+
+  function actualizarGraficas(data) {
+    if (typeof Chart === 'undefined') return;
+    const canvasTemp = document.getElementById('chart-temp-hourly');
+    const canvasPrecip = document.getElementById('chart-precip-hourly');
+    if (!canvasTemp || !canvasPrecip || !data || !data.hourly || !data.hourly.time) return;
+
+    const hourly = data.hourly;
+    const H = 24;
+    const idx = findCurrentHourIndex(data);
+    const labels = [];
+    const temps = [];
+    const precips = [];
+
+    for (let i = 0; i < H; i++) {
+      const hi = idx + i;
+      if (hi >= hourly.time.length) break;
+      const timeStr = hourly.time[hi];
+      let label = '';
+      if (i === 0) label = 'Ahora';
+      else {
+        const m = String(timeStr).match(/T(\d{2}):/);
+        label = m ? `${parseInt(m[1], 10)}h` : '';
+      }
+      labels.push(label);
+      const t = hourly.temperature_2m[hi];
+      if (unidad === 'F') {
+        temps.push(Math.round((Number(t) * 9) / 5 + 32));
+      } else {
+        temps.push(Math.round(Number(t) * 10) / 10);
+      }
+      const pp = hourly.precipitation_probability && hourly.precipitation_probability[hi];
+      precips.push(pp != null ? Math.round(Number(pp)) : 0);
+    }
+
+    if (!labels.length) return;
+
+    const c = chartThemeColors();
+    destroyForecastCharts();
+
+    const hPx = canvasTemp.parentElement ? canvasTemp.parentElement.clientHeight : 220;
+    const ctx = canvasTemp.getContext('2d');
+    const gradient = ctx.createLinearGradient(0, 0, 0, Math.max(hPx, 160));
+    gradient.addColorStop(0, c.fillTop);
+    gradient.addColorStop(1, c.fillBot);
+
+    chartTempInstance = new Chart(canvasTemp, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Temperatura',
+          data: temps,
+          borderColor: c.line,
+          backgroundColor: gradient,
+          fill: true,
+          tension: 0.35,
+          pointRadius: 2,
+          pointHoverRadius: 6,
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { intersect: false, mode: 'index' },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: function (ctx) {
+                const v = ctx.parsed.y;
+                return ' ' + v + '°' + unidad;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: { color: c.grid },
+            ticks: { color: c.text, maxRotation: 0, autoSkip: true, maxTicksLimit: 12 }
+          },
+          y: {
+            grid: { color: c.grid },
+            ticks: { color: c.text }
+          }
+        }
+      }
+    });
+
+    chartPrecipInstance = new Chart(canvasPrecip, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Lluvia %',
+          data: precips,
+          backgroundColor: c.bar,
+          borderColor: c.barBorder,
+          borderWidth: 1,
+          borderRadius: 4,
+          borderSkipped: false
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: function (ctx) {
+                return ' ' + ctx.parsed.y + '%';
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: { color: c.text, maxRotation: 0, autoSkip: true, maxTicksLimit: 12 }
+          },
+          y: {
+            min: 0,
+            max: 100,
+            grid: { color: c.grid },
+            ticks: {
+              color: c.text,
+              callback: function (v) { return v + '%'; }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  function refreshChartsFromCache() {
+    if (window.__hoy_lastForecastData) {
+      actualizarGraficas(window.__hoy_lastForecastData);
     }
   }
   
@@ -499,6 +705,7 @@
       console.warn('obtenerClimaPorCoords recibió coords inválidas', lat, lon);
       return;
     }
+    setWeatherPanelLoading(true);
     console.log('Solicitando Open-Meteo para coords:', lat, lon);
     // pedir variables horarias adicionales, daily (sunrise/sunset), y timezone=auto
     const hourlyParams = 'temperature_2m,relativehumidity_2m,weathercode,pressure_msl,visibility,dewpoint_2m,windspeed_10m,precipitation_probability,uv_index,apparent_temperature';
@@ -533,6 +740,9 @@
         
         // Actualizar tarjetas de información
         actualizarTarjetasInfo(data);
+
+        window.__hoy_lastForecastData = data;
+        actualizarGraficas(data);
 
         // Intentar poblar métricas detalladas si los elementos existen
         try {
@@ -651,6 +861,9 @@
           const summEl = document.getElementById('summary-sentence');
           if (summEl) summEl.textContent = 'No se pudieron obtener los datos meteorológicos en este momento.';
         } catch (e) {}
+      })
+      .finally(() => {
+        setWeatherPanelLoading(false);
       });
   }
 
@@ -668,6 +881,7 @@
       return;
     }
 
+    setWeatherPanelLoading(true);
     // Si no hay coordenadas predefinidas, consultar Nominatim para geocodificar "municipio, departamento, Honduras"
     try {
       const q = encodeURIComponent(`${muni}, ${depto}, Honduras`);
@@ -678,6 +892,7 @@
             console.warn('Nominatim no devolvió resultados para:', muni, depto);
             const summEl = document.getElementById('summary-sentence');
             if (summEl) summEl.textContent = `No se encontraron coordenadas para ${muni}, ${depto}.`;
+            setWeatherPanelLoading(false);
             return;
           }
           const r = results[0];
@@ -687,6 +902,7 @@
             console.warn('Coordenadas inválidas recibidas de Nominatim', r);
             const summEl = document.getElementById('summary-sentence');
             if (summEl) summEl.textContent = `No se pudieron determinar coordenadas para ${muni}.`;
+            setWeatherPanelLoading(false);
             return;
           }
           ultimaUbicacion = { lat, lon };
@@ -696,9 +912,11 @@
           console.error('Error geocoding Nominatim:', err);
           const summEl = document.getElementById('summary-sentence');
           if (summEl) summEl.textContent = `No se pudieron obtener coordenadas para ${muni}.`;
+          setWeatherPanelLoading(false);
         });
     } catch (e) {
       console.error('Error preparando geocoding para municipio:', e);
+      setWeatherPanelLoading(false);
     }
   }
 
@@ -830,13 +1048,18 @@
       95:"https://openweathermap.org/img/wn/11d@2x.png"
     };
     const wIcon = safeEl(weatherIcon);
-    if (wIcon) wIcon.src = iconMap[current.weathercode] || iconMap[0];
+    if (wIcon) {
+      wIcon.src = iconMap[current.weathercode] || iconMap[0];
+      const desc = weatherMap[current.weathercode] || 'Condición del clima';
+      wIcon.alt = desc;
+    }
 
     // determinar periodo del día usando la hora de la ciudad
     const horaActual = window.__hoy_debug?.cityHour ?? hora.getHours();
     let periodoLocal = '';
     if (horaActual >= 0 && horaActual < 5) periodoLocal = 'madrugada';
     else if (horaActual >= 5 && horaActual < 14) periodoLocal = 'dia';
+    else if (horaActual >= 14 && horaActual < 19) periodoLocal = 'tarde';
     else periodoLocal = 'noche';
 
     const climaKey = mapClima[current.weathercode] || 'despejado';
@@ -844,23 +1067,17 @@
       ? fondosClima[periodoLocal][climaKey]
       : (fondosClima[periodoLocal] && fondosClima[periodoLocal].despejado) || FALLBACK_IMAGE;
 
-    // Aplicar imagen al contenedor principal (.cuadro2) — principal objetivo
+    // Imagen de fondo solo en la cabecera index (.index-hero-weather-bg), según periodo + tipo de clima
     try {
-      const elCuadro = safeEl(cuadro2);
-      setBackgroundWithFallback(elCuadro, fondoURL, FALLBACK_IMAGE);
-    } catch (e) {
-      console.warn('No se pudo aplicar fondo en .cuadro2', e);
-    }
-
-    // Aplicar una versión sutil dentro del card (opcional). Si no quieres duplicar la imagen comenta este bloque.
-    try {
-      const elWeatherBg = safeEl(weatherBg);
-      if (elWeatherBg) {
-        // aplicamos la misma imagen pero puedes ajustar overlay desde CSS
-        setBackgroundWithFallback(elWeatherBg, fondoURL, FALLBACK_IMAGE);
+      const elHero = safeEl(indexHeroBackdrop);
+      if (elHero) {
+        setBackgroundWithFallback(elHero, fondoURL, FALLBACK_IMAGE);
+      } else {
+        const elFallback = safeEl(cuadro2);
+        if (elFallback) setBackgroundWithFallback(elFallback, fondoURL, FALLBACK_IMAGE);
       }
     } catch (e) {
-      console.warn('No se pudo aplicar fondo en .weather-bg', e);
+      console.warn('No se pudo aplicar fondo en cabecera hero', e);
     }
   }
 
@@ -879,6 +1096,15 @@
     }
   }
 
+  /** Quita el estado “cargando” del texto de ubicación (geolocalización o municipio). */
+  function finalizeLocationDisplay(el) {
+    if (!el) return;
+    try {
+      el.classList.remove('loading-location', 'location-default');
+      el.classList.add('location-text');
+    } catch (e) { /* noop */ }
+  }
+
   // -------------------------------------
   // Inicialización
   // -------------------------------------
@@ -894,39 +1120,25 @@ function init() {
         locEl.textContent = "Cargando ubicación...";
     }
 
-    // Simular obtención de ubicación luego de 2 segundos
-    setTimeout(() => {
-        mostrarUbicacionFinal(ubicacion);
-    }, 2000);
-
-    function mostrarUbicacionFinal(ubicacion) {
-        if (!locEl) return;
-
-        locEl.classList.remove("loading-location"); // quitar azul
-        locEl.classList.add("location-text");    // poner negro
-  
-    }
-
-
-// Llamar init al cargar DOM
-document.addEventListener('DOMContentLoaded', init);
-
-    // establecer fondo inicial (por periodo)
+    // Fondo inicial en hero (mismas claves que fondosClima: madrugada, dia, tarde, noche)
     try {
-      const elCuadro = safeEl(cuadro2);
-      if (elCuadro) {
+      const elHero = safeEl(indexHeroBackdrop);
+      const target = elHero || safeEl(cuadro2);
+      if (target) {
         const now = new Date();
         const h = now.getHours();
-        let periodo = '';
-        if (h >= 0 && h < 6) periodo = 'madrugada';
-        else if (h >= 6 && h < 12) periodo = 'mañana';
-        else if (h >= 12 && h < 18) periodo = 'tarde';
+        let periodo = 'dia';
+        if (h >= 0 && h < 5) periodo = 'madrugada';
+        else if (h >= 5 && h < 14) periodo = 'dia';
+        else if (h >= 14 && h < 19) periodo = 'tarde';
         else periodo = 'noche';
-        const initialFondo = (fondosClima[periodo] && fondosClima[periodo].despejado) ? fondosClima[periodo].despejado : FALLBACK_IMAGE;
-        setBackgroundWithFallback(elCuadro, initialFondo, FALLBACK_IMAGE);
+        const initialFondo = (fondosClima[periodo] && fondosClima[periodo].despejado)
+          ? fondosClima[periodo].despejado
+          : FALLBACK_IMAGE;
+        setBackgroundWithFallback(target, initialFondo, FALLBACK_IMAGE);
       }
     } catch (e) {
-      console.warn('No se pudo aplicar fondo inicial en .cuadro2', e);
+      console.warn('No se pudo aplicar fondo inicial en cabecera hero', e);
     }
 
     // cargar municipios (remote -> local -> fallback)
@@ -982,7 +1194,10 @@ document.addEventListener('DOMContentLoaded', init);
           const upEl = document.getElementById('update-time'); if (upEl) upEl.textContent = 'Actualizando...';
           ultimaUbicacion = null;
           const locEl2 = safeEl(locationText);
-          locEl2 && (locEl2.textContent = `${muni}, ${depto}, Honduras`);
+          if (locEl2) {
+            locEl2.textContent = `${muni}, ${depto}, Honduras`;
+            finalizeLocationDisplay(locEl2);
+          }
           obtenerClimaPorMunicipio(muni, depto);
         }
       } catch (e) {
@@ -1168,27 +1383,42 @@ document.addEventListener('DOMContentLoaded', init);
                 const state = data.address && data.address.state || "";
                 const country = data.address && data.address.country || "";
                 const locEl2 = safeEl(locationText);
-                locEl2 && (locEl2.textContent = `${city}, ${state}, ${country}`);
+                if (locEl2) {
+                  locEl2.textContent = `${city}, ${state}, ${country}`;
+                  finalizeLocationDisplay(locEl2);
+                }
               })
               .catch(() => {
                 const locEl2 = safeEl(locationText);
-                locEl2 && (locEl2.textContent = "Honduras");
+                if (locEl2) {
+                  locEl2.textContent = "Honduras";
+                  finalizeLocationDisplay(locEl2);
+                }
               });
           } catch (e) {
             const locEl2 = safeEl(locationText);
-            locEl2 && (locEl2.textContent = "Honduras");
+            if (locEl2) {
+              locEl2.textContent = "Honduras";
+              finalizeLocationDisplay(locEl2);
+            }
           }
         }
       }, error => {
         console.warn('No se obtuvo geolocalización:', error);
         const locEl2 = safeEl(locationText);
-        locEl2 && (locEl2.textContent = "Ubicación no disponible");
+        if (locEl2) {
+          locEl2.textContent = "Ubicación no disponible";
+          finalizeLocationDisplay(locEl2);
+        }
         ultimaUbicacion = { lat: 14.1, lon: -87.2 };
         obtenerClimaPorCoords(14.1, -87.2);
       });
     } else {
       const locEl2 = safeEl(locationText);
-      locEl2 && (locEl2.textContent = "Geolocalización no soportada");
+      if (locEl2) {
+        locEl2.textContent = "Geolocalización no soportada";
+        finalizeLocationDisplay(locEl2);
+      }
     }
   }
 
@@ -1209,6 +1439,8 @@ document.addEventListener('DOMContentLoaded', init);
     mapClima,
     setBackgroundWithFallback
   };
+
+  window.__hoy_refreshCharts = refreshChartsFromCache;
 
   console.log('hoy.js cargado y listo.');
 })();

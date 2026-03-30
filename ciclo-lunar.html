@@ -3,110 +3,82 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Clima — Ciclo Lunar</title>
+  <meta name="description" content="Fases lunares y calendario lunar para Honduras." />
+  <title>Ciclo lunar | El Clima Honduras</title>
 
-  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-
-  <!-- Icon fonts -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
-
-  <!-- CSS -->
   <link rel="stylesheet" href="css/estilo.css">
-  <link rel="stylesheet" href="css/hoy-css.css">
-  <link rel="stylesheet" href="css/ciclo.css">
-  <link rel="stylesheet" href="css/radar.css">
-  <!-- CSS del Modal Lunar -->
-  <link rel="stylesheet" href="css/modal-lunar.css">
+  <link rel="stylesheet" href="css/site-shell.css">
+  <link rel="stylesheet" href="css/ciclo-lunar.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 
-<body>
-  <!-- NAVEGADOR / SIDEBAR -->
+<body class="site-page">
+  <a class="skip-link" href="#contenido-principal">Saltar al contenido principal</a>
   <div class="container">
-    <div class="navigation">
+    <nav class="navigation" aria-label="Secciones del sitio">
       <ul>
         <li>
-          <a href="hoy.html">
-            <span class="icon"><img src="img/Captura_de_pantalla_2025-11-26_214249-removebg-preview.png" alt="Logo" style="width: 200px; height: 50px; object-fit: contain;"></span>    
+          <a href="index.html" aria-label="El Clima Honduras — inicio">
+            <span class="icon"><img src="img/logo/logo.png" alt="" width="200" height="50" style="width: 200px; height: 50px; object-fit: contain;"></span>
           </a>
         </li>
-         <li>
-          <a href="hoy.html">
-            <span class="icon">
-              <ion-icon name="cloudy-night-outline"></ion-icon>
-            </span>
+        <li>
+          <a href="index.html">
+            <span class="icon" aria-hidden="true"><ion-icon name="cloudy-night-outline"></ion-icon></span>
             <span class="title">Hoy</span>
           </a>
         </li>
-
         <li>
-          <a href="diario.html">
-            <span class="icon">
-              <ion-icon name="today-outline"></ion-icon>
-            </span>
+          <a href="pronóstico-diario.html">
+            <span class="icon" aria-hidden="true"><ion-icon name="today-outline"></ion-icon></span>
             <span class="title">Diario</span>
           </a>
         </li>
-
         <li>
-          <a href="radar.html">
-            <span class="icon">
-              <ion-icon name="radio-outline"></ion-icon>
-            </span>
+          <a href="radar-tiempo.html">
+            <span class="icon" aria-hidden="true"><ion-icon name="radio-outline"></ion-icon></span>
             <span class="title">Radar</span>
           </a>
         </li>
-
         <li>
           <a href="semana.html">
-            <span class="icon">
-              <ion-icon name="cloud-circle-outline"></ion-icon>
-            </span>
+            <span class="icon" aria-hidden="true"><ion-icon name="cloud-circle-outline"></ion-icon></span>
             <span class="title">Semanal</span>
           </a>
         </li>
-
-        <li>
-          <a href="ciclo.html" class="active">
-            <span class="icon">
-              <ion-icon name="moon-outline"></ion-icon>
-            </span>
+        <li class="active" aria-current="page">
+          <a href="ciclo-lunar.html" aria-current="page">
+            <span class="icon" aria-hidden="true"><ion-icon name="moon-outline"></ion-icon></span>
             <span class="title">Ciclo Lunar</span>
           </a>
         </li>
-
         <li>
           <a href="noticias.html">
-            <span class="icon">
-              <ion-icon name="thunderstorm-outline"></ion-icon>
-            </span>
+            <span class="icon" aria-hidden="true"><ion-icon name="thunderstorm-outline"></ion-icon></span>
             <span class="title">Noticias</span>
           </a>
         </li>
-
         <li>
-          <a href="nosotros.html">
-            <span class="icon">
-              <ion-icon name="people-circle-outline"></ion-icon>
-            </span>
+          <a href="acerca-de.html">
+            <span class="icon" aria-hidden="true"><ion-icon name="people-circle-outline"></ion-icon></span>
             <span class="title">Nosotros</span>
           </a>
         </li>
       </ul>
-    </div>
+    </nav>
   </div>
 
-  <!-- MAIN -->
   <div class="main">
-    <div class="topbar">
-      <div class="toggle">
-        <ion-icon name="menu-outline"></ion-icon>
-      </div>
-
-      <!-- Theme Switcher -->
+    <header class="topbar" role="banner">
+      <div class="toggle" role="button" tabindex="0" aria-label="Abrir o cerrar el menú de navegación"><ion-icon name="menu-outline" aria-hidden="true"></ion-icon></div>
+      <div class="topbar-spacer flex-grow-1" aria-hidden="true"></div>
       <div class="theme-switcher">
-        <button id="theme-btn" class="btn btn-sm btn-theme dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="ri-contrast-2-line me-1"></i>
+        <button id="theme-btn" class="btn btn-sm btn-theme btn-theme-modern dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Elegir tema de la página: claro u oscuro">
+          <i id="theme-icon" class="ri-sun-line me-1" aria-hidden="true"></i>
           <span id="current-theme">Claro</span>
         </button>
         <ul class="dropdown-menu dropdown-menu-end">
@@ -114,8 +86,9 @@
           <li><a class="dropdown-item" href="#" data-theme="dark"><i class="ri-moon-line me-2"></i>Oscuro</a></li>
         </ul>
       </div>
-    </div>
+    </header>
 
+  <main id="contenido-principal" tabindex="-1">
     <h1>🌙 Ciclo Lunar</h1>
     
     <!-- Luna clicable para abrir modal -->
@@ -196,9 +169,9 @@
         <div class="row">
           <div class="col-12">
             <p class="mb-0 small">
-              <a href="nosotros.html" class="text-white text-decoration-none me-3">Sobre Nosotros</a>
+              <a href="acerca-de.html" class="text-white text-decoration-none me-3">Sobre Nosotros</a>
               <span class="text-white-50">|</span>
-              <a href="sugerencias.html" class="text-white text-decoration-none mx-3">Contacto</a>
+              <a href="contacto.html" class="text-white text-decoration-none mx-3">Contacto</a>
               <span class="text-white-50">|</span>
               <a href="https://open-meteo.com" target="_blank" rel="noopener noreferrer" class="text-white text-decoration-none mx-3">Weather Source</a>
               <span class="text-white-50">|</span>
@@ -208,6 +181,8 @@
         </div>
       </div>
     </footer>
+
+  </main>
   </div>
 
   <!-- MODAL LUNAR - -->
@@ -244,41 +219,12 @@
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
-  <!-- Main JS -->
-  <script src="js/ciclo-weather.js"></script>
-  <script src="js/Prueba.js"></script>
-
- 
-  <script>
-    (function() {
-      const themeBtn = document.getElementById('theme-btn');
-      const currentThemeSpan = document.getElementById('current-theme');
-      const themeOptions = document.querySelectorAll('[data-theme]');
-      
-   
-      const savedTheme = localStorage.getItem('theme') || 'light';
-      applyTheme(savedTheme);
-  
-      themeOptions.forEach(option => {
-        option.addEventListener('click', (e) => {
-          e.preventDefault();
-          const theme = option.getAttribute('data-theme');
-          applyTheme(theme);
-          localStorage.setItem('theme', theme);
-        });
-      });
-      
-      function applyTheme(theme) {
-        if (theme === 'dark') {
-          document.body.classList.add('dark-theme');
-          currentThemeSpan.textContent = 'Oscuro';
-        } else {
-          document.body.classList.remove('dark-theme');
-          currentThemeSpan.textContent = 'Claro';
-        }
-      }
-    })();
-  </script>
+  <!-- Clima opcional (Open-Meteo) + calendario lunar en prueba.js -->
+  <script src="js/ciclo-lunar.js"></script>
+  <script src="js/prueba.js"></script>
+  <script src="js/principal.js"></script>
+  <script src="js/site-theme.js"></script>
+  <script src="js/ai-chat-widget.js" defer></script>
 
   <!-- Modal Lunar Script -->
   <script>
