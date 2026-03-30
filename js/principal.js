@@ -34,9 +34,16 @@
 
     // === Configurar alternancia del menú ===
     if (botonAlternancia) {
-      botonAlternancia.addEventListener('click', function () {
+      function alternarMenu() {
         if (navegador) navegador.classList.toggle("active");
         if (contenidoPrincipal) contenidoPrincipal.classList.toggle("active");
+      }
+      botonAlternancia.addEventListener('click', alternarMenu);
+      botonAlternancia.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          alternarMenu();
+        }
       });
     }
 
