@@ -58,11 +58,16 @@
   let playing = false;
   let playTimer = null;
 
+  const playBtnLabel = () => $('playBtnLabel');
+  const themeBtnLabel = () => $('themeBtnLabel');
+
   function startRadarAnim() {
     if (playing) return;
     playing = true;
     const pb = $('playBtn');
-    if (pb) { pb.classList.add('playing'); pb.textContent = '⏸ Pausar'; }
+    const pl = playBtnLabel();
+    if (pb) pb.classList.add('playing');
+    if (pl) pl.textContent = 'Pausar';
 
     playTimer = setInterval(() => {
       if (!owmLayer) return;
@@ -75,7 +80,9 @@
   function stopRadarAnim() {
     playing = false;
     const pb = $('playBtn');
-    if (pb) { pb.classList.remove('playing'); pb.textContent = '⏳ Animar'; }
+    const pl = playBtnLabel();
+    if (pb) pb.classList.remove('playing');
+    if (pl) pl.textContent = 'Animar capa';
     clearInterval(playTimer);
   }
 
@@ -91,26 +98,30 @@
     };
   }
 
-  // TEMA
+  // Mapa base claro / oscuro (no modifica el tema del sitio; usa el interruptor de la barra superior)
   let dark = true;
   const themeBtnEl = $('themeBtn');
+
+  function syncMapBaseButton() {
+    if (!themeBtnEl) return;
+    const tl = themeBtnLabel();
+    if (tl) tl.textContent = dark ? 'Mapa claro' : 'Mapa oscuro';
+    themeBtnEl.setAttribute('aria-pressed', dark ? 'true' : 'false');
+  }
+
   if (themeBtnEl) {
     themeBtnEl.onclick = () => {
       dark = !dark;
-      // toggle both classes to be compatible with other pages
-      document.body.classList.toggle('dark', dark);
-      document.body.classList.toggle('dark-theme', dark);
-
       try {
         map.removeLayer(darkBase);
         map.removeLayer(lightBase);
-      } catch {}
+      } catch (e) { /* noop */ }
 
       (dark ? darkBase : lightBase).addTo(map);
       if (owmLayer) owmLayer.bringToFront();
-
-      themeBtnEl.textContent = dark ? '☀ Tema claro' : '🌙 Tema oscuro';
+      syncMapBaseButton();
     };
+    syncMapBaseButton();
   }
 
   // GEOLOCALIZACIÓN

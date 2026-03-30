@@ -19,17 +19,17 @@ async function renderizarTablaDiaria() {
   const dias = await cargarClima();
   if (!dias || !contenedorTarjetasDiarias) return;
   
-  contenedorTarjetasDiarias.innerHTML = dias.map((dia, i) => 
-    <div class="forecast-row" data-idx="">
-      <div class="date-col"></div>
-      <div class="temp-col">°/°</div>
-      <div class="icon-col"></div>
-      <div class="desc-col"></div>
-      <div class="rain-col">💧 %</div>
+  contenedorTarjetasDiarias.innerHTML = dias.map((dia, i) => `
+    <div class="forecast-row" data-idx="${i}">
+      <div class="date-col">${dia.nombre}</div>
+      <div class="temp-col">${dia.tempMax}°/${dia.tempMin}°</div>
+      <div class="icon-col">${dia.icono}</div>
+      <div class="desc-col">${dia.desc}</div>
+      <div class="rain-col">💧 ${dia.lluvia ?? "--"}%</div>
       <button class="detail-btn" title="Detalles">+</button>
     </div>
     <div class="detail-row"></div>
-  ).join("");
+  `).join("");
   
   actualizarBadges(dias[0]);
 }
@@ -57,27 +57,27 @@ if (contenedorTarjetasDiarias) {
 // --- Renderizar detalles de día/noche ---
 function renderizarDetallesDia(dia) {
   if (!dia) return "";
-  return 
+  return `
     <div class="weather-detail glass">
       <div style="flex:1 1 50%;border-right:1px solid #eee;padding-right:10px;">
         <div style="font-weight:bold;">Día</div>
-        <div style="font-size:2rem;">° </div>
-        <div style="color:#888;margin-bottom:4px;"></div>
-        <div><span>💧</span> %</div>
-        <div> Viento máx:  km/h</div>
-        <div style="font-size:.95em;">🌅 Amanecer: </div>
-        <div style="font-size:.95em;">🌇 Puesta: </div>
+        <div style="font-size:2rem;">${dia.tempMax}° ${dia.icono}</div>
+        <div style="color:#888;margin-bottom:4px;">${dia.desc}</div>
+        <div><span>💧</span> ${dia.lluvia ?? "--"}%</div>
+        <div>${obtenerIconoViento()} Viento máx: ${dia.velocidadVientoMax ?? "--"} km/h</div>
+        <div style="font-size:.95em;">🌅 Amanecer: ${dia.amanecer ?? "--"}</div>
+        <div style="font-size:.95em;">🌇 Puesta: ${dia.atardecer ?? "--"}</div>
       </div>
       <div style="flex:1 1 40%;padding-left:10px">
         <div style="font-weight:bold;">Noche</div>
-        <div style="font-size:2rem;">° <ion-icon name="cloud-outline" style="color:#7f8c8d;font-size:30px"></ion-icon></div>
-        <div style="color:#888;margin-bottom:4px;"></div>
-        <div> Humedad: %</div>
-        <div> Índice UV: </div>
-        <div> Viento máx:  km/h</div>
+        <div style="font-size:2rem;">${dia.tempMin}° <ion-icon name="cloud-outline" style="color:#7f8c8d;font-size:30px"></ion-icon></div>
+        <div style="color:#888;margin-bottom:4px;">${dia.desc}</div>
+        <div>${obtenerIconoHumedad()} Humedad: ${dia.humedadMedia ?? "--"}%</div>
+        <div>${obtenerIconoUV()} Índice UV: ${dia.indiceUV ?? "--"}</div>
+        <div>${obtenerIconoViento()} Viento máx: ${dia.velocidadVientoMax ?? "--"} km/h</div>
       </div>
     </div>
-  ;
+  `;
 }
 
 // === Configurar controles de unidades ===

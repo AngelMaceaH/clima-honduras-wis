@@ -22,22 +22,22 @@ async function renderizarTarjetasSemanales() {
   // Filtrar para solo 7 días (sin sábados en esta versión)
   const diasSemana = dias.slice(0, 7);
   
-  contenedorTarjetasDiarias.innerHTML = diasSemana.map((dia, idx) => 
+  contenedorTarjetasDiarias.innerHTML = diasSemana.map((dia) => `
     <div class="week-card">
-      <div class="day-title"></div>
-      <div class="icon-big"></div>
+      <div class="day-title">${dia.nombre}</div>
+      <div class="icon-big">${dia.icono}</div>
       <div class="temps-block">
-        <span class="tmax">°</span>
-        <span class="tmin">°</span>
+        <span class="tmax">${dia.tempMax}°</span>
+        <span class="tmin">${dia.tempMin}°</span>
       </div>
       <div class="details-small">
-        <div> Humedad: %</div>
-        <div> Viento:  km/h</div>
-        <div> UV: </div>
-        <div> Lluvia: %</div>
+        <div>${obtenerIconoHumedad()} Humedad: ${dia.humedadMedia ?? "--"}%</div>
+        <div>${obtenerIconoViento()} Viento: ${dia.velocidadVientoMax ?? "--"} km/h</div>
+        <div>${obtenerIconoUV()} UV: ${dia.indiceUV ?? "--"}</div>
+        <div><span>💧</span> Lluvia: ${dia.lluvia ?? "--"}%</div>
       </div>
     </div>
-  ).join("");
+  `).join("");
   
   actualizarBadges(diasSemana[0]);
 }

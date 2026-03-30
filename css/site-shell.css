@@ -1,0 +1,108 @@
+/* =============================================================================
+   Shell compartido del sitio — mismo aspecto que la página de inicio (topbar,
+   sidebar, variables, fondo principal). Usar: body class="site-page"
+   ============================================================================= */
+
+body.site-page {
+  font-family: "Plus Jakarta Sans", "Ubuntu", system-ui, sans-serif;
+}
+
+body.site-page:not(.dark-theme) {
+  --idx-bg: #f1f5f9;
+  --idx-surface: #ffffff;
+  --idx-surface-2: #f8fafc;
+  --idx-text: #0f172a;
+  --idx-muted: #64748b;
+  --idx-accent: #0284c7;
+  --idx-accent-hover: #0369a1;
+  --idx-ring: rgba(2, 132, 199, 0.25);
+  --idx-border: #e2e8f0;
+  --idx-shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 12px 40px -16px rgba(15, 23, 42, 0.12);
+}
+
+body.site-page.dark-theme {
+  --idx-bg: #0b1120;
+  --idx-surface: #111827;
+  --idx-surface-2: #0f172a;
+  --idx-text: #f1f5f9;
+  --idx-muted: #94a3b8;
+  --idx-accent: #38bdf8;
+  --idx-accent-hover: #7dd3fc;
+  --idx-ring: rgba(56, 189, 248, 0.25);
+  --idx-border: #1e293b;
+  --idx-shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 16px 48px -12px rgba(0, 0, 0, 0.45);
+}
+
+body.site-page .main {
+  background: var(--idx-bg) !important;
+}
+
+body.site-page .topbar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: auto;
+  min-height: 52px;
+  padding: 10px 16px;
+  background: var(--idx-surface) !important;
+  border-bottom: 1px solid var(--idx-border) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+body.site-page .topbar-spacer {
+  min-width: 0;
+}
+
+body.site-page .toggle {
+  background: transparent !important;
+  border-radius: 10px;
+  color: var(--idx-text) !important;
+}
+
+body.site-page .toggle:hover {
+  background: var(--idx-surface-2) !important;
+}
+
+body.site-page .btn-theme-modern {
+  background: var(--idx-surface-2) !important;
+  color: var(--idx-text) !important;
+  border: 1px solid var(--idx-border) !important;
+  box-shadow: none !important;
+  font-weight: 600;
+}
+
+body.site-page .btn-theme-modern:hover {
+  border-color: var(--idx-accent) !important;
+  color: var(--idx-accent) !important;
+  transform: none !important;
+}
+
+body.site-page .navigation {
+  background: linear-gradient(185deg, #0f172a 0%, #1e293b 100%) !important;
+  box-shadow: 4px 0 32px rgba(0, 0, 0, 0.2) !important;
+}
+
+body.site-page .navigation::before {
+  opacity: 0.5;
+}
+
+body.site-page .navigation ul li:hover,
+body.site-page .navigation ul li.hovered {
+  background: rgba(255, 255, 255, 0.06) !important;
+  box-shadow: none !important;
+}
+
+body.site-page .navigation ul li:hover a,
+body.site-page .navigation ul li.hovered a {
+  color: #e2e8f0 !important;
+}
+
+body.site-page .navigation ul li.active {
+  background: rgba(56, 189, 248, 0.12) !important;
+  box-shadow: inset 3px 0 0 #38bdf8 !important;
+}
+
+body.site-page .navigation ul li.active a {
+  color: #f8fafc !important;
+}

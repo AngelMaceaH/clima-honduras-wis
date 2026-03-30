@@ -1,6 +1,4 @@
-@import url("css/estilo.css");
-@import url("css/hoy-css.css");
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+/* estilo.css y fuentes se cargan desde noticias.html — evitar @import "css/..." (se resuelve como css/css/...). */
 
 
 /* ====================== Responsive Navegador ========================== */

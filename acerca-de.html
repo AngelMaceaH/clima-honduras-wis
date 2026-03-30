@@ -13,7 +13,10 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="css/estilo.css">
-  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/site-shell.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
   <style>
     .feature-card {
@@ -59,95 +62,69 @@
 
 </head>
 
-<body>
-  <!-- NAVEGADOR / SIDEBAR -->
+<body class="site-page">
+  <a class="skip-link" href="#contenido-principal">Saltar al contenido principal</a>
   <div class="container">
-    <div class="navigation">
+    <nav class="navigation" aria-label="Secciones del sitio">
       <ul>
         <li>
-          <a href="index.html">
-            <span class="icon"><img src="img/logo/logo.png" alt="Logo" style="width: 200px; height: 50px; object-fit: contain;"></span>    
+          <a href="index.html" aria-label="El Clima Honduras — inicio">
+            <span class="icon"><img src="img/logo/logo.png" alt="" width="200" height="50" style="width: 200px; height: 50px; object-fit: contain;"></span>
           </a>
         </li>
-         <li>
+        <li>
           <a href="index.html">
-            <span class="icon">
-              <ion-icon name="cloudy-night-outline"></ion-icon>
-            </span>
+            <span class="icon" aria-hidden="true"><ion-icon name="cloudy-night-outline"></ion-icon></span>
             <span class="title">Hoy</span>
           </a>
         </li>
-
         <li>
           <a href="pronóstico-diario.html">
-            <span class="icon">
-              <ion-icon name="today-outline"></ion-icon>
-            </span>
+            <span class="icon" aria-hidden="true"><ion-icon name="today-outline"></ion-icon></span>
             <span class="title">Diario</span>
           </a>
         </li>
-
         <li>
           <a href="radar-tiempo.html">
-            <span class="icon">
-              <ion-icon name="radio-outline"></ion-icon>
-            </span>
+            <span class="icon" aria-hidden="true"><ion-icon name="radio-outline"></ion-icon></span>
             <span class="title">Radar</span>
           </a>
         </li>
-
         <li>
           <a href="semana.html">
-            <span class="icon">
-              <ion-icon name="cloud-circle-outline"></ion-icon>
-            </span>
+            <span class="icon" aria-hidden="true"><ion-icon name="cloud-circle-outline"></ion-icon></span>
             <span class="title">Semanal</span>
           </a>
         </li>
-
         <li>
           <a href="ciclo-lunar.html">
-            <span class="icon">
-              <ion-icon name="moon-outline"></ion-icon>
-            </span>
+            <span class="icon" aria-hidden="true"><ion-icon name="moon-outline"></ion-icon></span>
             <span class="title">Ciclo Lunar</span>
           </a>
         </li>
-
         <li>
           <a href="noticias.html">
-            <span class="icon">
-              <ion-icon name="thunderstorm-outline"></ion-icon>
-            </span>
+            <span class="icon" aria-hidden="true"><ion-icon name="thunderstorm-outline"></ion-icon></span>
             <span class="title">Noticias</span>
           </a>
         </li>
-
-        <li>
-          <a href="acerca-de.html" class="active">
-            <span class="icon">
-              <ion-icon name="people-circle-outline"></ion-icon>
-            </span>
+        <li class="active" aria-current="page">
+          <a href="acerca-de.html" aria-current="page">
+            <span class="icon" aria-hidden="true"><ion-icon name="people-circle-outline"></ion-icon></span>
             <span class="title">Nosotros</span>
           </a>
         </li>
       </ul>
-    </div>
+    </nav>
   </div>
 
-  <!-- MAIN -->
   <div class="main">
-    <div class="topbar">
-      <div class="toggle">
-        <ion-icon name="menu-outline"></ion-icon>
-      </div>
-
-      
-
-      <!-- Theme Switcher -->
+    <header class="topbar" role="banner">
+      <div class="toggle" role="button" tabindex="0" aria-label="Abrir o cerrar el menú de navegación"><ion-icon name="menu-outline" aria-hidden="true"></ion-icon></div>
+      <div class="topbar-spacer flex-grow-1" aria-hidden="true"></div>
       <div class="theme-switcher">
-        <button id="theme-btn" class="btn btn-sm btn-theme dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="ri-contrast-2-line me-1"></i>
+        <button id="theme-btn" class="btn btn-sm btn-theme btn-theme-modern dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Elegir tema de la página: claro u oscuro">
+          <i id="theme-icon" class="ri-sun-line me-1" aria-hidden="true"></i>
           <span id="current-theme">Claro</span>
         </button>
         <ul class="dropdown-menu dropdown-menu-end">
@@ -155,9 +132,9 @@
           <li><a class="dropdown-item" href="#" data-theme="dark"><i class="ri-moon-line me-2"></i>Oscuro</a></li>
         </ul>
       </div>
-    </div>
+    </header>
 
-    <!-- CONTENIDO PRINCIPAL -->
+  <main id="contenido-principal" tabindex="-1">
     <div class="cuadro2 p-4 mx-auto" style="max-width: 1200px;">
       <div class="container mt-4">
         
@@ -318,6 +295,8 @@
       </div>
     </footer>
 
+  </main>
+
   </div>
 
   <!-- Bootstrap Bundle -->
@@ -327,40 +306,8 @@
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
-  <!-- Main JS -->
   <script src="js/principal.js"></script>
-
-  <script>
-    // Theme switcher
-    const themeBtn = document.getElementById('theme-btn');
-    const currentThemeText = document.getElementById('current-theme');
-    const themeItems = document.querySelectorAll('[data-theme]');
-
-    // Cargar tema guardado
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    if (savedTheme === 'dark') {
-      document.body.classList.add('dark-theme');
-      currentThemeText.textContent = 'Oscuro';
-    }
-
-    // Cambiar tema
-    themeItems.forEach(item => {
-      item.addEventListener('click', (e) => {
-        e.preventDefault();
-        const theme = item.getAttribute('data-theme');
-        
-        if (theme === 'dark') {
-          document.body.classList.add('dark-theme');
-          currentThemeText.textContent = 'Oscuro';
-          localStorage.setItem('theme', 'dark');
-        } else {
-          document.body.classList.remove('dark-theme');
-          currentThemeText.textContent = 'Claro';
-          localStorage.setItem('theme', 'light');
-        }
-      });
-    });
-  </script>
+  <script src="js/site-theme.js"></script>
 
 </body>
 </html>

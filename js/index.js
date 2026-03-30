@@ -1096,6 +1096,15 @@
     }
   }
 
+  /** Quita el estado “cargando” del texto de ubicación (geolocalización o municipio). */
+  function finalizeLocationDisplay(el) {
+    if (!el) return;
+    try {
+      el.classList.remove('loading-location', 'location-default');
+      el.classList.add('location-text');
+    } catch (e) { /* noop */ }
+  }
+
   // -------------------------------------
   // Inicialización
   // -------------------------------------
@@ -1109,19 +1118,6 @@ function init() {
         locEl.classList.remove("location-default");
         locEl.classList.add("loading-location");
         locEl.textContent = "Cargando ubicación...";
-    }
-
-    // Simular obtención de ubicación luego de 2 segundos
-    setTimeout(() => {
-        mostrarUbicacionFinal(ubicacion);
-    }, 2000);
-
-    function mostrarUbicacionFinal(ubicacion) {
-        if (!locEl) return;
-
-        locEl.classList.remove("loading-location"); // quitar azul
-        locEl.classList.add("location-text");    // poner negro
-  
     }
 
     // Fondo inicial en hero (mismas claves que fondosClima: madrugada, dia, tarde, noche)
@@ -1198,7 +1194,10 @@ function init() {
           const upEl = document.getElementById('update-time'); if (upEl) upEl.textContent = 'Actualizando...';
           ultimaUbicacion = null;
           const locEl2 = safeEl(locationText);
-          locEl2 && (locEl2.textContent = `${muni}, ${depto}, Honduras`);
+          if (locEl2) {
+            locEl2.textContent = `${muni}, ${depto}, Honduras`;
+            finalizeLocationDisplay(locEl2);
+          }
           obtenerClimaPorMunicipio(muni, depto);
         }
       } catch (e) {
@@ -1384,27 +1383,42 @@ function init() {
                 const state = data.address && data.address.state || "";
                 const country = data.address && data.address.country || "";
                 const locEl2 = safeEl(locationText);
-                locEl2 && (locEl2.textContent = `${city}, ${state}, ${country}`);
+                if (locEl2) {
+                  locEl2.textContent = `${city}, ${state}, ${country}`;
+                  finalizeLocationDisplay(locEl2);
+                }
               })
               .catch(() => {
                 const locEl2 = safeEl(locationText);
-                locEl2 && (locEl2.textContent = "Honduras");
+                if (locEl2) {
+                  locEl2.textContent = "Honduras";
+                  finalizeLocationDisplay(locEl2);
+                }
               });
           } catch (e) {
             const locEl2 = safeEl(locationText);
-            locEl2 && (locEl2.textContent = "Honduras");
+            if (locEl2) {
+              locEl2.textContent = "Honduras";
+              finalizeLocationDisplay(locEl2);
+            }
           }
         }
       }, error => {
         console.warn('No se obtuvo geolocalización:', error);
         const locEl2 = safeEl(locationText);
-        locEl2 && (locEl2.textContent = "Ubicación no disponible");
+        if (locEl2) {
+          locEl2.textContent = "Ubicación no disponible";
+          finalizeLocationDisplay(locEl2);
+        }
         ultimaUbicacion = { lat: 14.1, lon: -87.2 };
         obtenerClimaPorCoords(14.1, -87.2);
       });
     } else {
       const locEl2 = safeEl(locationText);
-      locEl2 && (locEl2.textContent = "Geolocalización no soportada");
+      if (locEl2) {
+        locEl2.textContent = "Geolocalización no soportada";
+        finalizeLocationDisplay(locEl2);
+      }
     }
   }
 

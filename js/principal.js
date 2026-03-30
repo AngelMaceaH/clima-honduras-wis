@@ -102,7 +102,7 @@
 
   // Optional export for debugging from console:
   window.__main_debug = {
-    initMain
+    initMain: inicializarPrincipal
   };
 
 })();
