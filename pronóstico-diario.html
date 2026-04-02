@@ -21,7 +21,7 @@
   <a class="skip-link" href="#contenido-principal">Saltar al contenido principal</a>
 
   <div class="main">
-        <header class="topbar" role="banner">
+    <header class="topbar" role="banner">
       <nav class="top-nav" aria-label="Navegación principal">
         <div class="top-nav-side top-nav-side-left" role="list">
           <a class="top-nav-link" href="index.html">
@@ -78,134 +78,190 @@
       </div>
     </header>
 
-  <main id="contenido-principal" tabindex="-1">
-         <!-- CABECERA Y CITY SELECTOR -->
-      <div class="forecast-header">
-        <h2 class="forecast-title">Pronóstico de 14 días</h2>
-        <div class="forecast-subtitle">Honduras</div>
-      </div>
+    <main id="contenido-principal" tabindex="-1">
 
-      <!-- MINI-MAPA SUPERIOR (embebido) -->
-      <div class="mini-map-wrapper top">
-        <div class="mini-map-controls">
-          <label>Mini-mapa</label>
-          <span class="mini-map-note">Vista rápida de la zona seleccionada</span>
+      <!-- HERO PRINCIPAL -->
+      <section class="daily-hero-section">
+        <div class="daily-hero-grid">
+
+          <!-- PANEL IZQUIERDO -->
+          <div class="daily-hero-content">
+            <div class="forecast-header">
+              <span class="forecast-kicker">Clima en tiempo real</span>
+              <h1 class="forecast-title">Pronóstico de 14 días</h1>
+              <p class="forecast-subtitle">Consulta el tiempo por ciudad en Honduras con una vista más clara y rápida</p>
+            </div>
+
+            <div class="city-choose-area">
+              <div class="city-card-top">
+                <div class="city-card-intro">
+                  <span class="city-card-label">Ubicación</span>
+                  <h2 class="city-card-title">Selecciona una ciudad</h2>
+                  <p class="city-card-text">Explora lluvia, viento y el pronóstico diario de forma sencilla.</p>
+                </div>
+              </div>
+
+              <div class="city-row-flex">
+                <label for="cities" class="city-select-label">
+                  <ion-icon name="location-outline" class="location-icon"></ion-icon>
+                  <span>Ciudad</span>
+                </label>
+
+                <select id="cities">
+                  <option value="14.0723,-87.1921|Tegucigalpa|Francisco Morazán">Tegucigalpa</option>
+                  <option value="15.5007,-88.0244|San Pedro Sula|Cortés">San Pedro Sula</option>
+                  <option value="15.7835,-86.7972|La Ceiba|Atlántida">La Ceiba</option>
+                  <option value="13.3000,-87.2000|Choluteca|Choluteca">Choluteca</option>
+                  <option value="14.5000,-87.6333|Comayagua|Comayagua">Comayagua</option>
+                  <option value="15.3160,-87.9530|El Progreso|Yoro">El Progreso</option>
+                  <option value="15.6333,-88.5833|Puerto Cortés|Cortés">Puerto Cortés</option>
+                  <option value="15.2667,-83.7667|Puerto Lempira|Gracias a Dios">Puerto Lempira</option>
+                  <option value="15.7700,-87.4767|Tela|Atlántida">Tela</option>
+                  <option value="14.6000,-87.8333|Siguatepeque|Comayagua">Siguatepeque</option>
+                  <option value="14.1500,-88.0333|Talanga|Francisco Morazán">Talanga</option>
+                  <option value="15.3500,-88.0333|Villanueva|Cortés">Villanueva</option>
+                  <option value="15.1833,-87.1333|Tocoa|Colón">Tocoa</option>
+                  <option value="15.5333,-85.7500|Trujillo|Colón">Trujillo</option>
+                  <option value="14.9167,-87.2333|Yoro|Yoro">Yoro</option>
+                  <option value="14.3833,-87.7000|La Paz|La Paz">La Paz</option>
+                  <option value="14.8667,-89.1500|Ocotepeque|Ocotepeque">Ocotepeque</option>
+                  <option value="14.4700,-88.1800|Gracias|Lempira">Gracias</option>
+                  <option value="15.0500,-88.0000|Santa Bárbara|Santa Bárbara">Santa Bárbara</option>
+                  <option value="14.3333,-88.1667|Marcala|La Paz">Marcala</option>
+                  <option value="14.4500,-89.1833|Nueva Ocotepeque|Ocotepeque">Nueva Ocotepeque</option>
+                  <option value="14.5833,-88.5833|Santa Rosa de Copán|Copán">Santa Rosa de Copán</option>
+                  <option value="15.0300,-88.9500|Copán Ruinas|Copán">Copán Ruinas</option>
+                  <option value="14.3500,-88.7667|Erandique|Lempira">Erandique</option>
+                  <option value="13.8667,-88.6333|Nacaome|Valle">Nacaome</option>
+                  <option value="13.4333,-87.4500|San Lorenzo|Valle">San Lorenzo</option>
+                  <option value="13.8667,-86.5833|Danlí|El Paraíso">Danlí</option>
+                  <option value="14.0500,-86.5667|El Paraíso|El Paraíso">El Paraíso</option>
+                  <option value="14.1000,-88.2000|Intibucá|Intibucá">Intibucá</option>
+                  <option value="14.3000,-88.1667|La Esperanza|Intibucá">La Esperanza</option>
+                  <option value="16.3167,-86.5500|Guanaja|Islas de la Bahía">Guanaja</option>
+                  <option value="16.3167,-86.5333|Roatán|Islas de la Bahía">Roatán</option>
+                  <option value="16.4500,-86.6333|Utila|Islas de la Bahía">Utila</option>
+                </select>
+
+                <div class="unit-toggle-main" aria-label="Selector de unidades">
+                  <button id="celsius" class="active" type="button">°C</button>
+                  <button id="fahrenheit" type="button">°F</button>
+                </div>
+              </div>
+
+              <div class="city-meta-and-badges">
+                <div class="city-meta" id="city-meta"></div>
+
+                <div class="risk-badges" id="risk-badges" aria-hidden="false">
+                  <span class="badge-pill badge-rain" id="badge-rain" title="Probabilidad de lluvia">
+                    <i class="ri-rainy-line" aria-hidden="true"></i>
+                    <span>Lluvia: --</span>
+                  </span>
+
+                  <span class="badge-pill badge-wind" id="badge-wind" title="Estado del viento">
+                    <i class="ri-windy-line" aria-hidden="true"></i>
+                    <span>Viento: --</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PANEL DERECHO -->
+          <aside class="daily-hero-map-panel">
+            <div class="mini-map-wrapper top">
+              <div class="mini-map-controls">
+                <div class="mini-map-heading">
+                  <label for="miniMapTop">Mini mapa</label>
+                  <span class="mini-map-note">Vista rápida de la zona seleccionada</span>
+                </div>
+              </div>
+              <div id="miniMapTop" class="mini-map"></div>
+            </div>
+
+            <div class="hero-info-cards">
+              <article class="hero-info-card">
+                <i class="ri-cloud-line" aria-hidden="true"></i>
+                <div>
+                  <h3>Pronóstico claro</h3>
+                  <p>Visualiza el clima diario con una interfaz más cómoda y ordenada.</p>
+                </div>
+              </article>
+
+              <article class="hero-info-card">
+                <i class="ri-map-pin-time-line" aria-hidden="true"></i>
+                <div>
+                  <h3>Ubicación rápida</h3>
+                  <p>Consulta ciudades de Honduras sin perder tiempo navegando entre vistas.</p>
+                </div>
+              </article>
+            </div>
+          </aside>
+
         </div>
-        <div id="miniMapTop" class="mini-map"></div>
-      </div>
+      </section>
 
-      <div class="city-choose-area">
-        <div class="city-row-flex">
-          <label for="cities" class="city-select-label">
-            <ion-icon name="location-outline" class="location-icon"></ion-icon>
-            Selecciona ciudad:
-          </label>
-          <select id="cities">
-           <option value="14.0723,-87.1921|Tegucigalpa|Francisco Morazán">Tegucigalpa</option>
-              <option value="15.5007,-88.0244|San Pedro Sula|Cortés">San Pedro Sula</option>
-              <option value="15.7835,-86.7972|La Ceiba|Atlántida">La Ceiba</option>
-              <option value="13.3000,-87.2000|Choluteca|Choluteca">Choluteca</option>
-              <option value="14.5000,-87.6333|Comayagua|Comayagua">Comayagua</option>
-              <option value="15.3160,-87.9530|El Progreso|Yoro">El Progreso</option>
-              <option value="15.6333,-88.5833|Puerto Cortés|Cortés">Puerto Cortés</option>
-              <option value="15.2667,-83.7667|Puerto Lempira|Gracias a Dios">Puerto Lempira</option>
-              <option value="15.7700,-87.4767|Tela|Atlántida">Tela</option>
-              <option value="14.6000,-87.8333|Siguatepeque|Comayagua">Siguatepeque</option>
-              <option value="14.1500,-88.0333|Talanga|Francisco Morazán">Talanga</option>
-              <option value="15.3500,-88.0333|Villanueva|Cortés">Villanueva</option>
-              <option value="15.1833,-87.1333|Tocoa|Colón">Tocoa</option>
-              <option value="15.5333,-85.7500|Trujillo|Colón">Trujillo</option>
-              <option value="14.9167,-87.2333|Yoro|Yoro">Yoro</option>
-              <option value="14.3833,-87.7000|La Paz|La Paz">La Paz</option>
-              <option value="14.8667,-89.1500|Ocotepeque|Ocotepeque">Ocotepeque</option>
-              <option value="14.4700,-88.1800|Gracias|Lempira">Gracias</option>
-              <option value="15.0500,-88.0000|Santa Bárbara|Santa Bárbara">Santa Bárbara</option>
-              <option value="14.3333,-88.1667|Marcala|La Paz">Marcala</option>
-              <option value="14.4500,-89.1833|Nueva Ocotepeque|Ocotepeque">Nueva Ocotepeque</option>
-              <option value="14.5833,-88.5833|Santa Rosa de Copán|Copán">Santa Rosa de Copán</option>
-              <option value="15.0300,-88.9500|Copán Ruinas|Copán">Copán Ruinas</option>
-              <option value="14.3500,-88.7667|Erandique|Lempira">Erandique</option>
-              <option value="13.8667,-88.6333|Nacaome|Valle">Nacaome</option>
-              <option value="13.4333,-87.4500|San Lorenzo|Valle">San Lorenzo</option>
-              <option value="13.8667,-86.5833|Danlí|El Paraíso">Danlí</option>
-              <option value="14.0500,-86.5667|El Paraíso|El Paraíso">El Paraíso</option>
-              <option value="14.1000,-88.2000|Intibucá|Intibucá">Intibucá</option>
-              <option value="14.3000,-88.1667|La Esperanza|Intibucá">La Esperanza</option>
-              <option value="16.3167,-86.5500|Guanaja|Islas de la Bahía">Guanaja</option>
-              <option value="16.3167,-86.5333|Roatán|Islas de la Bahía">Roatán</option>
-              <option value="16.4500,-86.6333|Utila|Islas de la Bahía">Utila</option>
+      <!-- SECCIÓN DE PRONÓSTICO -->
+      <section class="forecast-list-section">
+        <div class="section-heading">
+          <div>
+            <span class="section-kicker">Pronóstico extendido</span>
+            <h2 class="section-title">Vista diaria</h2>
+          </div>
+          <p class="section-text">Consulta cada día, abre detalles y revisa el comportamiento del clima de forma rápida.</p>
+        </div>
 
-          </select>
+        <div id="daily-cards" class="daily-cards"></div>
+      </section>
 
-          <div class="unit-toggle-main">
-            <button id="celsius" class="active">°C</button>
-            <button id="fahrenheit">°F</button>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer mt-5 py-4 text-center text-white">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 mb-3 mb-md-0">
+            <p class="mb-0">&copy; 2025 ElClima: Honduras. Todos los derechos reservados.</p>
+          </div>
+          <div class="col-md-6">
+            <p class="mb-2">Síguenos en:</p>
+            <div class="social-links d-flex justify-content-center gap-3">
+              <a href="https://instagram.com/tu_usuario" target="_blank" rel="noopener noreferrer" class="text-white" title="Instagram" aria-label="Instagram">
+                <i class="ri-instagram-line fs-4"></i>
+              </a>
+              <a href="https://facebook.com/tu_pagina" target="_blank" rel="noopener noreferrer" class="text-white" title="Facebook" aria-label="Facebook">
+                <i class="ri-facebook-circle-line fs-4"></i>
+              </a>
+              <a href="https://youtube.com/@tu_canal" target="_blank" rel="noopener noreferrer" class="text-white" title="YouTube" aria-label="YouTube">
+                <i class="ri-youtube-line fs-4"></i>
+              </a>
+              <a href="https://twitter.com/tu_usuario" target="_blank" rel="noopener noreferrer" class="text-white" title="Twitter" aria-label="Twitter">
+                <i class="ri-twitter-x-line fs-4"></i>
+              </a>
+            </div>
           </div>
         </div>
-
-        <div class="city-meta-and-badges">
-          <div class="city-meta" id="city-meta"></div>
-          <!-- BADGES: solo Lluvia y Viento-->
-          <div class="risk-badges" id="risk-badges" aria-hidden="false">
-            <span class="badge-pill badge-rain" id="badge-rain" title="Probabilidad de lluvia">Lluvia: --</span>
-            <span class="badge-pill badge-wind" id="badge-wind" title="Estado del viento">Viento: --</span>
+        <hr class="my-3 border-white opacity-25">
+        <div class="row">
+          <div class="col-12">
+            <p class="mb-0 small">
+              <a href="#" class="text-white text-decoration-none me-3">Sobre Nosotros</a>
+              <span class="text-white-50">|</span>
+              <a href="mailto:contacto@elclima.hn" class="text-white text-decoration-none mx-3">Contacto</a>
+              <span class="text-white-50">|</span>
+              <a href="https://open-meteo.com" target="_blank" rel="noopener noreferrer" class="text-white text-decoration-none mx-3">Weather Source</a>
+              <span class="text-white-50">|</span>
+              <span class="text-white-50 ms-3">v1.0.0</span>
+            </p>
           </div>
         </div>
       </div>
+    </footer>
+  </div>
 
-      <!-- forecast (tabla + acordeón) -->
-      <div id="daily-cards" class="daily-cards"></div>
-
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="footer mt-5 py-4 text-center text-white">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 mb-3 mb-md-0">
-          <p class="mb-0">&copy; 2025 ElClima: Honduras. Todos los derechos reservados.</p>
-        </div>
-        <div class="col-md-6">
-          <p class="mb-2">Síguenos en:</p>
-          <div class="social-links d-flex justify-content-center gap-3">
-            <a href="https://instagram.com/tu_usuario" target="_blank" rel="noopener noreferrer" class="text-white" title="Instagram" aria-label="Instagram">
-              <i class="ri-instagram-line fs-4"></i>
-            </a>
-            <a href="https://facebook.com/tu_pagina" target="_blank" rel="noopener noreferrer" class="text-white" title="Facebook" aria-label="Facebook">
-              <i class="ri-facebook-circle-line fs-4"></i>
-            </a>
-            <a href="https://youtube.com/@tu_canal" target="_blank" rel="noopener noreferrer" class="text-white" title="YouTube" aria-label="YouTube">
-              <i class="ri-youtube-line fs-4"></i>
-            </a>
-            <a href="https://twitter.com/tu_usuario" target="_blank" rel="noopener noreferrer" class="text-white" title="Twitter" aria-label="Twitter">
-              <i class="ri-twitter-x-line fs-4"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-      <hr class="my-3 border-white opacity-25">
-      <div class="row">
-        <div class="col-12">
-          <p class="mb-0 small">
-            <a href="#" class="text-white text-decoration-none me-3">Sobre Nosotros</a>
-            <span class="text-white-50">|</span>
-            <a href="mailto:contacto@elclima.hn" class="text-white text-decoration-none mx-3">Contacto</a>
-            <span class="text-white-50">|</span>
-            <a href="https://open-meteo.com" target="_blank" rel="noopener noreferrer" class="text-white text-decoration-none mx-3">Weather Source</a>
-            <span class="text-white-50">|</span>
-            <span class="text-white-50 ms-3">v1.0.0</span>
-          </p>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-</div>
-  
-
- <!--  scripts mapa -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <!-- scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
   <!-- Ionicons -->
