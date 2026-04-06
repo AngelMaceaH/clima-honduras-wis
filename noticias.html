@@ -75,6 +75,8 @@
       </div>
     </header>
   <main id="contenido-principal" tabindex="-1">
+    
+    <!--SECCION DE MANTENTE INFORMADO-->
     <section class="hero">
     <div class="hero-overlay"></div>
 
@@ -97,72 +99,10 @@
     </div>
 </section>
 
-        <!-- SECCIÓN DE ALERTAS -->
-<section class="alertas-section">
-
-    <h2 class="alertas-title">Alertas Meteorológicas</h2>
-    <p class="alertas-subtitle">Mantente informado sobre las condiciones climáticas adversas</p>
-
-    <div class="alertas-cards">
-
-        <!-- CARD 1 -->
-        <div class="alert-card card-lluvias">
-                <div class="alert-icon"><ion-icon name="rainy-outline"></ion-icon></div>
-            <span class="estado-btn rojo">ACTIVO</span>
-
-            <h3> Lluvias</h3>
-            <p class="subinfo">Posibles lluvias intermitentes en próximos días</p>
-
-            <p class="ubicacion">
-                📍 <strong>Zona:</strong> Cortés / San Pedro Sula
-            </p>
-
-            <p>
-                El pronóstico indica que habrá "nubes y sol" durante varios días, pero con una 
-                probabilidad de lluvia para el miércoles y jueves de la próxima semana.
-            </p>
-        </div>
-
-        <!-- CARD 2 -->
-        <div class="alert-card card-tormentas">
-                <div class="alert-icon"><ion-icon name="thunderstorm-outline"></ion-icon></div>
-            <span class="estado-btn naranja">ACTIVO</span>
-
-            <h3> Tormentas / Vientos / Inestabilidad atmosférica</h3>
-
-            <p class="ubicacion">
-                📍 <strong>Zona:</strong> El Progreso
-            </p>
-
-            <p>
-                Probabilidad moderada de lluvia ligera a moderada, con vientos suaves. 
-                Condiciones relativamente normales, no tormentas intensas.
-            </p>
-        </div>
-
-        <!-- CARD 3 -->
-        <div class="alert-card card-inundaciones">
-                <div class="alert-icon"><ion-icon name="water-outline"></ion-icon></div>
-             <span class="estado-btn verde">ACTIVO</span>
-            <h3> Riesgo de Inundaciones / Crecidas de Ríos</h3>
-
-            <p>
-                Recientemente, tras lluvias graves, han habido impactos: viviendas dañadas, 
-                comunidades afectadas, puentes y rutas dañadas en varias zonas del país por 
-                desbordes, crecidas o saturación de suelos.
-            </p>
-        </div>
-
-    </div>
-</section>
-
-
         <!-- SECCIÓN NOTICIAS DESTACADAS -->
 <section class="noticias-section">
-    <h2 class="noticias-title">Noticias Destacadas</h2>
-    <p class="subinfo2">Las historias meteorológicas más importantes y actualizadas del momento
-
-</p>
+    <h2 class="noticias-title">Noticias</h2>
+    <p class="subinfo2">Mantente informado de lo más importantes</p>
 
 
     <!-- BOTONES DE FILTRO -->
@@ -251,6 +191,102 @@
 
     </div>
 </section>
+
+<!-- SECCIÓN PRONÓSTICO POR REGIONES -->
+<section class="pronostico-regiones">
+    <h2 class="pronostico-title">Pronóstico por Regiones</h2>
+    <p class="pronostico-subtitle">Condiciones climáticas actuales en las diferentes zonas de Honduras</p>
+
+    <div class="regiones-grid">
+        
+        <!-- REGIÓN ATLÁNTICA -->
+        <div class="region-card region-atlantica">
+            <div class="region-icon">🌊</div>
+            <span class="region-tag">Costa Norte</span>
+            <h3>Región Atlántica</h3>
+            <p class="region-deptos">Cortés, Atlántida, Colón, Islas de la Bahía</p>
+            <div class="clima-info">
+                <span class="temp">🌡️ 27°C - 31°C</span>
+                <span class="lluvia">🌧️ Húmedo</span>
+            </div>
+            <p class="descripcion">Clima cálido y húmedo, con lluvias frecuentes durante todo el año. Ideal para turismo de playa.</p>
+        </div>
+
+        <!-- REGIÓN OCCIDENTAL -->
+        <div class="region-card region-occidental">
+            <div class="region-icon">⛰️</div>
+            <span class="region-tag">Montañosa</span>
+            <h3>Región Occidental</h3>
+            <p class="region-deptos">Copán, Ocotepeque, Lempira, Intibucá</p>
+            <div class="clima-info">
+                <span class="temp">🌡️ 12°C - 22°C</span>
+                <span class="lluvia">🌤️ Templado</span>
+            </div>
+            <p class="descripcion">Zona montañosa con clima fresco. Temperaturas más bajas del país, ideal para café y ecoturismo.</p>
+        </div>
+
+        <!-- REGIÓN CENTRAL -->
+        <div class="region-card region-central">
+            <div class="region-icon">🏔️</div>
+            <span class="region-tag">Valle Central</span>
+            <h3>Región Central</h3>
+            <p class="region-deptos">Francisco Morazán, Comayagua, La Paz</p>
+            <div class="clima-info">
+                <span class="temp">🌡️ 22°C - 27°C</span>
+                <span class="lluvia">🌤️ Templado</span>
+            </div>
+            <p class="descripcion">Clima de sabana tropical, con dos estaciones bien marcadas: seca y lluviosa.</p>
+        </div>
+
+        <!-- REGIÓN SUR -->
+        <div class="region-card region-sur">
+            <div class="region-icon">☀️</div>
+            <span class="region-tag">Pacífico</span>
+            <h3>Región Sur</h3>
+            <p class="region-deptos">Choluteca, Valle</p>
+            <div class="clima-info">
+                <span class="temp">🌡️ 29°C - 34°C</span>
+                <span class="lluvia">🔥 Cálido y seco</span>
+            </div>
+            <p class="descripcion">La región más cálida de Honduras. Temperaturas elevadas la mayor parte del año.</p>
+        </div>
+
+        <!-- REGIÓN ORIENTAL -->
+        <div class="region-card region-oriental">
+            <div class="region-icon">🌳</div>
+            <span class="region-tag">Selva</span>
+            <h3>Región Oriental</h3>
+            <p class="region-deptos">Olancho, Gracias a Dios</p>
+            <div class="clima-info">
+                <span class="temp">🌡️ 23°C - 30°C</span>
+                <span class="lluvia">🌧️ Lluvioso</span>
+            </div>
+            <p class="descripcion">Clima de sabana tropical, con la biósfera del Río Plátano y gran biodiversidad.</p>
+        </div>
+
+    </div>
+</section>
+
+          <!-- SECCIÓN Mantente Informado -->
+<section class="hero">
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+        <h1>Mantente Informado sobre el Clima</h1>
+
+        <p>
+            Observa el estado metereologico de tu ciudad o pais en tiempo real, 
+            para que estés siempre preparado ante cualquier cambio climático.
+        </p>
+
+        <div class="hero-buttons">
+             <a href="index.html" class="btn btn-primary">Estado del Clima Hoy</a>
+        <a href="pronóstico-diario.html" class="btn btn-secondary">Pronóstico Semanal</a>
+        </div>
+       
+    </div>
+</section>
+
   </main>
 
   <!-- FOOTER -->
@@ -288,8 +324,6 @@
       </div>
     </div>
   </footer>
-
-
 
 </div>
 
