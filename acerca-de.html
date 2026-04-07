@@ -80,17 +80,18 @@
             <ion-icon name="radio-outline" aria-hidden="true"></ion-icon>
             <span>Radar</span>
           </a>
-        </div>
-
-        <a class="top-nav-logo" href="index.html" aria-label="El Clima Honduras — inicio">
-          <img src="img/logo/logo.png" alt="El Clima Honduras" width="200" height="50">
-        </a>
-
-        <div class="top-nav-side top-nav-side-right" role="list">
           <a class="top-nav-link" href="alertas.html">
             <ion-icon name="warning-outline" aria-hidden="true"></ion-icon>
             <span>Alertas</span>
-          </a>          <a class="top-nav-link" href="semana.html">
+          </a>
+        </div>
+
+        <a class="top-nav-logo" href="index.html" aria-label="CEMECO — inicio">
+          <img src="img/logo/logo.png" alt="CEMECO" width="200" height="50">
+        </a>
+
+        <div class="top-nav-side top-nav-side-right" role="list">
+          <a class="top-nav-link" href="semana.html">
             <ion-icon name="cloud-circle-outline" aria-hidden="true"></ion-icon>
             <span>Semanal</span>
           </a>
@@ -124,7 +125,7 @@
         </ul>
       </div>
     </header>
-  <main id="contenido-principal" tabindex="-1">
+  <main class="site-content" id="contenido-principal" tabindex="-1">
     <div class="cuadro2 p-4 mx-auto" style="max-width: 1200px;">
       <div class="container mt-4">
         
@@ -133,7 +134,7 @@
           <h2 class="forecast-title" style="text-align: center; margin-bottom: 30px;">¿Quiénes Somos?</h2>
           <div class="card" style="background: rgba(255, 255, 255, 0.95); border-radius: 12px; padding: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
             <p style="font-size: 1.1rem; line-height: 1.8; color: #333;">
-              <strong>ElClima: Honduras</strong> es tu fuente confiable de información meteorológica en tiempo real para todo el territorio hondureño. 
+              <strong>CEMECO</strong> es tu fuente confiable de información meteorológica en tiempo real para todo el territorio hondureño. 
               Nos dedicamos a proporcionar pronósticos precisos, alertas climáticas y datos actualizados para que puedas planificar tu día con confianza.
             </p>
             <p style="font-size: 1.1rem; line-height: 1.8; color: #333; margin-top: 15px;">
@@ -231,40 +232,23 @@
             <p style="font-size: 1.1rem; color: #555; margin-bottom: 20px;">
               ¿Tienes preguntas, sugerencias o comentarios? Nos encantaría escucharte.
             </p>
-            <p style="font-size: 1rem; color: #666; margin-bottom: 25px;">
-              También puedes llenar nuestro <a href="contacto.html" style="color: #4da6ff; font-weight: 600; text-decoration: none;">formulario de sugerencias</a>
+            <p style="font-size: 1rem; color: #666; margin-bottom: 0;">
+              También puedes llenar nuestro <a href="contacto.html" style="color: #4da6ff; font-weight: 600; text-decoration: none;">formulario de sugerencias</a>.
             </p>
-            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-              <a href="https://x.com/ElClimaHN" class="btn btn-dark" style="border-radius: 8px; padding: 10px 25px;">
-                <i class="ri-twitter-x-line me-2"></i>Twitter
-              </a>
-              <a href="https://www.instagram.com/elclima.hn/" class="btn btn-success" style="border-radius: 8px; padding: 10px 25px;">
-                <i class="ri-instagram-line me-2"></i>Instagram
-              </a>
-            </div>
           </div>
         </section>
 
       </div>
     </div>
 
+  </main>
+
     <!-- FOOTER -->
     <footer class="footer mt-5 py-4 text-center text-white">
       <div class="container">
         <div class="row">
-          <div class="col-md-6 mb-3 mb-md-0">
-            <p class="mb-0">&copy; 2025 ElClima: Honduras. Todos los derechos reservados.</p>
-          </div>
-          <div class="col-md-6">
-            <p class="mb-2">Síguenos en:</p>
-            <div class="social-links d-flex justify-content-center gap-3">
-              <a href="https://www.instagram.com/elclima.hn/" target="_blank" rel="noopener noreferrer" class="text-white" title="Instagram" aria-label="Instagram">
-                <i class="ri-instagram-line fs-4"></i>
-              </a>
-              <a href="https://x.com/ElClimaHN" target="_blank" rel="noopener noreferrer" class="text-white" title="X" aria-label="X">
-                <i class="ri-twitter-x-line fs-4"></i>
-              </a>
-            </div>
+          <div class="col-12 mb-3">
+            <p class="mb-0">&copy; 2026 CEMECO. Todos los derechos reservados.</p>
           </div>
         </div>
         <hr class="my-3 border-white opacity-25">
@@ -281,11 +265,8 @@
             </p>
           </div>
         </div>
-        <!-- Removed duplicate block: the links section was repeated twice -->
       </div>
     </footer>
-
-  </main>
 
   </div>
 
@@ -298,6 +279,7 @@
 
   <script src="js/principal.js"></script>
   <script src="js/site-theme.js"></script>
+  <script src="js/ai-chat-keys.js" defer></script>
   <script src="js/ai-chat-widget.js" defer></script>
 
 </body>

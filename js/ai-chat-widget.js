@@ -12,15 +12,33 @@
 (function () {
   'use strict';
 
-  var STORAGE_PROVIDER = 'elclima_ai_provider';
-  var STORAGE_GEMINI = 'elclima_gemini_api_key';
-  var STORAGE_GROQ = 'elclima_groq_api_key';
+  var STORAGE_PROVIDER = 'cemeco_ai_provider';
+  var STORAGE_GEMINI = 'cemeco_gemini_api_key';
+  var STORAGE_GROQ = 'cemeco_groq_api_key';
+
+  function migrateStorageFromElclima() {
+    try {
+      var pairs = [
+        ['cemeco_ai_provider', 'elclima_ai_provider'],
+        ['cemeco_gemini_api_key', 'elclima_gemini_api_key'],
+        ['cemeco_groq_api_key', 'elclima_groq_api_key']
+      ];
+      for (var i = 0; i < pairs.length; i++) {
+        var kNew = pairs[i][0];
+        var kOld = pairs[i][1];
+        if (!localStorage.getItem(kNew) && localStorage.getItem(kOld)) {
+          localStorage.setItem(kNew, localStorage.getItem(kOld));
+        }
+      }
+    } catch (e) { /* noop */ }
+  }
+  migrateStorageFromElclima();
 
   var GEMINI_MODELS = ['gemini-2.0-flash', 'gemini-1.5-flash', 'gemini-1.5-flash-8b'];
   var GROQ_MODELS = ['llama-3.3-70b-versatile', 'llama-3.1-8b-instant'];
 
   var SYSTEM_PROMPT =
-    'Eres un asistente virtual de El Clima Honduras. Actúas como meteorólogo y divulgador climático ' +
+    'Eres un asistente virtual de CEMECO. Actúas como meteorólogo y divulgador climático ' +
     'con experiencia en Honduras y Centroamérica. Respondes siempre en español, con tono claro, amable y profesional. ' +
     'Explicas conceptos (frentes, humedad, índices UV, alertas, estaciones, efectos del Niño/La Niña cuando aplique) ' +
     'sin alarmismo. Si no tienes datos en tiempo real, dilo y ofrece orientación general o cómo interpretar fuentes ' +
@@ -65,6 +83,70 @@
     }
   }
 
+  function parseGroqKeyFromEnvText(envText) {
+    if (typeof envText !== 'string') return '';
+    var lines = envText.split(/\r?\n/);
+    var keys = ['GROQ_API_KEY', 'groq_api_key', 'chatbot_api_key', 'CHATBOT_API_KEY'];
+
+    for (var i = 0; i < lines.length; i++) {
+      var row = String(lines[i] || '').trim();
+      if (!row || row.charAt(0) === '#') continue;
+
+      for (var k = 0; k < keys.length; k++) {
+        var keyName = keys[k];
+        var re = new RegExp('^\\s*' + keyName + '\\s*=');
+        if (!re.test(row)) continue;
+        return row
+          .replace(new RegExp('^\\s*' + keyName + '\\s*=\\s*'), '')
+          .replace(/^['"]|['"]$/g, '')
+          .trim();
+      }
+    }
+    return '';
+  }
+
+  function tryLoadGroqKeyFromEnv(done) {
+    var paths = [
+      'groq.env',
+      './groq.env',
+      '/groq.env',
+      'env',
+      './env',
+      '/env',
+      '.env',
+      './.env',
+      '/.env',
+      '/.env.txt',
+      './.env.txt',
+    ];
+    var idx = 0;
+
+    function next() {
+      if (idx >= paths.length) {
+        done('');
+        return;
+      }
+      var p = paths[idx++];
+      fetch(p, { cache: 'no-store' })
+        .then(function (res) {
+          if (!res.ok) {
+            next();
+            return;
+          }
+          return res.text().then(function (txt) {
+            var key = parseGroqKeyFromEnvText(txt);
+            if (key) done(key);
+            else next();
+          });
+        })
+        .catch(function () {
+          next();
+        });
+    }
+
+    next();
+  }
+
   function getActiveKey() {
     return getProvider() === 'groq' ? getGroqKey() : getGeminiKey();
   }
@@ -105,8 +187,6 @@
       '<p class="ai-chat-panel__title" id="ai-chat-title">Asistente de clima</p>' +
       '<p class="ai-chat-panel__sub" id="ai-chat-sub">Pregunta sobre el tiempo en Honduras</p></div>' +
       '<div class="ai-chat-panel__head-actions">' +
-      '<button type="button" class="ai-chat-panel__settings" id="ai-chat-settings" aria-label="Configurar clave API" aria-expanded="false" aria-controls="ai-chat-config" title="Clave API">' +
-      '<i class="ri-settings-3-line" aria-hidden="true"></i></button>' +
       '<button type="button" class="ai-chat-panel__close" id="ai-chat-close" aria-label="Cerrar chat"><span aria-hidden="true">×</span></button></div></div>' +
       '<div class="ai-chat-messages" id="ai-chat-messages"></div>' +
       '<div class="ai-chat-config" id="ai-chat-config" hidden></div>' +
@@ -220,7 +300,7 @@
   function callGemini(done, fail) {
     var key = getGeminiKey();
     if (!key) {
-      fail('Falta la clave de Gemini. Pulsa el engranaje arriba, pégala y guarda.');
+      fail('Falta la clave de Gemini en la configuración del sitio.');
       return;
     }
 
@@ -286,65 +366,80 @@
   }
 
   function callGroq(done, fail) {
-    var key = getGroqKey();
-    if (!key) {
-      fail('Falta la clave de Groq. Ábrela desde el icono de ajustes (engranaje).');
-      return;
-    }
-
-    var midx = 0;
-    function tryGroqModel() {
-      if (midx >= GROQ_MODELS.length) {
-        fail('No se pudo obtener respuesta con Groq.');
-        return;
-      }
-      var model = GROQ_MODELS[midx];
-      fetch('https://api.groq.com/openai/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + key
-        },
-        body: JSON.stringify({
-          model: model,
-          messages: buildGroqMessages(),
-          temperature: 0.75,
-          max_tokens: 1024
+    function requestGroq(key) {
+      var midx = 0;
+      function tryGroqModel() {
+        if (midx >= GROQ_MODELS.length) {
+          fail('No se pudo obtener respuesta con Groq.');
+          return;
+        }
+        var model = GROQ_MODELS[midx];
+        fetch('https://api.groq.com/openai/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + key
+          },
+          body: JSON.stringify({
+            model: model,
+            messages: buildGroqMessages(),
+            temperature: 0.75,
+            max_tokens: 1024
+          })
         })
-      })
-        .then(function (res) {
-          return res.json().then(function (data) {
-            if (!res.ok) {
-              var msg = (data && data.error && data.error.message) || res.statusText;
-              if (res.status === 400 && msg && msg.indexOf('model') !== -1) {
+          .then(function (res) {
+            return res.json().then(function (data) {
+              if (!res.ok) {
+                var msg = (data && data.error && data.error.message) || res.statusText;
+                if (res.status === 400 && msg && msg.indexOf('model') !== -1) {
+                  midx++;
+                  tryGroqModel();
+                  return;
+                }
+                fail(msg);
+                return;
+              }
+              var text =
+                data.choices &&
+                data.choices[0] &&
+                data.choices[0].message &&
+                data.choices[0].message.content;
+              if (!text || !String(text).trim()) {
                 midx++;
                 tryGroqModel();
                 return;
               }
-              fail(msg);
-              return;
-            }
-            var text =
-              data.choices &&
-              data.choices[0] &&
-              data.choices[0].message &&
-              data.choices[0].message.content;
-            if (!text || !String(text).trim()) {
-              midx++;
-              tryGroqModel();
-              return;
-            }
-            done(String(text).trim());
+              done(String(text).trim());
+            });
+          })
+          .catch(function (err) {
+            midx++;
+            if (midx < GROQ_MODELS.length) tryGroqModel();
+            else fail(err.message || 'Error de red');
           });
-        })
-        .catch(function (err) {
-          midx++;
-          if (midx < GROQ_MODELS.length) tryGroqModel();
-          else fail(err.message || 'Error de red');
-        });
+      }
+
+      tryGroqModel();
     }
 
-    tryGroqModel();
+    var key = getGroqKey();
+    if (key) {
+      requestGroq(key);
+      return;
+    }
+
+    tryLoadGroqKeyFromEnv(function (loadedKey) {
+      if (!loadedKey) {
+        fail(
+          'No se pudo cargar la clave Groq. Asegúrate de tener .env en la raíz del proyecto y ejecuta: ' +
+            'powershell -File scripts/sync-env.ps1 (copia .env → groq.env). Luego recarga la página.'
+        );
+        return;
+      }
+      setGroqKey(loadedKey);
+      try { window.__GROQ_API_KEY__ = loadedKey; } catch (e) { /* noop */ }
+      requestGroq(loadedKey);
+    });
   }
 
   function callAI(done, fail) {
@@ -361,7 +456,6 @@
     var fab = document.getElementById('ai-chat-fab');
     var panel = document.getElementById('ai-chat-panel');
     var closeBtn = document.getElementById('ai-chat-close');
-    var settingsBtn = document.getElementById('ai-chat-settings');
     var messages = document.getElementById('ai-chat-messages');
     var configEl = document.getElementById('ai-chat-config');
     var form = document.getElementById('ai-chat-form');
@@ -372,20 +466,11 @@
     if (!fab || !panel || !messages || !configEl || !form || !input) return;
 
     function setSettingsOpen(open) {
-      if (!configEl || !settingsBtn) return;
+      if (!configEl) return;
       configEl.hidden = !open;
-      settingsBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
       if (open) {
         renderConfigPanel(configEl);
       }
-    }
-
-    if (settingsBtn) {
-      settingsBtn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        var next = configEl.hidden;
-        setSettingsOpen(next);
-      });
     }
 
     function openPanel() {
@@ -436,20 +521,29 @@
       typing.hidden = false;
       typing.textContent = 'Pensando…';
 
-      callAI(
-        function (reply) {
-          typing.hidden = true;
-          sendBtn.disabled = false;
-          appendMsg(messages, reply, 'bot');
-          history.push({ role: 'model', text: reply });
-        },
-        function (err) {
-          typing.hidden = true;
-          sendBtn.disabled = false;
-          appendMsg(messages, String(err), 'err');
-          history.pop();
-        }
-      );
+      function requestAI() {
+        callAI(
+          function (reply) {
+            typing.hidden = true;
+            sendBtn.disabled = false;
+            appendMsg(messages, reply, 'bot');
+            history.push({ role: 'model', text: reply });
+          },
+          function (err) {
+            typing.hidden = true;
+            sendBtn.disabled = false;
+            appendMsg(messages, String(err), 'err');
+            history.pop();
+          }
+        );
+      }
+
+      var keysReady = window.__AI_CHAT_KEYS_READY__;
+      if (keysReady && typeof keysReady.then === 'function') {
+        keysReady.then(requestAI).catch(requestAI);
+      } else {
+        requestAI();
+      }
     });
   }
 

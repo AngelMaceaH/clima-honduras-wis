@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Clima — Sugerencias</title>
+  <title>Contacto | CEMECO</title>
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
@@ -101,17 +101,18 @@
             <ion-icon name="radio-outline" aria-hidden="true"></ion-icon>
             <span>Radar</span>
           </a>
-        </div>
-
-        <a class="top-nav-logo" href="index.html" aria-label="El Clima Honduras — inicio">
-          <img src="img/logo/logo.png" alt="El Clima Honduras" width="200" height="50">
-        </a>
-
-        <div class="top-nav-side top-nav-side-right" role="list">
           <a class="top-nav-link" href="alertas.html">
             <ion-icon name="warning-outline" aria-hidden="true"></ion-icon>
             <span>Alertas</span>
-          </a>          <a class="top-nav-link" href="semana.html">
+          </a>
+        </div>
+
+        <a class="top-nav-logo" href="index.html" aria-label="CEMECO — inicio">
+          <img src="img/logo/logo.png" alt="CEMECO" width="200" height="50">
+        </a>
+
+        <div class="top-nav-side top-nav-side-right" role="list">
+          <a class="top-nav-link" href="semana.html">
             <ion-icon name="cloud-circle-outline" aria-hidden="true"></ion-icon>
             <span>Semanal</span>
           </a>
@@ -145,7 +146,7 @@
         </ul>
       </div>
     </header>
-  <main id="contenido-principal" tabindex="-1">
+  <main class="site-content" id="contenido-principal" tabindex="-1">
     <div class="cuadro2 p-4 mx-auto" style="min-height: calc(100vh - 100px);">
       <div class="container mt-4">
         
@@ -269,32 +270,23 @@
       </div>
     </div>
 
+  </main>
+
   <!-- FOOTER -->
   <footer class="footer mt-5 py-4 text-center text-white">
     <div class="container">
       <div class="row">
-        <div class="col-md-6 mb-3 mb-md-0">
-          <p class="mb-0">&copy; 2025 ElClima: Honduras. Todos los derechos reservados.</p>
-        </div>
-        <div class="col-md-6">
-          <p class="mb-2">Síguenos en:</p>
-          <div class="social-links d-flex justify-content-center gap-3">
-              <a href="https://www.instagram.com/elclima.hn/" target="_blank" rel="noopener noreferrer" class="text-white" title="Instagram" aria-label="Instagram">
-                <i class="ri-instagram-line fs-4"></i>
-              </a>
-              <a href="https://x.com/ElClimaHN" target="_blank" rel="noopener noreferrer" class="text-white" title="X" aria-label="X">
-                <i class="ri-twitter-x-line fs-4"></i>
-              </a>
-          </div>
+        <div class="col-12 mb-3">
+          <p class="mb-0">&copy; 2026 CEMECO. Todos los derechos reservados.</p>
         </div>
       </div>
       <hr class="my-3 border-white opacity-25">
       <div class="row">
         <div class="col-12">
           <p class="mb-0 small">
-              <a href="acerca-de.html" class="text-white text-decoration-none me-3">Sobre Nosotros</a>
-              <span class="text-white-50">|</span>
-              <a href="contacto.html" class="text-white text-decoration-none mx-3">Contacto</a>
+            <a href="acerca-de.html" class="text-white text-decoration-none me-3">Sobre Nosotros</a>
+            <span class="text-white-50">|</span>
+            <a href="contacto.html" class="text-white text-decoration-none mx-3">Contacto</a>
             <span class="text-white-50">|</span>
             <a href="https://open-meteo.com" target="_blank" rel="noopener noreferrer" class="text-white text-decoration-none mx-3">Weather Source</a>
             <span class="text-white-50">|</span>
@@ -304,8 +296,6 @@
       </div>
     </div>
   </footer>
-
-  </main>
 
   </div>
 
@@ -319,6 +309,7 @@
   <!-- Main JS -->
   <script src="js/principal.js"></script>
   <script src="js/site-theme.js"></script>
+  <script src="js/ai-chat-keys.js" defer></script>
   <script src="js/ai-chat-widget.js" defer></script>
 
   <!-- EmailJS SDK -->
@@ -385,7 +376,7 @@
           name: formData.nombre + ' ' + formData.apellido,
           email: formData.email,
           message: formData.mensaje,
-          _subject: 'Nueva sugerencia desde ElClima Honduras',
+          _subject: 'Nueva sugerencia desde CEMECO',
           _template: 'table'
         })
       })

@@ -79,6 +79,9 @@ web_modules/
 .env.production.local
 .env.local
 
+# Copia local de .env para que el navegador pueda cargarla (ver scripts/sync-env.ps1)
+groq.env
+
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 .parcel-cache

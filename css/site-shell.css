@@ -210,6 +210,61 @@ body.site-page.dark-theme .top-nav-link:hover {
   box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.2) inset;
 }
 
+/* =============================================================================
+   Estándar de layout compartido (contenedor, spacing y radios)
+   ============================================================================= */
+body.site-page {
+  --shell-content-max-width: 1200px;
+  --shell-page-padding-inline: clamp(12px, 2.2vw, 28px);
+  --shell-page-padding-block: clamp(16px, 2.2vw, 28px);
+  --shell-content-gap: clamp(14px, 2vw, 24px);
+  --shell-surface-radius: 16px;
+  --shell-control-radius: 12px;
+}
+
+body.site-page .site-content {
+  width: 100%;
+  padding: var(--shell-page-padding-block) var(--shell-page-padding-inline)
+    calc(var(--shell-page-padding-block) * 1.4);
+  display: grid;
+  gap: var(--shell-content-gap);
+}
+
+body.site-page .site-content > * {
+  width: min(100%, var(--shell-content-max-width));
+  margin-inline: auto;
+}
+
+body.site-page .site-content > .index-hero-weather-bg,
+body.site-page .site-content > .index-content-block {
+  width: 100%;
+  max-width: 100%;
+}
+
+body.site-page .site-content .container,
+body.site-page .site-content .content {
+  width: min(100%, var(--shell-content-max-width));
+  margin-inline: auto;
+}
+
+body.site-page .site-content .card,
+body.site-page .site-content .cuadro2,
+body.site-page .site-content .radar-panel,
+body.site-page .site-content .maps-wrap,
+body.site-page .site-content .alerts-hero,
+body.site-page .site-content .noticias-section,
+body.site-page .site-content .uv-section,
+body.site-page .site-content .daily-hero-section,
+body.site-page .site-content .forecast-header {
+  border-radius: var(--shell-surface-radius);
+}
+
+body.site-page .site-content .btn,
+body.site-page .site-content .form-control,
+body.site-page .site-content .form-select {
+  border-radius: var(--shell-control-radius);
+}
+
 @media (max-width: 1100px) {
   body.site-page .topbar {
     flex-wrap: wrap;
