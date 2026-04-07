@@ -1,6 +1,5 @@
 /* estilo.css y fuentes se cargan desde noticias.html — evitar @import "css/..." (se resuelve como css/css/...). */
 
-
 /* ====================== Responsive Navegador ========================== */
 @media (max-width: 991px) {
   .navigation {
@@ -96,18 +95,12 @@
 
 /* CARDS DE NOTICIAS DESTACDAS */
 .noticias-section {
-    padding: 60px 30px;
+    padding: 20px 30px;
     background: #f9f9f9;
 }
 
-.noticias-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-}
-
 .noticias-title {
-    font-size: 60px;
+    font-size: 80px;
     color: #0066cc;
     font-weight: 1000px;
     margin-bottom: -10px;
@@ -119,7 +112,7 @@
     font-weight: 1000;
     color: rgb(214, 90, 44);
     margin-top: 0px;
-    margin-bottom: 60px; 
+    margin-bottom: 10px; 
     padding-left: 0; 
     text-align: center; 
 }
@@ -134,129 +127,102 @@
     flex-wrap: wrap;
 }
 
-.filtro-btn {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 20px;
-    background: #ddd;
-    cursor: pointer;
-    position: center;
-    transition: background 0.3s;
-    
-}
-
-.filtro-btn.active,
-.filtro-btn:hover {
-    background: #170dd5;
-    color: white;
-}
-
-.noticias-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-}
-
-.noticia-card {
-    background: #fff;
-    border-radius: 18px;
-    overflow: hidden;
-    position: relative;
+/* ================= FILTRO DROPDOWN ================= */
+.noticias-filtros {
     display: flex;
-    flex-direction: column;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
 }
 
-/* Hover idéntico al de alert-card */
-.noticia-card:hover {
-    transform: translateY(-10px) scale(1.03);
-    box-shadow: 0 15px 25px rgba(0,0,0,0.25);
-}
-
-
-
-.noticia-card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-}
-
-.noticia-card h3 {
-    font-size: 20px;
-    margin: 10px 15px 5px 15px;
-}
-
-.noticia-card .descripcion {
-    font-size: 14px;
-    margin: 0 15px 10px 15px;
-    color: #555;
-}
-
-.noticia-card .fecha {
-    font-size: 12px;
-    color: #999;
-    margin: 0 15px 15px 15px;
-}
-
-.card {
+.dropdown-filter {
     position: relative;
+    display: inline-block;
 }
 
-.btn-ver-mas {
+.filtro-dropdown-btn {
+    background: #170dd5;
+    color: white;
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.filtro-dropdown-btn:hover {
+    background: #0a08a3;
+    transform: translateY(-2px);
+}
+
+.filtro-dropdown-btn i {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+}
+
+.dropdown-filter.active .filtro-dropdown-btn i {
+    transform: rotate(180deg);
+}
+
+.filtro-dropdown-menu {
     position: absolute;
-    bottom: 2px;
-    right: 20px;
-    padding: 5px 12px;
-    border: none;
+    top: 100%;
+    left: 0;
+    background: white;
+    min-width: 180px;
     border-radius: 12px;
-    background: #170dd5;
-      text-decoration: none; 
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    margin-top: 8px;
+    padding: 8px 0;
+    list-style: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 100;
+    border: 1px solid #eee;
+}
 
-    color: white;
+.dropdown-filter.active .filtro-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.filtro-dropdown-menu li {
+    padding: 10px 20px;
     cursor: pointer;
-    transition: background 0.3s;
+    font-size: 14px;
+    color: #333;
+    transition: all 0.2s ease;
 }
 
-.btn-ver-mas:hover {
-    background: #007bff;
+.filtro-dropdown-menu li:hover {
+    background: #f0f0f0;
+    color: #170dd5;
 }
 
-
-/* BOTONES CON ANIMACIÓN */
-.filtro-btn {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 20px;
-    background: #ddd;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.filtro-btn:hover {
+.filtro-dropdown-menu li.active {
     background: #170dd5;
     color: white;
-    transform: translateY(-4px) scale(1.05);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
 }
 
-.filtro-btn.active {
-    background: #170dd5;
-    color: white;
-    transform: translateY(-4px) scale(1.05);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+body.dark-theme .filtro-dropdown-menu {
+    background: #1a2530;
+    border-color: #2a3a48;
 }
 
-/* Animación de aparición/desaparición */
-.noticia-card {
-  transition: transform 0.5s ease, box-shadow 0.3s ease, opacity 0.5s ease;
+body.dark-theme .filtro-dropdown-menu li {
+    color: #e0e0e0;
 }
 
-.noticia-card.oculto {
-  opacity: 0;
-  transform: translateY(20px);
-  pointer-events: none;
-  display: none; 
+body.dark-theme .filtro-dropdown-menu li:hover {
+    background: #2a3a48;
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
@@ -1343,3 +1309,293 @@ body.dark-theme .descripcion {
 .region-central { border-top: 5px solid #f39c12; }
 .region-sur { border-top: 5px solid #e74c3c; }
 .region-oriental { border-top: 5px solid #9b59b6; }
+
+/* ================= NOTICIAS ESTILO 2 COLUMNAS ================= */
+.noticias-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.noticia-card {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 12px;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 12px;
+    transition: all 0.3s ease;
+    border: 1px solid #eef2f5;
+    align-items: flex-start;
+    flex-wrap: nowrap !important;
+    width: 100%;
+}
+
+/* Cuando la tarjeta está oculta - desaparece completamente del grid */
+.noticia-card.oculto {
+    display: none !important;  /* ← CLAVE: desaparece sin dejar espacio */
+    opacity: 0;
+    transform: scale(0.95);
+}
+
+.noticia-card:hover {
+    transform: translateY(-4px);
+    border-color: #170dd5;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+body.dark-theme .noticia-card {
+    background: #1a2530;
+    border-color: #2a3a48;
+}
+
+body.dark-theme .noticia-card:hover {
+    border-color: #4da6ff;
+}
+
+.noticia-card img {
+    width: 160px;
+    min-width: 160px;
+    max-width: 160px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+.noticia-contenido {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.noticia-categoria {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #170dd5;
+    margin-bottom: 6px;
+}
+
+body.dark-theme .noticia-categoria {
+    color: #4da6ff;
+}
+
+.noticia-card h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0 0 6px 0;
+    color: #1a2a3a;
+    line-height: 1.3;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+body.dark-theme .noticia-card h3 {
+    color: #e0e0e0;
+}
+
+.noticia-card .descripcion {
+    font-size: 16px;
+    line-height: 1.4;
+    color: #5a6a7a;
+    margin-bottom: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+body.dark-theme .noticia-card .descripcion {
+    color: #a0b0c0;
+}
+
+.noticia-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.fecha {
+    font-size: 11px;
+    color: #8899aa;
+}
+
+.btn-ver-mas {
+    background: none;
+    color: #170dd5;
+    font-weight: 600;
+    font-size: 12px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    padding: 0;
+    white-space: nowrap;
+}
+
+.btn-ver-mas:hover {
+    color: #0a08a3;
+    transform: translateX(3px);
+}
+
+body.dark-theme .btn-ver-mas {
+    color: #4da6ff;
+}
+
+/* Animación para filtros */
+.noticia-card.oculto {
+    opacity: 0;
+    transform: scale(0.95);
+    display: none;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .noticias-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .noticia-card {
+        flex-direction: column !important;
+        flex-wrap: wrap !important;
+    }
+    
+    .noticia-card img {
+        width: 100%;
+        min-width: auto;
+        max-width: 100%;
+        height: 180px;
+    }
+    
+    .noticia-contenido {
+        min-width: auto;
+    }
+}
+
+/* ================= CARRUSEL ANCHO COMPLETO ================= */
+.noticias-carrusel {
+    margin: 30px 0;  /* ← Elimina el margin lateral */
+    width: 100%;     /* ← Ocupa todo el ancho */
+    max-width: 100%; /* ← Sin límite de ancho */
+    border-radius: 0; /* ← Opcional: quita bordes redondeados */
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.carrusel-container {
+    position: relative;
+    width: 100%;
+}
+
+.carrusel-track {
+    display: flex;
+    transition: transform 0.4s ease-in-out;
+}
+
+.carrusel-slide {
+    min-width: 100%;
+    position: relative;
+    height: 450px;  /* ← Puedes ajustar la altura */
+}
+
+.carrusel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carrusel-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+    color: white;
+    padding: 40px 30px 25px;
+    text-align: center;  /* ← Centra el texto */
+}
+
+.carrusel-categoria {
+    display: inline-block;
+    background: #170dd5;
+    padding: 6px 18px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.carrusel-slide h3 {
+    font-size: 28px;
+    margin: 0;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.carrusel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding: 15px 0;
+    background: #f5f5f5;
+}
+
+body.dark-theme .carrusel-indicators {
+    background: #1a2530;
+}
+
+.carrusel-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ccc;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.carrusel-dot.active {
+    background: #170dd5;
+    width: 30px;
+    border-radius: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .carrusel-slide {
+        height: 350px;
+    }
+    
+    .carrusel-slide h3 {
+        font-size: 20px;
+    }
+    
+    .carrusel-overlay {
+        padding: 25px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .carrusel-slide {
+        height: 280px;
+    }
+    
+    .carrusel-slide h3 {
+        font-size: 16px;
+    }
+    
+    .carrusel-categoria {
+        font-size: 11px;
+        padding: 4px 12px;
+    }
+}

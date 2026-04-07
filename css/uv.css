@@ -1,0 +1,363 @@
+/* ================= SECCIÓN ÍNDICE UV ================= */
+.uv-section {
+    padding: 40px 30px;
+    background: #f9f9f9;
+}
+
+body.dark-theme .uv-section {
+    background: #0f1419;
+}
+
+.uv-title {
+    font-size: 60px;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #0066cc;
+}
+
+body.dark-theme .uv-title {
+    color: #4da6ff;
+}
+
+.uv-subtitle {
+    text-align: center;
+    color: #e68d09;
+    margin-bottom: 40px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+body.dark-theme .uv-subtitle {
+    color: #aaa;
+}
+
+/* Contenedor principal UV */
+.uv-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Card principal UV */
+.uv-card {
+    background: white;
+    border-radius: 24px;
+    padding: 35px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.uv-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+body.dark-theme .uv-card {
+    background: #1a2530;
+}
+
+/* Valor UV */
+.uv-value {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.uv-number {
+    font-size: 90px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.uv-label {
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.uv-level {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+/* Barra UV */
+.uv-bar-container {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    height: 32px;
+    margin: 25px 0;
+    overflow: hidden;
+}
+
+.uv-bar {
+    height: 100%;
+    width: 0%;
+    border-radius: 30px;
+    transition: width 0.6s ease;
+}
+
+/* Tabla de horas */
+.uv-hours {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 25px 0;
+    flex-wrap: wrap;
+}
+
+.uv-hour-item {
+    flex: 1;
+    text-align: center;
+    background: rgba(0, 102, 204, 0.05);
+    border-radius: 16px;
+    padding: 12px 8px;
+    transition: all 0.3s ease;
+}
+
+.uv-hour-item:hover {
+    transform: translateY(-3px);
+    background: rgba(0, 102, 204, 0.1);
+}
+
+body.dark-theme .uv-hour-item {
+    background: rgba(77, 166, 255, 0.08);
+}
+
+.uv-hour-time {
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+body.dark-theme .uv-hour-time {
+    color: #aaa;
+}
+
+.uv-hour-value {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+/* Recomendaciones */
+.uv-recommendations {
+    background: rgba(0, 102, 204, 0.05);
+    border-radius: 20px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+body.dark-theme .uv-recommendations {
+    background: rgba(77, 166, 255, 0.08);
+}
+
+.uv-recommendations h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #0066cc;
+}
+
+body.dark-theme .uv-recommendations h3 {
+    color: #4da6ff;
+}
+
+.uv-recommendations ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.uv-recommendations li {
+    padding: 8px 0;
+    padding-left: 28px;
+    position: relative;
+    font-size: 14px;
+}
+
+/* Loading */
+.loading-uv {
+    text-align: center;
+    padding: 60px;
+    font-size: 18px;
+    color: #0066cc;
+}
+
+.loading-uv i {
+    font-size: 30px;
+    margin-right: 10px;
+}
+
+body.dark-theme .loading-uv {
+    color: #4da6ff;
+}
+
+/* Error */
+.error-uv {
+    background: rgba(220, 53, 69, 0.1);
+    border: 1px solid #dc3545;
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+}
+
+.error-uv i {
+    font-size: 48px;
+    color: #dc3545;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.error-uv button {
+    margin-top: 20px;
+    padding: 10px 24px;
+    background: #0066cc;
+    border: none;
+    border-radius: 30px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.error-uv button:hover {
+    background: #0052a3;
+    transform: translateY(-2px);
+}
+
+/* Ubicación */
+.uv-location {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #666;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+body.dark-theme .uv-location {
+    color: #aaa;
+    border-bottom-color: #2a3a48;
+}
+
+/* ================= SECCIÓN INFORMACIÓN UV ================= */
+.uv-info-section {
+    padding: 60px 30px;
+    background: #ffffff;
+}
+
+body.dark-theme .uv-info-section {
+    background: #0a0e12;
+}
+
+.uv-info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.uv-info-card {
+    text-align: center;
+    padding: 30px 20px;
+    background: #f5f7fa;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.uv-info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-theme .uv-info-card {
+    background: #1a2530;
+}
+
+.uv-info-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.uv-info-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #0066cc;
+}
+
+body.dark-theme .uv-info-card h3 {
+    color: #4da6ff;
+}
+
+.uv-info-card p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #555;
+}
+
+body.dark-theme .uv-info-card p {
+    color: #bbb;
+}
+
+/* Botón activo en hero */
+.hero-buttons .btn-secondary.active-uv {
+    background: #170dd5;
+    color: white;
+    box-shadow: 0 4px 15px rgba(23, 13, 213, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .uv-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .uv-hours {
+        gap: 8px;
+    }
+    
+    .uv-hour-value {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    .uv-title {
+        font-size: 40px;
+    }
+    
+    .uv-card {
+        padding: 25px;
+    }
+    
+    .uv-number {
+        font-size: 65px;
+    }
+    
+    .uv-label {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .uv-info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .uv-hours {
+        flex-direction: column;
+    }
+    
+    .uv-hour-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 15px;
+    }
+    
+    .uv-hour-time {
+        margin-bottom: 0;
+    }
+}

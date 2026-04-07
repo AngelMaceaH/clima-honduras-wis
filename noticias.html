@@ -76,128 +76,121 @@
     </header>
   <main id="contenido-principal" tabindex="-1">
     
-    <!--SECCION DE MANTENTE INFORMADO-->
-    <section class="hero">
-    <div class="hero-overlay"></div>
-
-    <div class="hero-content">
-        <span class="badge">⚡ Última Hora</span>
-
-        <h1>Mantente Informado<br>sobre el Clima</h1>
-
-        <p>
-            Las noticias meteorológicas más actualizadas, alertas en tiempo real
-            y pronósticos precisos para que estés siempre preparado ante cualquier
-            cambio climático.
-        </p>
-
-        <div class="hero-buttons">
-             <a href="index.html" class="btn btn-primary">Ver Clima de Hoy</a>
-        <a href="pronóstico-diario.html" class="btn btn-secondary">Pronóstico Diario</a>
-        </div>
-       
-    </div>
-</section>
-
-        <!-- SECCIÓN NOTICIAS DESTACADAS -->
+<!-- SECCIÓN NOTICIAS DESTACADAS -->
 <section class="noticias-section">
     <h2 class="noticias-title">Noticias</h2>
     <p class="subinfo2">Mantente informado de lo más importantes</p>
 
-
-    <!-- BOTONES DE FILTRO -->
-    <div class="noticias-filtros">
-        <button class="filtro-btn active" data-categoria="todos">Todos</button>
-        <button class="filtro-btn" data-categoria="huracanes">Huracanes</button>
-        <button class="filtro-btn" data-categoria="inundaciones">Inundaciones</button>
-        <button class="filtro-btn" data-categoria="sequia">Sequía</button>
-        <button class="filtro-btn" data-categoria="cambio-climatico">Cambio Climático</button>
+<!-- CARRUSEL SIMPLE -->
+<div class="noticias-carrusel">
+    <div class="carrusel-container">
+        <div class="carrusel-track" id="carruselTrack">
+            <!-- Las imágenes se generan con JS -->
+        </div>
     </div>
+    <div class="carrusel-indicators" id="carruselIndicators"></div>
+</div>
 
-    <!-- CARDS DE NOTICIAS -->
-    <div class="noticias-cards">
-
-        <!-- CARD 1 -->
-        <div class="noticia-card" data-categoria="huracanes">
-            <img src="img/noticias/huracan-mitch.png" alt="Huracán Mitch">
-            <h3>Huracán Mitch (Categoría 5)</h3>
-            <p class="descripcion">El peor desastre natural de la historia de Honduras.</p>
-            <p class="fecha">Fecha: 1998</p>
-            <a href="https://historiauniversal.org/historia-de-honduras-huracan-mitch/" class="btn btn-sm btn-outline-primary btn-ver-mas">Ver más</a>
-        </div>
-
-        <!-- CARD 2 -->
-        <div class="noticia-card" data-categoria="huracanes">
-            <img src="img/noticias/huracanes-eta-iota.png" alt="Huracanes ETA e IOTA">
-            <h3>Huracanes ETA e IOTA (Categorías 4 y 5)</h3>
-            <p class="descripcion">Dos huracanes consecutivos golpearon el país en menos de dos semanas. Carreteras, puentes y viviendas destruidas.</p>
-            <p class="fecha">Fecha: 2020</p>
-            <a href="https://honduras.un.org/sites/default/files/2021-02/Informe%20de%20Situaci%C3%B3n%20No.%208%20-%20Tormentas%20Tropicales%20Eta%20e%20Iota%20en%20Honduras.pdf" class="btn-ver-mas">Ver más</a>
-        </div>
-
-        <!-- CARD 3 -->
-        <div class="noticia-card" data-categoria="inundaciones">
-            <img src="img/noticias/inundaciones-sur.png" alt="Inundaciones en el Sur">
-            <h3>Inundaciones en el Sur</h3>
-            <p class="descripcion">Afectó Choluteca, Valle y Francisco Morazán. Ríos desbordados por una vaguada. Comunidades incomunicadas por más de 48 horas.</p>
-            <p class="fecha">Fecha: 2023</p>
-            <a href="https://www.elheraldo.hn/honduras/lluvias-dejan-inundada-zona-sur-elevan-alertas-varios-departamentos-HA27634164" class="btn-ver-mas">Ver más</a>
-        </div>
-
-        <!-- CARD 4 -->
-        <div class="noticia-card" data-categoria="inundaciones">
-            <img src="img/noticias/inundaciones-junio.png" alt="Inundaciones por lluvias de junio">
-            <h3>Inundaciones por lluvias de junio: +8,300 personas afectadas</h3>
-            <p class="descripcion">Deslizamientos en la zona sur. Drenajes colapsados en Choluteca y Tegucigalpa.</p>
-            <p class="fecha">Fecha: 2024</p>
-            <a href="https://oncenoticias.hn/nacionales/alerta-en-honduras-por-lluvias-para-10-departamentos-14-de-junio-de-2024/" class="btn-ver-mas">Ver más</a>
-        </div>
-
-        <!-- CARD 5 -->
-        <div class="noticia-card" data-categoria="sequia">
-            <img src="img/noticias/sequia-extrema.jpg" alt="Sequía extrema">
-            <h3>Sequía extrema</h3>
-            <p class="descripcion">Una de las peores en la historia reciente. Pérdida masiva de cosechas de maíz y frijol. Crisis alimentaria en zonas rurales.</p>
-            <p class="fecha">Fecha: 2015</p>
-            <a href="https://www.unocha.org/publications/report/honduras/honduras-emergencia-por-sequ-en-el-corredor-seco-al-24-de-agosto-del-2015" class="btn-ver-mas">Ver más</a>
-        </div>
-
-        <!-- CARD 6 -->
-        <div class="noticia-card" data-categoria="sequia">
-            <img src="img/noticias/sequia-severa.jpg" alt="Nueva sequía severa">
-            <h3>Nueva sequía severa</h3>
-            <p class="descripcion">Afectó Choluteca, El Paraíso, Valle y Olancho. El ganado murió por falta de agua. Las represas bajaron a niveles críticos.</p>
-            <p class="fecha">Fecha: 2019</p>
-            <a href="https://www.elimparcial.com/mundo/2019/09/10/sed-perdida-de-cultivos-y-muerte-de-ganado-por-sequia-en-honduras/" class="btn-ver-mas">Ver más</a>
-        </div>
-
-         <!-- CARD 7 -->
-        <div class="noticia-card" data-categoria="cambio-climatico">
-            <img src="img/noticias/cambio-climatico.png" alt="Nueva sequía severa">
-            <h3>Honduras entre los 5 países más vulnerables del mundo</h3>
-            <p class="descripcion">Según Germanwatch y estudios de adaptación climática. Razones: Deforestación extrema, Tormentas más frecuentes y violentas, Sequías prolongadas.</p>
-            <p class="fecha">Fecha: 2020-2025</p>
-            <a href="https://blogs.unah.edu.hn/presencia-universitaria/honduras-entre-los-tres-paises-mas-vulnerables-del-mundo-segun-el-indice-de-riesgo-climatico-2025/" class="btn-ver-mas">Ver más</a>
-        </div>
-
-         <!-- CARD 8 -->
-        <div class="noticia-card" data-categoria="cambio-climatico">
-            <img src="img/noticias/evento-clima.jpg" alt="Nueva sequía severa">
-            <h3>Aumento del nivel del mar en La Mosquitia</h3>
-            <p class="descripcion">Comunidades costeras reportan pérdida de playa, mayor intrusión salina en ríos, poblaciones indígenas afectadas.</p>
-            <p class="fecha">Fecha: 2024</p>
-            <a href="https://www.tunota.com/honduras-hoy/cambio-climatico-la-mosquitia-ha-perdido-parte-territorio-subida-mar-2023-04-25" class="btn-ver-mas">Ver más</a>
-        </div>
-
+<!-- BOTÓN DE FILTRAR CON DROPDOWN -->
+<div class="noticias-filtros">
+    <div class="dropdown-filter">
+        <button class="filtro-dropdown-btn" id="filtroBtn">
+            <span>Filtrar:</span>
+            <span id="filtroSeleccionado">Todos</span>
+            <i class="ri-arrow-down-s-line"></i>
+        </button>
+        <ul class="filtro-dropdown-menu" id="filtroMenu">
+            <li data-categoria="todos" class="active">Todos</li>
+            <li data-categoria="huracanes">Huracanes</li>
+            <li data-categoria="inundaciones">Inundaciones</li>
+            <li data-categoria="sequia">Sequía</li>
+            <li data-categoria="cambio-climatico">Cambio Climático</li>
+        </ul>
     </div>
-</section>
+</div>
+
+<!-- CARDS DE NOTICIAS -->
+<div class="noticias-cards">
+    
+<!-- NOTICIA 1: Inundaciones en el norte (Enero 2026) -->
+<div class="noticia-card" data-categoria="inundaciones">
+    <img src="img/noticias/inundaciones-sur.png" alt="Inundaciones en el norte de Honduras">
+    <div class="noticia-contenido">
+        <span class="noticia-categoria">💧 Inundaciones</span>
+        <h3>Lluvias intensas en el norte dejan 16 familias afectadas y evacuaciones preventivas</h3>
+        <p class="descripcion">Una masa de aire frío provoca inundaciones en el litoral Atlántico. COPECO mantiene alerta amarilla en siete departamentos del norte del país.</p>
+        <div class="noticia-meta">
+            <span class="fecha">📅 Enero 2026</span>
+            <a href="https://extradigital.hn/copeco-reporta-16-familias-afectadas-y-evacuaciones-preventivas-por-lluvias/" class="btn-ver-mas" target="_blank" rel="noopener noreferrer">Ver más →</a>
+        </div>
+    </div>
+</div>
+
+<!-- NOTICIA 2: Rescate en Puerto Cortés (Noviembre 2025) -->
+<div class="noticia-card" data-categoria="inundaciones">
+    <img src="img/noticias/inundaciones-junio.png" alt="Rescate por inundaciones en Puerto Cortés">
+    <div class="noticia-contenido">
+        <span class="noticia-categoria">💧 Inundaciones</span>
+        <h3>Rescatan a familia de casa inundada tras fuertes tormentas en Puerto Cortés</h3>
+        <p class="descripcion">Un frente frío deja miles de afectados, viviendas dañadas y comunidades incomunicadas en el norte de Honduras.</p>
+        <div class="noticia-meta">
+            <span class="fecha">📅 Noviembre 2025</span>
+            <a href="https://www.latribuna.hn/2025/11/14/rescatan-a-familia-de-casa-inundada-luego-de-tormentas/" class="btn-ver-mas" target="_blank" rel="noopener noreferrer">Ver más →</a>
+        </div>
+    </div>
+</div>
+
+<!-- NOTICIA 3: Tormenta Tropical Sara (Agosto 2025) -->
+<div class="noticia-card" data-categoria="huracanes">
+    <img src="img/noticias/huracan-mitch.png" alt="Tormenta Tropical Sara Honduras">
+    <div class="noticia-contenido">
+        <span class="noticia-categoria">🌪️ Huracanes</span>
+        <h3>Tormenta Tropical Sara deja un muerto y más de 47 mil afectados en Honduras</h3>
+        <p class="descripcion">El fenómeno climático causa graves daños en los departamentos de Gracias a Dios, Colón, Atlántida y Yoro.</p>
+        <div class="noticia-meta">
+            <span class="fecha">📅 Agosto 2025</span>
+            <a href="https://chtv.hn/un-muerto-y-mas-de-47-mil-personas-afectadas-por-tormenta-tropical-sara-en-honduras/" class="btn-ver-mas" target="_blank" rel="noopener noreferrer">Ver más →</a>
+        </div>
+    </div>
+</div>
+
+<!-- NOTICIA 4: Alerta Verde por frente frío (Enero 2026) -->
+<div class="noticia-card" data-categoria="inundaciones">
+    <img src="img/noticias/evento-clima.jpg" alt="Frente frío en Honduras">
+    <div class="noticia-contenido">
+        <span class="noticia-categoria">💧 Inundaciones</span>
+        <h3>COPECO declara alerta verde en siete departamentos por lluvias y vientos</h3>
+        <p class="descripcion">Una masa de aire frío genera lluvias intensas en el Caribe hondureño. Recomiendan precaución por el aumento del caudal de ríos.</p>
+        <div class="noticia-meta">
+            <span class="fecha">📅 Enero 2026</span>
+            <a href="https://www.infobae.com/honduras/2026/01/18/la-secretaria-de-estado-de-honduras-declara-alerta-verde-en-siete-departamentos-por-lluvias-y-vientos/" class="btn-ver-mas" target="_blank" rel="noopener noreferrer">Ver más →</a>
+        </div>
+    </div>
+</div>
+
+<!-- NOTICIA 5: Temporada de huracanes 2026 -->
+<div class="noticia-card" data-categoria="huracanes">
+    <img src="img/noticias/huracanes-eta-iota.png" alt="Temporada de huracanes 2026">
+    <div class="noticia-contenido">
+        <span class="noticia-categoria">🌪️ Huracanes</span>
+        <h3>Estos son los nombres de huracanes 2026 en el Atlántico y su riesgo en Honduras</h3>
+        <p class="descripcion">Conoce la lista oficial de nombres para la temporada de huracanes 2026 y cómo podría impactar al país.</p>
+        <div class="noticia-meta">
+            <span class="fecha">📅 Febrero 2026</span>
+            <a href="https://www.televicentro.com/esta-es-la-lista-de-huracanes-2026-cuando-inicia-la-temporada-afectaran-a-honduras-2026-02-27" class="btn-ver-mas" target="_blank" rel="noopener noreferrer">Ver más →</a>
+        </div>
+    </div>
+</div>
+</div>
 
 <!-- SECCIÓN PRONÓSTICO POR REGIONES -->
 <section class="pronostico-regiones">
     <h2 class="pronostico-title">Pronóstico por Regiones</h2>
     <p class="pronostico-subtitle">Condiciones climáticas actuales en las diferentes zonas de Honduras</p>
+    
+    <!-- ← El p se cierra correctamente aquí -->
 
-    <div class="regiones-grid">
+    <div class="regiones-grid"> 
         
         <!-- REGIÓN ATLÁNTICA -->
         <div class="region-card region-atlantica">
@@ -209,7 +202,7 @@
                 <span class="temp">🌡️ 27°C - 31°C</span>
                 <span class="lluvia">🌧️ Húmedo</span>
             </div>
-            <p class="descripcion">Clima cálido y húmedo, con lluvias frecuentes durante todo el año. Ideal para turismo de playa.</p>
+            <p class="descripcion">Clima cálido y húmedo, con lluvias frecuentes durante todo el año.</p>
         </div>
 
         <!-- REGIÓN OCCIDENTAL -->
@@ -222,7 +215,7 @@
                 <span class="temp">🌡️ 12°C - 22°C</span>
                 <span class="lluvia">🌤️ Templado</span>
             </div>
-            <p class="descripcion">Zona montañosa con clima fresco. Temperaturas más bajas del país, ideal para café y ecoturismo.</p>
+            <p class="descripcion">Zona montañosa con clima fresco. Temperaturas más bajas del país.</p>
         </div>
 
         <!-- REGIÓN CENTRAL -->
@@ -235,7 +228,7 @@
                 <span class="temp">🌡️ 22°C - 27°C</span>
                 <span class="lluvia">🌤️ Templado</span>
             </div>
-            <p class="descripcion">Clima de sabana tropical, con dos estaciones bien marcadas: seca y lluviosa.</p>
+            <p class="descripcion">Clima de sabana tropical, con dos estaciones bien marcadas.</p>
         </div>
 
         <!-- REGIÓN SUR -->
@@ -261,13 +254,13 @@
                 <span class="temp">🌡️ 23°C - 30°C</span>
                 <span class="lluvia">🌧️ Lluvioso</span>
             </div>
-            <p class="descripcion">Clima de sabana tropical, con la biósfera del Río Plátano y gran biodiversidad.</p>
+            <p class="descripcion">Clima de sabana tropical, con la biósfera del Río Plátano.</p>
         </div>
 
     </div>
 </section>
 
-          <!-- SECCIÓN Mantente Informado -->
+<!-- SECCIÓN Mantente Informado -->
 <section class="hero">
     <div class="hero-overlay"></div>
 
@@ -282,12 +275,13 @@
         <div class="hero-buttons">
              <a href="index.html" class="btn btn-primary">Estado del Clima Hoy</a>
         <a href="pronóstico-diario.html" class="btn btn-secondary">Pronóstico Semanal</a>
+        <a href="UV.html" class="btn btn-secondary">Conoce la Protección UV</a>
         </div>
        
     </div>
 </section>
 
-  </main>
+</main>
 
   <!-- FOOTER -->
   <footer class="footer mt-5 py-4 text-center text-white">
