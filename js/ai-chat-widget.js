@@ -1,9 +1,9 @@
 /**
  * Widget de chat — asistente meteorológico.
  *
- * Proveedores con capa gratuita (clave en el navegador, localStorage):
+ * Proveedores:
  *   - Google Gemini — https://aistudio.google.com/apikey
- *   - Groq (modelos Llama, API estilo OpenAI/chat) — https://console.groq.com/keys
+ *   - Groq (modelos Llama) vía Netlify Function (clave en servidor)
  *
  * La API de OpenAI (GPT/“ChatGPT” en API) es de pago; no hay plan gratis permanente como los anteriores.
  *
@@ -81,70 +81,6 @@
     } catch (e) {
       return '';
     }
-  }
-
-  function parseGroqKeyFromEnvText(envText) {
-    if (typeof envText !== 'string') return '';
-    var lines = envText.split(/\r?\n/);
-    var keys = ['GROQ_API_KEY', 'groq_api_key', 'chatbot_api_key', 'CHATBOT_API_KEY'];
-
-    for (var i = 0; i < lines.length; i++) {
-      var row = String(lines[i] || '').trim();
-      if (!row || row.charAt(0) === '#') continue;
-
-      for (var k = 0; k < keys.length; k++) {
-        var keyName = keys[k];
-        var re = new RegExp('^\\s*' + keyName + '\\s*=');
-        if (!re.test(row)) continue;
-        return row
-          .replace(new RegExp('^\\s*' + keyName + '\\s*=\\s*'), '')
-          .replace(/^['"]|['"]$/g, '')
-          .trim();
-      }
-    }
-    return '';
-  }
-
-  function tryLoadGroqKeyFromEnv(done) {
-    var paths = [
-      'groq.env',
-      './groq.env',
-      '/groq.env',
-      'env',
-      './env',
-      '/env',
-      '.env',
-      './.env',
-      '/.env',
-      '/.env.txt',
-      './.env.txt',
-    ];
-    var idx = 0;
-
-    function next() {
-      if (idx >= paths.length) {
-        done('');
-        return;
-      }
-      var p = paths[idx++];
-      fetch(p, { cache: 'no-store' })
-        .then(function (res) {
-          if (!res.ok) {
-            next();
-            return;
-          }
-          return res.text().then(function (txt) {
-            var key = parseGroqKeyFromEnvText(txt);
-            if (key) done(key);
-            else next();
-          });
-        })
-        .catch(function () {
-          next();
-        });
-    }
-
-    next();
   }
 
   function getActiveKey() {
@@ -366,80 +302,34 @@
   }
 
   function callGroq(done, fail) {
-    function requestGroq(key) {
-      var midx = 0;
-      function tryGroqModel() {
-        if (midx >= GROQ_MODELS.length) {
-          fail('No se pudo obtener respuesta con Groq.');
-          return;
-        }
-        var model = GROQ_MODELS[midx];
-        fetch('https://api.groq.com/openai/v1/chat/completions', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + key
-          },
-          body: JSON.stringify({
-            model: model,
-            messages: buildGroqMessages(),
-            temperature: 0.75,
-            max_tokens: 1024
-          })
-        })
-          .then(function (res) {
-            return res.json().then(function (data) {
-              if (!res.ok) {
-                var msg = (data && data.error && data.error.message) || res.statusText;
-                if (res.status === 400 && msg && msg.indexOf('model') !== -1) {
-                  midx++;
-                  tryGroqModel();
-                  return;
-                }
-                fail(msg);
-                return;
-              }
-              var text =
-                data.choices &&
-                data.choices[0] &&
-                data.choices[0].message &&
-                data.choices[0].message.content;
-              if (!text || !String(text).trim()) {
-                midx++;
-                tryGroqModel();
-                return;
-              }
-              done(String(text).trim());
-            });
-          })
-          .catch(function (err) {
-            midx++;
-            if (midx < GROQ_MODELS.length) tryGroqModel();
-            else fail(err.message || 'Error de red');
-          });
-      }
-
-      tryGroqModel();
-    }
-
-    var key = getGroqKey();
-    if (key) {
-      requestGroq(key);
-      return;
-    }
-
-    tryLoadGroqKeyFromEnv(function (loadedKey) {
-      if (!loadedKey) {
-        fail(
-          'No se pudo cargar la clave Groq. Asegúrate de tener .env en la raíz del proyecto y ejecuta: ' +
-            'powershell -File scripts/sync-env.ps1 (copia .env → groq.env). Luego recarga la página.'
-        );
-        return;
-      }
-      setGroqKey(loadedKey);
-      try { window.__GROQ_API_KEY__ = loadedKey; } catch (e) { /* noop */ }
-      requestGroq(loadedKey);
-    });
+    fetch('/.netlify/functions/chat-groq', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        messages: buildGroqMessages(),
+        models: GROQ_MODELS,
+        temperature: 0.75,
+        max_tokens: 1024
+      })
+    })
+      .then(function (res) {
+        return res.json().then(function (data) {
+          if (!res.ok) {
+            var msg = (data && data.error) || res.statusText || 'Error del servidor';
+            fail(msg);
+            return;
+          }
+          var text = data && data.reply;
+          if (!text || !String(text).trim()) {
+            fail('No se pudo obtener respuesta con Groq.');
+            return;
+          }
+          done(String(text).trim());
+        });
+      })
+      .catch(function (err) {
+        fail(err.message || 'Error de red');
+      });
   }
 
   function callAI(done, fail) {
