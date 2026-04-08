@@ -83,21 +83,24 @@
     </header>
 
   <main class="site-content" id="contenido-principal" tabindex="-1">
-    <h1>🌙 Ciclo Lunar</h1>
+    <section class="lunar-hero" aria-labelledby="lunar-page-title">
+      <h1 id="lunar-page-title" class="lunar-page-title">Ciclo Lunar</h1>
+      <p class="lunar-hero-tagline">Fases e iluminación para planificar con la Luna</p>
 
-    <!-- Luna clicable para abrir modal -->
-    <div class="current-moon-display">
-      <div class="moon-clickable" id="moon-clickable">
-        <div class="moon-icon-clickable"></div>
-        <p>Haz clic en la luna para ver los detalles de hoy</p>
+      <!-- Luna clicable para abrir modal -->
+      <div class="current-moon-display">
+        <div class="moon-clickable" id="moon-clickable">
+          <div class="moon-icon-clickable" aria-hidden="true"></div>
+          <p>Haz clic en la luna para ver los detalles de hoy</p>
+        </div>
       </div>
-    </div>
 
-    <div id="status">Solicitando ubicación...</div>
+      <div id="lunar-status" class="lunar-status" role="status">Solicitando ubicación...</div>
+    </section>
 
     <!-- Lunar Grid -->
-    <div class="cuadro2 p-4 mx-auto" style="text-align:center; max-width:1100px;">
-      <div id="status" style="color:var(--text-secondary); margin-bottom:10px;">&nbsp;</div>
+    <div class="cuadro2 p-4 mx-auto lunar-calendar-panel" style="text-align:center; max-width:1100px;">
+      <div class="lunar-grid-spacer" aria-hidden="true"></div>
       <div id="container"></div>
       <hr class="phase-separator" aria-hidden="true">
 

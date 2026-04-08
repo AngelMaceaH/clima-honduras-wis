@@ -303,7 +303,7 @@
       cont.appendChild(card);
     }
 
-    const status = document.getElementById('status');
+    const status = document.getElementById('lunar-status');
     if (status) status.innerText = '';
   }
 
